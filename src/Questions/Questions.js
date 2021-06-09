@@ -1,12 +1,13 @@
 import React from 'react';
 import './Questions.css';
 import NextPrevButtons from './NextPrevButtons';
+import QuestionOpen from './QuestionOpen';
 
 const Questions = props => {
     return (
         <article className="questions">
             <section className="questions__questionArea u-glasMorphism">
-                {/* <p>Test</p> */}
+                <QuestionOpen />
             </section>
             <NextPrevButtons />
         </article>
