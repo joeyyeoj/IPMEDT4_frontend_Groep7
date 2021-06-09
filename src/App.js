@@ -1,5 +1,5 @@
 import './App.css';
-import Questions from './Questions.js';
+import Questions from './Questions/Questions.js';
 
 function App() {
   return (
