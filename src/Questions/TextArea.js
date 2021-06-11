@@ -1,45 +1,29 @@
 import React from 'react';
 
 const Textarea = ({ rows, cols, value, limit }) => {
-    const [{ content, wordCount }, setContent] = React.useState({
-      content: value,
-      wordCount: 0
-    });
-  
-    const setFormattedContent = React.useCallback(
-      text => {
-        let words = text.split(' ').filter(Boolean);
-        if (words.length > limit) {
-          setContent({
-            content: words.slice(0, limit).join(' '),
-            wordCount: limit
-          });
-        } else {
-          setContent({ content: text, wordCount: words.length });
-        }
-      },
-      [limit, setContent]
-    );
-  
-    React.useEffect(() => {
-      setFormattedContent(content);
-    }, []);
-  
-    return (
-      <>
-        <textarea
-          rows={rows}
-          cols={cols}
-          onChange={event => setFormattedContent(event.target.value)}
-          value={content}
-          className="questions__textArea"
-        />
-        <p>
-          {/* {wordCount}/{limit} */}
-          {limit-wordCount} woorden over
-        </p>
-      </>
-    );
-  };
+  const [content, setContent] = React.useState(value.slice(0, limit));
 
-  export default Textarea;
+  const setFormattedContent = React.useCallback(
+    text => {
+      setContent(text.slice(0, limit));
+    },
+    [limit, setContent]
+  );
+
+  return (
+    <>
+      <textarea
+        rows={rows}
+        cols={cols}
+        onChange={event => setFormattedContent(event.target.value)}
+        value={content}
+        className="questions__textArea"
+      />
+      <p className="questions__textArea__label">
+        {limit - content.length} tekens over
+      </p>
+    </>
+  );
+};
+
+export default Textarea;

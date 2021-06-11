@@ -11,9 +11,8 @@
 .questions__questionArea {
     width: 100%;
     max-width: 50rem;
-    height: 60%;
+    height: auto;
     border-radius: 1rem;
-    text-align: center;
     padding: 2rem;
 }
 
@@ -21,8 +20,27 @@
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0px 0px 70px 4px rgba(0, 0, 0, 0.2); 
     border-radius: .5rem;
-    width: 90%;
-    height: 70%;
+    width: 100%;
+    margin-top: 1rem;
+    height: 20rem;
+    padding: .5rem;
+    font-size: 1.6rem;
+}
+
+.questions__textArea__label {  
+    margin-left: 0;
+    font-size: 1.5rem;
+} 
+
+.questions__mcButton {
+    width: 100%;
+    padding: 1.5rem 1rem;
+    text-align: left;
+    border-radius: .5rem;
+    border: none;
+    margin: 1rem 0;
+    background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
+    color: #fff;
 }
 
 .questions__button {

@@ -5,7 +5,6 @@ const QuestionOpen = props => {
 
     return (
         <div className="questions__questionOpen">
-            <h1>Title</h1>
             <form>
                 <TextArea limit={250} value="" />
             </form>
