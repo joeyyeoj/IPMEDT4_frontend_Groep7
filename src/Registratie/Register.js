@@ -1,6 +1,9 @@
 import React from 'react';
 import './Register.css';
 import axios from "axios";
+import Cookies from "js-cookie";
+import {changeUser, getCSRFToken, loginUser} from "../actions";
+import {connect} from "react-redux";
 
 
 
@@ -21,12 +24,13 @@ class Register extends React.Component{
 
     componentDidMount() {
         console.log(this.state);
+
     }
 
 
     render(){
         return(
-            <form className="registerForm" onSubmit={this.onSubmit} id="registerForm">
+            <form className="registerForm" onSubmit={this.onSubmit} id="registerForm" method="POST">
                 <fieldset className="registerForm__fieldset">
                     <label className="registerForm__label" htmlFor="name">Naam { this.state.nameIncorrect ? 'mag niet leeg zijn' : '' }</label>
                     <input className={this.state.nameIncorrect ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="text" id="name" name="name" onChange={this.handleInputChange}/>
@@ -65,6 +69,7 @@ class Register extends React.Component{
 
     makeApiCall = () => {
         const REGISTER_URL = "http://127.0.0.1:8000/api/users/create"
+
         const userAccount = {
             name: this.state.name,
             email: this.state.email,
@@ -72,34 +77,34 @@ class Register extends React.Component{
             password: this.state.password,
             password_confirmation: this.state.password_confirm,
         };
-        console.log(userAccount)
 
-        const axiosconfig = {
-            method: 'post',
-            url: REGISTER_URL,
+
+        axios.post(REGISTER_URL, userAccount, {
+            withCredentials: true,
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            data: userAccount
-        }
-
-        axios(axiosconfig).then(res => {
-            console.log(res);
-            this.setState({
-                token: res.data.token
-            })
-            document.getElementById("registerForm").reset();
-            console.log(this.state);
-        }).catch(error => {
-            alert("Er is iets misgegaan!");
-            console.log(error);
-        })
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-XSRF-Token': this.props.csrf_token,
+            }
+        }).then(response => {
+            let userCreated = {
+                token: response.data.token,
+                userData: {
+                    id: 5,
+                    name: response.data.user.name,
+                    email: response.data.user.email,
+                    organisatie: response.data.user.organisatie
+                }
+            }
+            this.props.changeUser(userCreated);
+            this.props.loginUser(true);
+            console.log(this.props.User);
+        }).catch(error=>console.log(error));
 
     }
 
     onSubmit = event => {
         event.preventDefault();
+
         this.setState(
             {emailIncorrect: false,
                     emailEmpty: false,
@@ -110,9 +115,6 @@ class Register extends React.Component{
         if(this.validateAllInputs()){
             this.makeApiCall();
         }
-        console.log(this.state);
-
-
     }
 
     validateEmail(email)
@@ -155,6 +157,10 @@ class Register extends React.Component{
 }
 
 
+const mapStateToProps = state => {
+    return {csrf_token: state.CSRFToken, User: state.User}
+}
 
-
-export default( Register );
+export default connect(
+    mapStateToProps,
+    {getCSRFToken: getCSRFToken, changeUser: changeUser, loginUser: loginUser})(Register);
