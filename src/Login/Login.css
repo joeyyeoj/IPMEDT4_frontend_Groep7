@@ -1,4 +1,4 @@
-.registerForm{
+.loginForm{
     width: 90vw;
     margin: 0 auto;
     margin-top: 5rem;
@@ -10,13 +10,12 @@
     color: white;
 }
 
-
-.registerForm__fieldset{
+.loginForm__fieldset{
     width: 100%;
     border: none;
 }
 
-.registerForm__input {
+.loginForm__input {
     width: 100%;
     border-radius: 1.5rem;
     padding-top: 1rem;
@@ -28,11 +27,11 @@
     box-shadow: 0px 0px 70px 4px rgba(0, 0, 0, 0.2);
 }
 
-.registerForm__input--incorrect{
+.loginForm__input--incorrect{
     border: 2px solid red;
 }
 
-.registerForm__submit{
+.loginForm__submit{
     background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
     border-radius: 1.5rem;
     padding: 1rem;
@@ -45,23 +44,20 @@
     font-size: 1.8rem;
 }
 
-
 @media only screen and  (min-width: 768px) {
-    .registerForm{
+    .loginForm{
         max-width: 45vw;
     }
 }
 
 @media only screen and  (min-width: 1024px) {
-    .registerForm{
+    .loginForm{
         max-width: 35vw;
     }
 }
 
 @media only screen and  (min-width: 1440px) {
-    .registerForm{
+    .loginForm{
         max-width: 30vw;
     }
 }
-
-

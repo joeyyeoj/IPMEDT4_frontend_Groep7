@@ -1,5 +1,6 @@
 import './App.css';
 import  Register from './Registratie/Register';
+import Login from './Login/Login';
 import React from "react";
 import axios from "axios";
 import {connect} from "react-redux";
@@ -17,6 +18,11 @@ class App extends React.Component {
                     <Route path="/Register">
                             <Provider store={store}>
                                 <Register />
+                            </Provider>
+                    </Route>
+                    <Route path="/Login">
+                            <Provider store={store}>
+                                <Login />
                             </Provider>
                     </Route>
                 </Switch>
