@@ -1,7 +1,6 @@
 import React from 'react';
 import './Register.css';
 import axios from "axios";
-import Cookies from "js-cookie";
 import {changeUser, getCSRFToken, loginUser} from "../actions";
 import {connect} from "react-redux";
 
@@ -12,38 +11,50 @@ class Register extends React.Component{
     constructor(props) {
         super(props);
         this.state =
-            {emailIncorrect: false,
-            emailEmpty: false,
-            nameIncorrect: false,
-            passwordIncorrect: false,
-            passConIncorrect: false,
-            pwDontMatch: false}
+            {
+                nameError: {
+                    message: "",
+                    valid: false,
+                    touched: false,
+                },
+                emailError: {
+                    message: "",
+                    valid: false,
+                    touched: false,
+                },
+                passwordError: {
+                    message: "",
+                    valid: false,
+                    touched: false,
+                },
+                passwordConfirmationError: {
+                    message: "",
+                    valid: false,
+                    touched: false,
+                },
+                allInputsValid: false
+            }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-
-    componentDidMount() {
-        console.log(this.state);
-
-    }
 
 
     render(){
         return(
             <form className="registerForm" onSubmit={this.onSubmit} id="registerForm" method="POST">
                 <fieldset className="registerForm__fieldset">
-                    <label className="registerForm__label" htmlFor="name">Naam { this.state.nameIncorrect ? 'mag niet leeg zijn' : '' }</label>
-                    <input className={this.state.nameIncorrect ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="text" id="name" name="name" onChange={this.handleInputChange}/>
-                    <label className="registerForm__label" htmlFor="email">Email { this.state.emailEmpty ? 'mag niet leeg zijn' : '' || this.state.emailIncorrect ? 'is incorrect' : '' }</label>
-                    <input className={this.state.emailIncorrect ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="text" id="email" name="email" onChange={this.handleInputChange}/>
+                    <label className="registerForm__label" htmlFor="name">Naam { !this.state.nameError.valid ? this.state.nameError.message : '' }</label>
+                    <input className={!this.state.nameError.valid && this.state.nameError.touched ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="text" id="name" name="name" onChange={this.handleInputChange}/>
+                    <label className="registerForm__label" htmlFor="email">Email { !this.state.emailError.valid ? this.state.emailError.message : ''}</label>
+                    <input className={!this.state.emailError.valid && this.state.emailError.touched ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="text" id="email" name="email" onChange={this.handleInputChange}/>
                     <label className="registerForm__label" htmlFor="organisatie">Organisatie</label>
                     <input className="registerForm__input" type="text" name="organisatie" onChange={this.handleInputChange}/>
                 </fieldset>
                 <fieldset className="registerForm__fieldset">
-                    <label className="registerForm__label" htmlFor="password">Wachtwoord { this.state.passwordIncorrect ? 'mag niet leeg zijn' : '' || this.state.pwDontMatch ? 'niet gelijk met wachtwoord bevestigen' : ''}</label>
-                    <input className={this.state.passwordIncorrect ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="password" name="password" onChange={this.handleInputChange}/>
-                    <label className="registerForm__label" htmlFor="password__confirm">Wachtwoord bevestigen { this.state.passConIncorrect ? 'mag niet leeg zijn' : '' }</label>
-                    <input className={this.state.passConIncorrect ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="password" id="password_confirm" name="password_confirm" onChange={this.handleInputChange}/>
+                    <label className="registerForm__label" htmlFor="password">Wachtwoord { !this.state.passwordError.valid ? this.state.passwordError.message : ''}</label>
+                    <input className={!this.state.passwordError.valid && this.state.passwordError.touched ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="password" name="password" onChange={this.handleInputChange}/>
+                    <label className="registerForm__label" htmlFor="password__confirm">Wachtwoord bevestigen</label>
+                    <input className={!this.state.passwordConfirmationError.valid && this.state.passwordConfirmationError.touched ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="password" id="password_confirm" name="password_confirm" onChange={this.handleInputChange}/>
                 </fieldset>
                 <fieldset className="registerForm__fieldset">
                     <input type="submit" className="registerForm__submit" value="Registreren"/>
@@ -52,7 +63,6 @@ class Register extends React.Component{
             )
 
     }
-
 
     handleInputChange(event){
         const target = event.target;
@@ -63,13 +73,169 @@ class Register extends React.Component{
                 [name]: value
             }
         )
+
+        this.validateInputs(target)
+
+
+
     }
 
+    validateEmail(email)
+    {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
 
+    validateInputs(target){
+        const value = target.value;
+        const name = target.name;
+
+        switch(name){
+            case "name":
+                if(value != null && value.length >= 2){
+                    this.setState({
+                        nameError: {
+                            valid: true
+                        }
+                    })
+                }
+                else if(!value || value === ""){
+                    this.setState({
+                        nameError: {
+                            valid: false,
+                            message: "mag niet leeg zijn",
+                            touched: true
+                        }
+                    })
+                }
+                else if(value.length < 2){
+                    this.setState({
+                        nameError: {
+                            valid: false,
+                            message: "is te kort",
+                            touched: true
+                        }
+                    })
+                }
+                break
+            case "email":
+                if(this.validateEmail(value)){
+                    this.setState({
+                        emailError: {
+                            valid: true
+                        }
+                    })
+
+                }
+                else if(value == null || value === ""){
+                    this.setState({
+                        emailError: {
+                            valid: false,
+                            message: "mag niet leeg zijn",
+                            touched: true
+                        }
+                    })
+                }
+                else if(!this.validateEmail(value)){
+                    this.setState({
+                        emailError: {
+                            valid: false,
+                            message: "is ongeldig",
+                            touched: true
+                        }
+                    })
+                }
+                break
+            case "password":
+                if(value && value.length >= 8 && value === this.state.password_confirm){
+                    this.setState({
+                        passwordError: {
+                            valid: true
+                        },
+                        passwordConfirmationError: {
+                            valid: true
+                        }
+                    })
+                }
+                else if(value == null || value === ""){
+                    this.setState({
+                        passwordError: {
+                            valid: false,
+                            message: "mag niet leeg zijn",
+                            touched: true
+                        }
+                    })
+                }
+                else if(value.length < 8
+                ){
+                    this.setState({
+                        passwordError: {
+                            valid: false,
+                            message: "is te kort (minimaal 8 karakters)",
+                            touched: true
+                        }
+                    })
+                }
+                else if(value !== this.state.password_confirm){
+                    this.setState({
+                        passwordError: {
+                            valid: false,
+                            message: "velden moeten hetzelfde zijn",
+                            touched: true
+                        },
+                        passwordConfirmationError: {
+                            valid: false,
+                            touched: true
+                        }
+
+                    })
+                }
+                break
+            case "password_confirm":
+                if(value && value !== "" && value === this.state.password){
+                    this.setState({
+                        passwordConfirmationError: {
+                            valid: true,
+                            touched: true,
+                        },
+                        passwordError: {
+                            valid: true,
+                            touched: true
+                        }
+                    })
+                }
+                else if(!value || value === ""){
+                    this.setState({
+                        passwordConfirmationError: {
+                            valid: false,
+                            message: "mag niet leeg zijn",
+                            touched: true
+                        },
+                        passwordError: {
+                            valid: false,
+                            message: "velden moeten hetzelfde zijn"
+                        }
+                    })
+                }
+                else if(value && value !== "" && value !== this.state.password){
+                    this.setState({
+                        passwordConfirmationError: {
+                            valid: false,
+                            touched: true
+                        },
+                        passwordError: {
+                            valid: false,
+                            message: "velden moeten gelijk zijn",
+                            touched: true
+                        }
+                    })
+                }
+                break
+        }
+    }
 
     makeApiCall = () => {
         const REGISTER_URL = "http://127.0.0.1:8000/api/users/create"
-
         const userAccount = {
             name: this.state.name,
             email: this.state.email,
@@ -77,7 +243,6 @@ class Register extends React.Component{
             password: this.state.password,
             password_confirmation: this.state.password_confirm,
         };
-
 
         axios.post(REGISTER_URL, userAccount, {
             withCredentials: true,
@@ -89,7 +254,7 @@ class Register extends React.Component{
             let userCreated = {
                 token: response.data.token,
                 userData: {
-                    id: 5,
+                    id: response.data.user.id,
                     name: response.data.user.name,
                     email: response.data.user.email,
                     organisatie: response.data.user.organisatie
@@ -97,62 +262,26 @@ class Register extends React.Component{
             }
             this.props.changeUser(userCreated);
             this.props.loginUser(true);
-            console.log(this.props.User);
         }).catch(error=>console.log(error));
+    }
 
+    checkAllInputErrors(){
+        return this.state.nameError.valid && this.state.emailError.valid && this.state.passwordError.valid && this.state.passwordConfirmationError.valid
     }
 
     onSubmit = event => {
         event.preventDefault();
 
-        this.setState(
-            {emailIncorrect: false,
-                    emailEmpty: false,
-                    nameIncorrect: false,
-                    passwordIncorrect: false,
-                    passConIncorrect: false,
-                    pwDontMatch: false})
-        if(this.validateAllInputs()){
-            this.makeApiCall();
+        if(this.checkAllInputErrors()){
+            this.makeApiCall()
         }
-    }
-
-    validateEmail(email)
-    {
-        var re = /\S+@\S+\.\S+/;
-        return re.test(email);
-    }
-
-    validateAllInputs(){
-        if(this.state.name == null || this.state.name === ''){
-            console.log("Naam veld mag niet leeg zijn!")
-            this.setState({nameIncorrect: true})
-        }
-        if(this.state.email == null || this.state.email === ''){
-            console.log("Email veld mag niet leeg zijn!")
-            this.setState({emailEmpty: true})
-        }
-        if(!this.validateEmail(this.state.email)){
-            console.log("Dit is geen email-adres")
-            this.setState({emailIncorrect: true})
-        }
-        if(this.state.password == null){
-            console.log("Wachtwoord mag niet leeg zijn")
-            this.setState({passwordIncorrect: true})
-        }
-        if(this.state.password_confirm == null){
-            console.log("Wachtwoord bevestiging mag niet leeg zijn")
-            this.setState({passConIncorrect: true})
-        }
-        if(this.state.password !== this.state.password_confirm && this.state.password != null && this.state.password_confirm != null){
-            console.log("Wachtwoord niet gelijk met bevestiging")
-            this.setState({pwDontMatch: true})
+        else{
+            alert("Er is iets mis gegaan, check of je alle velden juist hebt ingevoerd.")
         }
 
-        else if(this.state.name != null && this.state.email != null && this.validateEmail(this.state.email) && this.state.password != null && this.state.password_confirm != null && this.state.password === this.state.password_confirm){
-            return true;
-        }
     }
+
+
 
 }
 

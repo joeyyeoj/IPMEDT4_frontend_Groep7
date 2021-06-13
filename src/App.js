@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {getCSRFToken} from "./actions";
 import {Provider} from "react-redux";
 import {store} from "./store";
-import {Switch, Route, BrowserRouter as Router, Link} from "react-router-dom";
+import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import Cookies from "js-cookie"
 
 class App extends React.Component {
