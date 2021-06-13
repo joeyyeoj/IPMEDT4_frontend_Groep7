@@ -1,25 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import  Register from './Registratie/Register';
+import React from "react";
+import axios from "axios";
+import {connect} from "react-redux";
+import {getCSRFToken} from "./actions";
+import {Provider} from "react-redux";
+import {store} from "./store";
+import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
+import Cookies from "js-cookie"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    render(){
+        return (
+            <Router>
+                <Switch>
+                    <Route path="/Register">
+                            <Provider store={store}>
+                                <Register />
+                            </Provider>
+                    </Route>
+                </Switch>
+            </Router>
+        );
+    }
+
+    componentDidMount() {
+        const csrfURL = "http://localhost:8000/sanctum/csrf-cookie";
+        axios.get(csrfURL, {
+            withCredentials: true
+        }).then(response => {
+            let token = Cookies.get('XSRF-TOKEN');
+            this.props.getCSRFToken(token);
+        })
+    }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return { csrfToken: state.csrfToken };
+}
+
+export default connect(
+    mapStateToProps,
+    {getCSRFToken: getCSRFToken})(App);

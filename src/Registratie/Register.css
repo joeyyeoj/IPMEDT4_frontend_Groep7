@@ -1,0 +1,51 @@
+.registerForm{
+    width: 90vw;
+    margin: 0 auto;
+    margin-top: 5rem;
+    border-radius: 2.5rem;
+    background: rgba(255, 255, 255, 0.25);
+    mix-blend-mode: normal;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 2rem;
+    color: white;
+}
+
+
+.registerForm__fieldset{
+    width: 100%;
+    border: none;
+}
+
+.registerForm__input {
+    width: 100%;
+    border-radius: 1.5rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0px 0px 70px 4px rgba(0, 0, 0, 0.2);
+}
+
+.registerForm__input--incorrect{
+    border: 2px solid red;
+}
+
+.registerForm__submit{
+    background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
+    border-radius: 1.5rem;
+    padding: 1rem;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    border: none;
+    color: white;
+    width: 15rem;
+    margin-top: 1rem;
+    font-size: 1.8rem;
+}
+
+
+
+
+
