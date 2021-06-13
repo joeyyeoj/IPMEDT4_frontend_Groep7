@@ -7,7 +7,7 @@ class SearchBar extends React.Component {
         return (
             <section className="searchbar">
                 <form className="searchbar__form">
-                    <label className="searchbar__form__label" for="email">Zoek email</label>
+                    <label className="searchbar__form__label" htmlFor="email">Zoek email</label>
                     <input className="searchbar__form__input" id="email" placeholder="Zoek hier een emailadres" type="text" />
                     <button className="searchbar__form__button" type="submit">Voeg email toe</button> 
                 </form>             

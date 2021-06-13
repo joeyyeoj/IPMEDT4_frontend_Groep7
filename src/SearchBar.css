@@ -24,9 +24,12 @@
     font-size: 1.8rem;
     border: none;
     border-radius: 15px;
-    transition: 2s ease-out all;
+    transition: 1.5s ease all;
+    box-sizing: border-box;
 }
 
 .searchbar__form__button:hover {
-    background-position: 100%;
+    background-image: none;
+    box-shadow: inset 0px 0px 0px .3rem #FC4A1A;
+    color: #FC4A1A;
 }
