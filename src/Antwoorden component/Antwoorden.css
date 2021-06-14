@@ -1,0 +1,16 @@
+.vraag{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(1.5rem); 
+    border-radius: 2.5rem;
+    mix-blend-mode: normal;
+    padding: 2rem;
+    max-width: 62rem;
+}
+
+.vraag__antwoorden{
+    list-style: none;
+    margin-top: 1rem;
+}
