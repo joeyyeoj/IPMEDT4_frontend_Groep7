@@ -43,12 +43,22 @@ class Vraag extends React.Component {
 
     }
 
+    hideItems() {
+        let vraag_antwoorden = document.getElementById("js--vraag_antwoorden")
+        if (vraag_antwoorden.style.display == 'none')
+            vraag_antwoorden.style.display = 'block';
+        else {
+            vraag_antwoorden.style.display = 'none';
+        }
+    }
+
+
     render() {
         let antwoorden;
 
         if (this.props.soort === 1) {
             antwoorden =
-                <ul className="vraag__antwoorden">
+                <ul id="js--vraag_antwoorden" className="vraag__antwoorden">
                     {this.state.openAntwoorden.map(function (antwoord, id) {
                         return <li className="vraag__antwoord" key={id}>{antwoord}</li>
                     })}
@@ -83,7 +93,10 @@ class Vraag extends React.Component {
                             },
                         }
                     }}
-                />
+                    height={300}
+                    width={300}
+                />;
+            antwoorden = <div>{antwoorden}</div>
         }
 
         if (this.props.soort === 2) {
@@ -100,6 +113,11 @@ class Vraag extends React.Component {
                                 '#A8E063',
                             ],
                             borderWidth: 0,
+                            borderRadius: {
+                                topRight: 10,
+                                topLeft: 10,
+                            },
+                            borderSkipped: false,
                         }
                     ]
                 }}
@@ -114,28 +132,35 @@ class Vraag extends React.Component {
                             x: {
                                 grid: {
                                     display: false,
+                                    borderColor: '#fff',
+                                    borderWidth: 10,
                                 },
                                 ticks: {
                                     color: '#fff',
-                                },
+                                }
                             },
                             y:
                             {
                                 grid: {
-                                    display: false
+                                    display: false,
+                                    borderColor: '#fff',
+                                    borderWidth: 10,
                                 },
                                 ticks: {
                                     stepSize: 1,
                                     color: '#fff',
                                 },
-                            }
+                            },
                         }
                     }}
-                />
+                    height={300}
+                    width={300}
+                />;
+            antwoorden = <div>{antwoorden}</div>
         }
 
         return (
-            <article className="vraag">
+            <article className="vraag" onClick={this.hideItems}>
                 <h3 className="vraag__header">{this.props.vraag}</h3>
                 {antwoorden}
             </article>
