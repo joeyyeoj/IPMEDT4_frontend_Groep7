@@ -13,8 +13,10 @@ class EmailCard extends React.Component {
     onSubmit = (searchTerm) => {
         const BASE_URL = "http://127.0.0.1:8000/api/mailgroep/1/emailadressen";
         // http://127.0.0.1:8000/api/mailgroep/1/emailadressen
+        // https://pokeapi.co/v2/pokemon/
 
-        axios.get(BASE_URL + searchTerm).then(res => {
+        //  + searchTerm
+        axios.get(BASE_URL).then(res => {
             this.setState({
                 name: res.data.email                
             });
@@ -27,7 +29,7 @@ class EmailCard extends React.Component {
                 <section className="email-card__content">
                     <h1 className="email-card__content__header">Hey, Gebruiker</h1>
                     <SearchBar onSubmit={this.onSubmit} />
-                    <p>{this.state.email}</p>
+                    <p>{this.state.name}</p>
                 </section>               
             </section>
         );
