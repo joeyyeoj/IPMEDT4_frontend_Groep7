@@ -9,22 +9,24 @@ import {Provider} from "react-redux";
 import {store} from "./store";
 import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import Cookies from "js-cookie"
+import VragenlijstVerzenden from "./Vragenlijst/VragenlijstVerzenden";
 
 class App extends React.Component {
     render(){
         return (
             <Router>
                 <Switch>
-                    <Route path="/Register">
-                            <Provider store={store}>
-                                <Register />
-                            </Provider>
-                    </Route>
-                    <Route path="/Login">
-                            <Provider store={store}>
-                                <Login />
-                            </Provider>
-                    </Route>
+                    <Provider store={store}>
+                        <Route path="/Register">
+                            <Register />
+                        </Route>
+                        <Route path="/Login">
+                            <Login />
+                        </Route>
+                        <Route path="/verzenden">
+                            <VragenlijstVerzenden />
+                        </Route>
+                    </Provider>
                 </Switch>
             </Router>
         );

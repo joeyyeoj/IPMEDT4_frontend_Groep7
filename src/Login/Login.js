@@ -3,6 +3,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import './Login.css'
 import {changeUser, getCSRFToken, loginUser} from "../actions";
+import { Redirect } from "react-router-dom";
 
 
 class Login extends React.Component{
@@ -11,8 +12,7 @@ class Login extends React.Component{
 
         this.state = {
             incorrectLogin: false,
-
-
+            redirectToDashboard: false,
             emailError: {
                 valid: false,
                 message: "",
@@ -25,10 +25,15 @@ class Login extends React.Component{
             }
         }
         this.handleInputChange = this.handleInputChange.bind(this)
+
+
+
     }
 
-
     render(){
+        if(this.state.redirectToDashboard){
+            return <Redirect to="/verzenden"/>
+        }
         return(
             <form className="loginForm" onSubmit={this.onSubmit }>
                 <fieldset className="loginForm__fieldset">
@@ -127,6 +132,7 @@ class Login extends React.Component{
             }
         }).then(response => {
             console.log(response)
+            console.log(this.props.csrf_token)
             let userCreated = {
                 token: response.data.token,
                 userData: {
@@ -141,6 +147,10 @@ class Login extends React.Component{
             })
             this.props.changeUser(userCreated);
             this.props.loginUser(true);
+            this.setState({
+                redirectToDashboard: true
+            })
+
         }).catch(error => {
             console.log(error);
             this.setState({
@@ -162,7 +172,7 @@ class Login extends React.Component{
 
 
 const mapStateToProps = state => {
-    return {csrf_token: state.CSRFToken, logged_in: state.logged_in}
+    return {csrf_token: state.CSRFToken, logged_in: state.logged_in, User: state.user}
 }
 
 export default connect(

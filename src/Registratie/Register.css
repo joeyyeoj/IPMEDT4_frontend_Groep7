@@ -43,6 +43,14 @@
     width: 15rem;
     margin-top: 1rem;
     font-size: 1.8rem;
+    transition: 0.5s ease all;
+}
+
+.registerForm__submit:hover{
+    cursor: pointer;
+    background: white;
+    color: #F98404;
+    border: 2px solid #F98404;
 }
 
 
