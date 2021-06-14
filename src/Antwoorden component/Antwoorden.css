@@ -1,3 +1,7 @@
+.vragen{
+    height: fit-content;
+}
+
 .vraag{
     width: 90%;
     margin: 0 auto;
@@ -7,10 +11,21 @@
     border-radius: 2.5rem;
     mix-blend-mode: normal;
     padding: 2rem;
+    padding-bottom: 4rem;
     max-width: 62rem;
+    max-height: 36.5rem;
+}
+
+.vraag:nth-last-child(1){
+    margin-bottom: 2rem;
 }
 
 .vraag__antwoorden{
-    list-style: none;
+    margin-top: 2rem;
+    list-style-position: inside;
+}
+
+.vraag__antwoord{
     margin-top: 1rem;
+    font-size: 1.8rem;
 }

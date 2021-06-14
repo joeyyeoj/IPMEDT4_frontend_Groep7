@@ -27,7 +27,7 @@ class Antwoorden extends React.Component {
 
     render() {
         return (
-            <main>
+            <main className="vragen">
                 {this.state.vragen.map(function (vraag, id) {
                     return (<Vraag key={id} vraag={vraag.vraag} id={vraag.id} soort={vraag.soort} />)
                 })}
