@@ -1,6 +1,6 @@
 .questions {
     width: 100%;
-    height: 93.5%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,6 +10,10 @@
 
 .progressArea {
     height: 6.5%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +28,6 @@
 
 .progressArea__progress {
     width: 100%;
-    height: 2rem;
     margin: 0;
     border-radius: 0;
     margin-top: 1.2rem;
