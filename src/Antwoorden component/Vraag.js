@@ -43,12 +43,15 @@ class Vraag extends React.Component {
 
     }
 
-    hideItems() {
-        let vraag_antwoorden = document.getElementById("js--vraag_antwoorden")
-        if (vraag_antwoorden.style.display == 'none')
-            vraag_antwoorden.style.display = 'block';
+    hideItems(id) {
+        let vraag_antwoorden = document.getElementById(id).parentElement;
+        if (vraag_antwoorden.style.overflow == 'hidden') {
+            vraag_antwoorden.style.overflow = 'inherit';
+            vraag_antwoorden.style.maxHeight = "fit-content";
+        }
         else {
-            vraag_antwoorden.style.display = 'none';
+            vraag_antwoorden.style.overflow = 'hidden';
+            vraag_antwoorden.style.maxHeight = "38rem";
         }
     }
 
@@ -56,11 +59,13 @@ class Vraag extends React.Component {
     render() {
         let extraClass = "vraag";
         let antwoorden;
+        let functie;
 
         if (this.props.soort === 1) {
+            functie = () => this.hideItems(this.props.id);
             extraClass = "vraag vraag--open";
             antwoorden =
-                <ul id="js--vraag_antwoorden" className="vraag__antwoorden">
+                <ul id={this.props.id} className="vraag__antwoorden">
                     {this.state.openAntwoorden.map(function (antwoord, id) {
                         return <li className="vraag__antwoord" key={id}>{antwoord}</li>
                     })}
@@ -96,7 +101,7 @@ class Vraag extends React.Component {
                             },
                         }
                     }}
-                    height={310}
+                    height={320}
                     width={300}
                 />;
             antwoorden = <div>{antwoorden}</div>
@@ -164,7 +169,7 @@ class Vraag extends React.Component {
         }
 
         return (
-            <article className={extraClass} onClick={this.hideItems}>
+            <article className={extraClass} onClick={functie}>
                 <h3 className="vraag__header">{this.props.vraag}</h3>
                 {antwoorden}
             </article>
