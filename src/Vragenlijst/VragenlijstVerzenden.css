@@ -1,4 +1,4 @@
-.loginForm{
+.sendEmailsForm{
     width: 90vw;
     margin: 0 auto;
     margin-top: 5rem;
@@ -10,28 +10,13 @@
     color: white;
 }
 
-.loginForm__fieldset{
+.sendEmailsForm__fieldset{
     width: 100%;
     border: none;
-}
-
-.loginForm__input {
-    width: 100%;
-    border-radius: 1.5rem;
-    padding-top: 1rem;
-    padding-left: 1rem;
-    padding-bottom: 1rem;
     margin-bottom: 1rem;
-    margin-top: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0px 0px 70px 4px rgba(0, 0, 0, 0.2);
 }
 
-.loginForm__input--incorrect{
-    border: 2px solid red;
-}
-
-.loginForm__submit{
+.sendEmailsForm__submit{
     background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
     border-radius: 1.5rem;
     padding: 1rem;
@@ -42,10 +27,19 @@
     width: 15rem;
     margin-top: 1rem;
     font-size: 1.8rem;
-    transition: 0.5s ease background;
+    transition: 0.5s ease background-color;
 }
 
-.loginForm__submit:hover{
+.sendEmailsForm__submit:disabled{
+    border-radius: 1.5rem;
+    background: none;
+    background-color: rgba(161, 161, 161, 0.5);
+    opacity: 0.8;
+    pointer-events: none;
+    font-style: italic;
+}
+
+.sendEmailsForm__submit:hover{
     cursor: pointer;
     background: white;
     color: #F98404;
@@ -55,20 +49,26 @@
     padding-bottom: 1rem;
 }
 
+.sendEmailsForm__input{
+    color: black;
+}
+
 @media only screen and  (min-width: 768px) {
-    .loginForm{
+    .sendEmailsForm{
         max-width: 45vw;
     }
 }
 
 @media only screen and  (min-width: 1024px) {
-    .loginForm{
+    .sendEmailsForm{
         max-width: 35vw;
     }
 }
 
 @media only screen and  (min-width: 1440px) {
-    .loginForm{
+    .sendEmailsForm{
         max-width: 30vw;
     }
 }
+
+

@@ -131,8 +131,7 @@ class Login extends React.Component{
                 'X-XSRF-Token': this.props.csrf_token,
             }
         }).then(response => {
-            console.log(response)
-            console.log(this.props.csrf_token)
+            this.props.loginUser(true);
             let userCreated = {
                 token: response.data.token,
                 userData: {
@@ -146,7 +145,6 @@ class Login extends React.Component{
                 incorrectLogin: false
             })
             this.props.changeUser(userCreated);
-            this.props.loginUser(true);
             this.setState({
                 redirectToDashboard: true
             })

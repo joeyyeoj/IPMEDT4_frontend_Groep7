@@ -2,6 +2,7 @@ import React from "react";
 import Select from "react-select";
 import axios from "axios";
 import {connect} from "react-redux";
+import "./VragenlijstVerzenden.css";
 import {changeUser, getCSRFToken, loginUser} from "../actions";
 import {Redirect} from "react-router-dom";
 
@@ -11,14 +12,22 @@ export class VragenlijstVerzenden extends React.Component{
         super(props);
         this.state = {
             vragenlijst: null,
-            emails: [],
+            mailgroep: null,
             mailGroepen: [],
             vragenlijsten: [],
-            redirectToLogin: false
+            redirectToLogin: false,
+            mailGroupValid: false,
+            vragenlijstValid: false
         }
     }
 
     componentDidMount() {
+        if(!this.props.logged_in){
+            this.setState({
+                redirectToLogin: true
+            })
+            return
+        }
 
         const BASE_URL = "http://localhost:8000/api"
         axios.get(BASE_URL + "/user/" + this.props.User.userData.id + "/mailgroepen", {
@@ -58,50 +67,59 @@ export class VragenlijstVerzenden extends React.Component{
             return <Redirect to="/login" />
         }
         return(
-            <form>
-                <fieldset>
-                    <Select onChange={this.handleMailGroupChange} options={this.state.mailGroepen}></Select>
-                    <p>Dit zijn de emailadressen waar de vragenlijst naar word verzonden:</p>
-                    {this.state.emails.map(function(email, i){
-                        return <p>{ email }</p>
-                    })}
+            <form onSubmit={this.onSubmit} className="sendEmailsForm">
+                <fieldset className="sendEmailsForm__fieldset">
+                    <label className="sendEmailsForm__label" htmlFor="onderzoek">Selecteer een onderzoek:</label>
+                    <Select className="sendEmailsForm__input" name="onderzoek" onChange={this.handleOnderzoekChange} options={this.state.vragenlijsten}></Select>
                 </fieldset>
-                <fieldset>
-                    <Select onChange={this.handleOnderzoekChange} options={this.state.vragenlijsten}></Select>
+                <fieldset className="sendEmailsForm__fieldset">
+                    <label className="sendEmailsForm__label" htmlFor="mailgroep">Versturen naar: </label>
+                    <Select className="sendEmailsForm__input" name="mailgroep" onChange={this.handleMailGroupChange} options={this.state.mailGroepen}></Select>
                 </fieldset>
-                <input type="submit"/>
+                <input className="sendEmailsForm__submit" type="submit" disabled={this.state.mailGroupValid && this.state.vragenlijstValid ? '' : true}/>
             </form>
         )
     }
 
     handleMailGroupChange = e =>{
-        let temp_emails = []
-        e.value.forEach(email => temp_emails.push(email))
         this.setState({
-            emails: temp_emails
+            mailgroep: e.value,
+            mailGroupValid: true
         })
-        console.log(this.props.CSRFToken);
     }
 
     handleOnderzoekChange = e => {
         this.setState({
-            vragenlijst: e.value
+            vragenlijst: e.value,
+            vragenlijstValid: true
         })
     }
 
     onSubmit = e => {
         e.preventDefault();
-
+        this.makeApiCall()
     }
 
     makeApiCall = () => {
-        axios.post()
+        const sendEmailUrl = "http://localhost:8000/api/send-email"
+        const pakketje = {
+            mailgroep: this.state.mailgroep,
+            vragenlijst: this.state.vragenlijst,
+        }
+        axios.post(sendEmailUrl, pakketje, {
+            withCredentials: true,
+            headers: {
+                'Authorization' : 'Bearer ' + this.props.User.token,
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-XSRF-Token': this.props.csrf_token,
+            }
+        })
     }
 
 }
 
 const mapStateToProps = state => {
-    return {csrf_token: state.CSRFToken, User: state.User}
+    return {csrf_token: state.CSRFToken, User: state.User, logged_in: state.logged_in}
 }
 
 export default connect(
