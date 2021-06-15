@@ -48,42 +48,60 @@ class Questions extends React.Component {
         const kind = this.state.kind[this.state.currentQuestion];
         if(kind === 1) {
             return (
-                <article className="questions">
-                    <section className="questions__questionArea u-glasMorphism">
-                        <h3>{this.state.questions[this.state.currentQuestion]}</h3>
-                        <QuestionOpen />
-                    </section>                    
-                    <section>
-                        <button onClick={this.prevQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabled}>Vorige</button>
-                        <button onClick={this.nextQuestion} className="questions__button u-glasMorphism">Volgende</button>
+                <article className="u-height-100">
+                    <section className="questions">
+                        <div className="questions__questionArea u-glasMorphism">
+                            <h3>{this.state.questions[this.state.currentQuestion]}</h3>
+                            <QuestionOpen />
+                        </div>                    
+                        <div>
+                            <button onClick={this.prevQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabled}>Vorige</button>
+                            <button onClick={this.nextQuestion} className="questions__button u-glasMorphism">Volgende</button>
+                        </div>
+                    </section>
+                    <section className="progressArea">
+                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion} van {this.state.questions.length}</label>
+                        <progress className="progressArea__progress" value={this.state.currentQuestion} max={this.state.questions.length}></progress>
                     </section>
                 </article>
             );
         }
         if(kind === 2) {
             return (
-                <article className="questions">
-                    <section className="questions__questionArea u-glasMorphism">
-                        <h3>{this.state.questions[this.state.currentQuestion]}</h3>
-                        <QuestionRange />
+                <article className="u-height-100">
+                    <section className="questions">
+                        <div className="questions__questionArea u-glasMorphism">
+                            <h3>{this.state.questions[this.state.currentQuestion]}</h3>
+                            <QuestionRange />
+                        </div>
+                        <div>
+                            <button onClick={this.prevQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabled}>Vorige</button>
+                            <button onClick={this.nextQuestion} className="questions__button u-glasMorphism">Volgende</button>
+                        </div>
                     </section>
-                    <section>
-                        <button onClick={this.prevQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabled}>Vorige</button>
-                        <button onClick={this.nextQuestion} className="questions__button u-glasMorphism">Volgende</button>
+                    <section className="progressArea">
+                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion} van {this.state.questions.length}</label>
+                        <progress className="progressArea__progress" value={this.state.currentQuestion} max={this.state.questions.length}></progress>
                     </section>
                 </article>
             );
         }
         if(kind === 3) {
             return (
-                <article className="questions">
-                    <section className="questions__questionArea u-glasMorphism">
-                        <h3>{this.state.questions[this.state.currentQuestion]}</h3>
-                        <QuestionMc options={this.state.options[this.state.currentQuestion]} />
+                <article className="u-height-100">
+                    <section className="questions">
+                        <div className="questions__questionArea u-glasMorphism">
+                            <h3>{this.state.questions[this.state.currentQuestion]}</h3>
+                            <QuestionMc options={this.state.options[this.state.currentQuestion]} />
+                        </div>
+                        <div>
+                            <button onClick={this.prevQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabled}>Vorige</button>
+                            <button onClick={this.nextQuestion} className="questions__button u-glasMorphism">Volgende</button>
+                        </div>
                     </section>
-                    <section>
-                        <button onClick={this.prevQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabled}>Vorige</button>
-                        <button onClick={this.nextQuestion} className="questions__button u-glasMorphism">Volgende</button>
+                    <section className="progressArea">
+                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion} van {this.state.questions.length}</label>
+                        <progress className="progressArea__progress" value={this.state.currentQuestion} max={this.state.questions.length}></progress>
                     </section>
                 </article>
             );

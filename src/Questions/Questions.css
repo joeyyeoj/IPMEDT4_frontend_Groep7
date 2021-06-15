@@ -1,11 +1,44 @@
 .questions {
     width: 100%;
-    height: 100%;
+    height: 93.5%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 1rem;
+}
+
+.progressArea {
+    height: 6.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.progressArea__label {
+    padding: .5rem 1.5rem;
+    border-radius: .5rem;
+    font-size: 1.5rem;
+}
+
+.progressArea__progress {
+    width: 100%;
+    height: 30%;
+    margin: 0;
+    border-radius: 0;
+    margin-top: 1.2rem;
+}
+
+.progressArea__progress::-webkit-progress-bar {
+    background-color: rgba(255,255,255, 0.25);
+    border: none;
+    backdrop-filter: blur(25px);
+}
+
+.progressArea__progress::-webkit-progress-value {
+    background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
+    transition: 1s ease-out;
 }
 
 .questions__questionArea {
@@ -37,13 +70,13 @@
     opacity: 0.8;
     -webkit-transition: .2s;
     transition: opacity .2s;
-  }
+}
   
-  .questions__questionRange__slider:hover {
+.questions__questionRange__slider:hover {
     opacity: 1;
-  }
+}
   
-  .questions__questionRange__slider::-webkit-slider-thumb {
+.questions__questionRange__slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 25px;
@@ -51,21 +84,21 @@
     border-radius: 50%;
     background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
     cursor: pointer;
-  }
+}
 
-  .questions__questionRange__list {
+.questions__questionRange__list {
     width: 100%;
-  }
+}
 
-  .questions__questionRange__listItem {
+.questions__questionRange__listItem {
     display: inline-block;
     width: 20%;
     text-align: center;
-  }
+}
 
-  .questions__questionRange__sliderLabel {
-      margin-top: 1rem;
-  }
+.questions__questionRange__sliderLabel {
+    margin-top: 1rem;
+}
 
 .questions__textArea__label {  
     margin-left: 0;
@@ -108,6 +141,7 @@
     margin-right: 2rem;
 }
 
+/* Utility classes */
 .u-glasMorphism {
     background-color: rgba(255,255,255, 0.25);
     border: 1px solid rgba(255,255,255, 0.25);
@@ -123,4 +157,8 @@
 
 .u-margin-top-1rem {
     margin-top: 1rem;
+}
+
+.u-height-100 {
+    height: 100%;
 }
