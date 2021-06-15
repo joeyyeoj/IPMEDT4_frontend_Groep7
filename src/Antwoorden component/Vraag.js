@@ -54,9 +54,11 @@ class Vraag extends React.Component {
 
 
     render() {
+        let extraClass = "vraag";
         let antwoorden;
 
         if (this.props.soort === 1) {
+            extraClass = "vraag vraag--open";
             antwoorden =
                 <ul id="js--vraag_antwoorden" className="vraag__antwoorden">
                     {this.state.openAntwoorden.map(function (antwoord, id) {
@@ -75,9 +77,10 @@ class Vraag extends React.Component {
                                 data: this.state.data,
                                 backgroundColor: [
                                     '#ED213A',
-                                    '#CCFF00',
-                                    '#FE8C00',
                                     '#A8E063',
+                                    '#F7F48B',
+                                    '#9896F1',
+                                    '#F98404',
                                 ],
                                 borderWidth: 0,
                             }
@@ -93,7 +96,7 @@ class Vraag extends React.Component {
                             },
                         }
                     }}
-                    height={300}
+                    height={310}
                     width={300}
                 />;
             antwoorden = <div>{antwoorden}</div>
@@ -109,8 +112,9 @@ class Vraag extends React.Component {
                             backgroundColor: [
                                 '#ED213A',
                                 '#F98404',
-                                '#FE8C00',
+                                '#9896F1',
                                 '#A8E063',
+                                '#F7F48B'
                             ],
                             borderWidth: 0,
                             borderRadius: {
@@ -153,14 +157,14 @@ class Vraag extends React.Component {
                             },
                         }
                     }}
-                    height={300}
+                    height={325}
                     width={300}
                 />;
             antwoorden = <div>{antwoorden}</div>
         }
 
         return (
-            <article className="vraag" onClick={this.hideItems}>
+            <article className={extraClass} onClick={this.hideItems}>
                 <h3 className="vraag__header">{this.props.vraag}</h3>
                 {antwoorden}
             </article>
