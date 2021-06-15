@@ -10,10 +10,27 @@ class EmailCard extends React.Component {
 
     state = { name: "" };
 
+    componentDidMount() {
+        this.getEmails(1);
+        
+    }
+
+    getEmails(num) {
+        let array = [];
+
+        const BASE_URL = "http://localhost:8000/api/mailgroep/"+ num +"/emailadressen/";
+        axios.get(BASE_URL).then(res => {
+            this.setState({
+                name: this.res.name                
+            });        
+            console.log(res.data.name);
+        });  
+    }
+
     onSubmit = (searchTerm) => {
-        const BASE_URL = "http://127.0.0.1:8000/api/mailgroep/1/emailadressen";
+        const BASE_URL = "http://localhost:8000/api/mailgroep/1/emailadressen/";
         // http://127.0.0.1:8000/api/mailgroep/1/emailadressen
-        // https://pokeapi.co/v2/pokemon/
+        // https://pokeapi.co/api/v2/pokemon/
 
         //  + searchTerm
         axios.get(BASE_URL).then(res => {
