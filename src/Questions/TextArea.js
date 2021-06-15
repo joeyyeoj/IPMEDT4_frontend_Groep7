@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { changeAnswer } from './actions';
 
 const Textarea = ({ rows, cols, value, limit }) => {
   const [content, setContent] = React.useState(value.slice(0, limit));
@@ -8,7 +10,12 @@ const Textarea = ({ rows, cols, value, limit }) => {
       setContent(text.slice(0, limit));
     },
     [limit, setContent]
-  );
+  );  
+
+  function onChange(event) {
+    this.props.changeAnswer(event.target.value);
+    console.log(this.props.changedAnswer);
+  };
 
   return (
     <>
@@ -26,4 +33,11 @@ const Textarea = ({ rows, cols, value, limit }) => {
   );
 };
 
-export default Textarea;
+const mapStateToProps = state => {
+    return {changedAnswer: state.changedAnswer};
+}
+
+export default connect(
+  mapStateToProps,
+  {changeAnswer: changeAnswer}
+)(Textarea);
