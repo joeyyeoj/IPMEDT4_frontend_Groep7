@@ -49,8 +49,13 @@
     padding-bottom: 1rem;
 }
 
+.sendEmailsForm__label{
+    margin-bottom: 0.5rem;
+}
+
 .sendEmailsForm__input{
     color: black;
+    border: 1.5rem;
 }
 
 @media only screen and  (min-width: 768px) {
