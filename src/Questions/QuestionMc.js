@@ -1,7 +1,6 @@
 import React from 'react';
 
 class QuestionOpen extends React.Component {
-    // state = {value: 'huts?'};
 
     constructor(props) {
         super(props);
