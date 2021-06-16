@@ -103,7 +103,7 @@ class Vraag extends React.Component {
                     height={320}
                     width={300}
                 />;
-            antwoorden = <div className="vraag__canvas">{antwoorden}</div>
+            antwoorden = <section className="vraag__canvas">{antwoorden}</section>
         }
 
         if (this.props.soort === 2) {
@@ -164,7 +164,7 @@ class Vraag extends React.Component {
                     height={320}
                     width={300}
                 />;
-            antwoorden = <div className="vraag__canvas">{antwoorden}</div>
+            antwoorden = <section className="vraag__canvas">{antwoorden}</section>
         }
 
         return (

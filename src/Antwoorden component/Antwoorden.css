@@ -17,6 +17,10 @@
     border: 0.1rem rgba(255, 255, 255, 0.25) solid;
 }
 
+.vragen__resultaten{
+    display: none;
+}
+
 .vraag:nth-last-child(1){
     margin-bottom: 2rem;
 }
@@ -47,6 +51,9 @@
     padding: 2rem;
     mix-blend-mode: normal;
     border: 0.1rem rgba(255, 255, 255, 0.25) solid;
+    font-size: 1.8rem;
+    display: flex;
+    gap: 1rem;
 }
 
 .vragen__navigatie__listItem:hover{
@@ -123,13 +130,27 @@
         display: none;
     }
 
-    .vraag--open{
-        max-height: fit-content;
-        margin-bottom: 50rem;
+    .vragen__resultaten{
+        display: block;
+        padding: 2rem;
+        width: fit-content;
+        border-radius: 2rem;
+    }
+
+    .vraag{
+        width: fit-content;
+        max-height: none;
+        float: left;
     }
 
     .vraag__canvas{
+        height: 10%;
+    }
+
+    .vraag--open{
         width: 100%;
+        max-height: fit-content;
+        margin-bottom: 30rem;
     }
 
     .vraag__header{
@@ -140,7 +161,7 @@
         font-size: 2.6rem;
     }
 
-    .vraag, h3, ul,li,.vraag__canvas{
+    .vraag, h3, ul,li,.vraag__canvas, .vragen__resultaten{
         background-color: RGBA(63,189,229,1);
         color: #fff;
     }

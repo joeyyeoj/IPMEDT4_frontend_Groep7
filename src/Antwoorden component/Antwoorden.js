@@ -35,10 +35,11 @@ class Antwoorden extends React.Component {
             <main className="vragen">
                 <nav className="vragen__navigatie">
                     <ul className="vragen__navigatie__list">
-                        <li className="vragen__navigatie__listItem"><i className="fas fa-arrow-left"></i></li>
-                        <li className="vragen__navigatie__listItem" onClick={this.printPage}><i className="fas fa-print"></i></li>
+                        <li className="vragen__navigatie__listItem"><i className="fas fa-arrow-left"></i>Terug</li>
+                        <li className="vragen__navigatie__listItem" onClick={this.printPage}><i className="fas fa-print"></i>Print</li>
                     </ul>
                 </nav>
+                <h1 className="vragen__resultaten">Resultaten</h1>
                 {this.state.vragen.map(function (vraag, id) {
                     return (<Vraag key={id} vraag={vraag.vraag} id={vraag.id} soort={vraag.soort} />)
                 })}
