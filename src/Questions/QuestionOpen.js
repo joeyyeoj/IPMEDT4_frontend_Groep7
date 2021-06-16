@@ -1,29 +1,33 @@
 import React from 'react';
-import TextArea from './TextArea.js';
-import { connect } from 'react-redux';
-import { changeAnswer } from './actions';
 
-const QuestionOpen = props => {
+class QuestionOpen extends React.Component {
+    state = {value: '', limit: 250};
 
-    function onChange(event) {
-        this.props.changeAnswer(event.target.value);
-        console.log(this.props.changedAnswer);
-      };
+    constructor(props) {
+        super(props);
+    }
 
-    return (
-        <div className="questions__questionOpen">
-            <form>
-                <TextArea limit={250} value="" onChange={onChange} />
-            </form>
-        </div>
-    );
+    onChange = (event) => {
+        this.setState({value: event.target.value}, () => {
+            if(this.props.onChange) {
+                this.props.onChange(this.state.value);
+            }
+        });
+    };
+
+    render() {
+        return (
+            <div className="questions__questionOpen">
+                <form>
+                    <textarea
+                        onChange={this.onChange}
+                        className="questions__textArea"
+                    />
+                    <p className="questions__textArea__label">{this.state.limit - this.state.value.length} tekens over</p>
+                </form>
+            </div>
+        );
+    }
 }
 
-const mapStateToProps = state => {
-    return {changedAnswer: state.changedAnswer};
-}
-
-export default connect(
-    mapStateToProps,
-    {changeAnswer: changeAnswer}
-  )(QuestionOpen);
+export default QuestionOpen;

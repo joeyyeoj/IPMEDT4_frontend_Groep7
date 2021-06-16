@@ -4,22 +4,46 @@ class QuestionRange extends React.Component {
 
     state = { value: 3, valueText: 'Neutraal'}
 
+    constructor(props) {
+        super(props);
+    }
+
     onChange(e) {
         const newVal = e.target.value;
         if(newVal == 1) {
-            this.setState({ value : newVal, valueText: "Helemaal oneens"});
+            this.setState({ value : newVal, valueText: "Helemaal oneens"}, () => {
+                if(this.props.onChange) {
+                    this.props.onChange(this.state.value);
+                }
+            });
         }
         else if(newVal == 2) {
-            this.setState({ value : newVal, valueText: "Oneens"});
+            this.setState({ value : newVal, valueText: "Oneens"}, () => {
+                if(this.props.onChange) {
+                    this.props.onChange(this.state.value);
+                }
+            });
         }
         else if(newVal == 3) {
-            this.setState({ value : newVal, valueText: "Neutraal"});
+            this.setState({ value : newVal, valueText: "Neutraal"}, () => {
+                if(this.props.onChange) {
+                    this.props.onChange(this.state.value);
+                }
+            });
         }
         else if(newVal == 4) {
-            this.setState({ value : newVal, valueText: "Eens"});
+            this.setState({ value : newVal, valueText: "Eens"}, () => {
+                if(this.props.onChange) {
+                    this.props.onChange(this.state.value);
+                }
+            });
         }
         else if(newVal == 5) {
-            this.setState({ value : newVal, valueText: "Helemaal eens"});
+            this.setState({ value : newVal, valueText: "Helemaal eens"}, () => {
+                if(this.props.onChange) {
+                    this.props.onChange(this.state.value);
+                }
+            });
         }
     }
 

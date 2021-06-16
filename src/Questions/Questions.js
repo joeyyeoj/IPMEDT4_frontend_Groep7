@@ -13,7 +13,9 @@ class Questions extends React.Component {
         questions: [],
         options: [],
         kind: [],
-        antwoorden: [],
+        answers: [],
+        end: false,
+        currentAnswer: ''
     };
 
     constructor(props) {
@@ -42,7 +44,16 @@ class Questions extends React.Component {
             this.setState({questions: questionArray, options: optionsArray, kind: kindArray});        
             console.log(this.state);
         });
-    } 
+    }
+
+    changeCurrentAnswer = (data) => {
+        console.log("komt ie hier?");
+        console.log(data);
+        this.setState({currentAnswer: data});
+        // if(this.state.kind[this.state.currentQuestion] === 3) {
+        //     this.nextQuestion();
+        // }
+    }
 
     checkQuestionKind() {
         const kind = this.state.kind[this.state.currentQuestion];
@@ -52,7 +63,7 @@ class Questions extends React.Component {
                     <section className="questions">
                         <div className="questions__questionArea u-glasMorphism">
                             <h3>{this.state.questions[this.state.currentQuestion]}</h3>
-                            <QuestionOpen />
+                            <QuestionOpen onChange={this.changeCurrentAnswer} />
                         </div>                    
                         <div>
                             <button onClick={this.prevQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabled}>Vorige</button>
@@ -60,8 +71,8 @@ class Questions extends React.Component {
                         </div>
                     </section>
                     <section className="progressArea">
-                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion} van {this.state.questions.length}</label>
-                        <progress className="progressArea__progress" value={this.state.currentQuestion} max={this.state.questions.length}></progress>
+                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion + 1} van {this.state.questions.length}</label>
+                        <progress className="progressArea__progress" value={this.state.currentQuestion + 1} max={this.state.questions.length}></progress>
                     </section>
                 </article>
             );
@@ -72,7 +83,7 @@ class Questions extends React.Component {
                     <section className="questions">
                         <div className="questions__questionArea u-glasMorphism">
                             <h3>{this.state.questions[this.state.currentQuestion]}</h3>
-                            <QuestionRange />
+                            <QuestionRange onChange={this.changeCurrentAnswer} />
                         </div>
                         <div>
                             <button onClick={this.prevQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabled}>Vorige</button>
@@ -80,8 +91,8 @@ class Questions extends React.Component {
                         </div>
                     </section>
                     <section className="progressArea">
-                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion} van {this.state.questions.length}</label>
-                        <progress className="progressArea__progress" value={this.state.currentQuestion} max={this.state.questions.length}></progress>
+                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion + 1} van {this.state.questions.length}</label>
+                        <progress className="progressArea__progress" value={this.state.currentQuestion + 1} max={this.state.questions.length}></progress>
                     </section>
                 </article>
             );
@@ -92,7 +103,7 @@ class Questions extends React.Component {
                     <section className="questions">
                         <div className="questions__questionArea u-glasMorphism">
                             <h3>{this.state.questions[this.state.currentQuestion]}</h3>
-                            <QuestionMc options={this.state.options[this.state.currentQuestion]} />
+                            <QuestionMc options={this.state.options[this.state.currentQuestion].split(',')} onSubmit={this.changeCurrentAnswer} />
                         </div>
                         <div>
                             <button onClick={this.prevQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabled}>Vorige</button>
@@ -100,13 +111,20 @@ class Questions extends React.Component {
                         </div>
                     </section>
                     <section className="progressArea">
-                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion} van {this.state.questions.length}</label>
-                        <progress className="progressArea__progress" value={this.state.currentQuestion} max={this.state.questions.length}></progress>
+                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion + 1} van {this.state.questions.length}</label>
+                        <progress className="progressArea__progress" value={this.state.currentQuestion + 1} max={this.state.questions.length}></progress>
                     </section>
                 </article>
             );
         }
+        if(this.state.currentQuestion === this.state.questions.length && this.state.end === true) {
+            for( let i=0; i<this.state.questions.length; i++) {
+                console.log('test');
+            }
+        }
         else {
+            console.log(this.state.currentQuestion);
+            console.log(this.state.questions.length);
             return (
                 <article className="loaderArea">
                     <section class="loaderArea__loader"></section>
@@ -117,13 +135,26 @@ class Questions extends React.Component {
     }
 
     nextQuestion() {
+        let answersArray = this.state.answers;
+        if(this.state.kind[this.state.currentQuestion] === 2 && this.state.currentAnswer === '') {
+            answersArray.push('3');
+        }
+        else {
+            answersArray.push(this.state.currentAnswer);
+        }
+        console.log(answersArray);
+        
         const currentQuestion = this.state.currentQuestion;
         const nextQuestion = currentQuestion+1;
+        
         if(this.state.disabled === true) {
             this.setState({disabled: false});
         }
-        this.setState({currentQuestion: nextQuestion});
-        console.log('volgende');
+        
+        if(nextQuestion === this.state.questions.length) {
+            this.setState({end: true});
+        }
+        this.setState({currentQuestion: nextQuestion, answers: answersArray, currentAnswer: ''});
     }
 
     prevQuestion() {
@@ -133,7 +164,6 @@ class Questions extends React.Component {
             this.setState({disabled: true});
         }
         this.setState({currentQuestion: prevQuestion});
-        console.log('vorige');
     }
 
     render() {

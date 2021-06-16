@@ -119,6 +119,10 @@
     color: #fff;
 }
 
+.questions__mcButton:hover {
+    cursor: pointer;
+}
+
 .questions__button {
     width: 10rem;
     padding: .75rem 0;
