@@ -39,12 +39,11 @@ class EmailCard extends React.Component {
             data: bodyFormData,
             headers: { "Content-Type": "multipart/form-data" },
         })
+        // kan later weg
           .then(function (response) {
-            //handle success
             console.log(response);
           })
           .catch(function (response) {
-            //handle error
             console.log(response);
           });    
     }
@@ -55,7 +54,9 @@ class EmailCard extends React.Component {
                 <section className="email-card__content">
                     <h1 className="email-card__content__header">Hey, Gebruiker</h1>
                     <SearchBar onSubmit={this.onSubmit} />
-                    <p>{this.state.name}</p>
+                    <p className="email-card__content__text">Voorbeeld@mail.com</p>
+                    <p className="email-card__content__text">Voorbeeld@mail.com</p>
+                    <p className="email-card__content__text">Voorbeeld@mail.com</p>
                 </section>               
             </section>
         );

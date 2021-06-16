@@ -23,3 +23,8 @@
     font-size: 4.8rem;
     font-weight: bold;
 }
+
+.email-card__content__text {
+    font-size: 1.8rem;
+    margin-top: .25rem;
+}
