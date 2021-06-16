@@ -47,12 +47,12 @@ class Questions extends React.Component {
     }
 
     changeCurrentAnswer = (data) => {
-        console.log("komt ie hier?");
-        console.log(data);
-        this.setState({currentAnswer: data});
-        // if(this.state.kind[this.state.currentQuestion] === 3) {
-        //     this.nextQuestion();
-        // }
+        if(this.state.kind[this.state.currentQuestion] === 3) {
+            this.nextQuestion(data);
+        }
+        else {
+            this.setState({currentAnswer: data});
+        }
     }
 
     checkQuestionKind() {
@@ -134,10 +134,13 @@ class Questions extends React.Component {
         }
     }
 
-    nextQuestion() {
+    nextQuestion(data) {
         let answersArray = this.state.answers;
         if(this.state.kind[this.state.currentQuestion] === 2 && this.state.currentAnswer === '') {
             answersArray.push('3');
+        }
+        else if(this.state.kind[this.state.currentQuestion] === 3) {
+            answersArray.push(data);
         }
         else {
             answersArray.push(this.state.currentAnswer);
