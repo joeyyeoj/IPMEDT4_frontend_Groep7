@@ -110,6 +110,7 @@ class Questions extends React.Component {
             return (
                 <article className="loaderArea">
                     <section class="loaderArea__loader"></section>
+                    <h2>Even geduld...</h2>
                 </article>
             );
         }

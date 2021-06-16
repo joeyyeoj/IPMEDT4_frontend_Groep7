@@ -2,7 +2,7 @@ import React from 'react';
 
 class QuestionRange extends React.Component {
 
-    state = { value: '', valueText: ''}
+    state = { value: 3, valueText: 'Neutraal'}
 
     onChange(e) {
         const newVal = e.target.value;
@@ -27,7 +27,15 @@ class QuestionRange extends React.Component {
         return (
             <div className="questions__questionRange">
                 <form className="u-flex-column">
-                    <input name="range" id="range" className="questions__questionRange__slider u-margin-top-1rem" type="range" min="1" max="5" onChange={this.onChange.bind(this)}></input>
+                    <input name="range" 
+                           id="range" 
+                           className="questions__questionRange__slider u-margin-top-1rem"
+                           type="range" 
+                           min="1" 
+                           max="5" 
+                           value={this.state.value} 
+                           onChange={this.onChange.bind(this)}>
+                    </input>
                     {/* <ul className="questions__questionRange__list">
                         <li className="questions__questionRange__listItem">1</li>
                         <li className="questions__questionRange__listItem">2</li>

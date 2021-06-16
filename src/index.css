@@ -37,9 +37,11 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .loaderArea__loader {
+  margin-bottom: 1rem;
   border: .5rem solid #fff;
   border-radius: 50%;
   border-top: .5rem solid #F98404;
