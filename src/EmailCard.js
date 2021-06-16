@@ -8,7 +8,7 @@ import axios from "axios";
 
 class EmailCard extends React.Component {
 
-    state = { name: "" };
+    state = { email: "", id: "" };
 
     componentDidMount() {
         this.getEmails(1);
@@ -27,17 +27,26 @@ class EmailCard extends React.Component {
         });  
     }
 
-    onSubmit = (searchTerm) => {
-        const BASE_URL = "http://localhost:8000/api/mailgroep/1/emailadressen/";
-        // http://127.0.0.1:8000/api/mailgroep/1/emailadressen
-        // https://pokeapi.co/api/v2/pokemon/
+    onSubmit = (emailInput) => {
+        let bodyFormData = new FormData();
+        bodyFormData.append('email', emailInput);
+        bodyFormData.append('mailgroep-id', 1);
+        const BASE_URL = "http://localhost:8000/api/mailgroep/1/";
 
-        //  + searchTerm
-        axios.get(BASE_URL).then(res => {
-            this.setState({
-                name: res.data.email                
-            });
-        });     
+        axios({
+            method: "post",
+            url: BASE_URL,
+            data: bodyFormData,
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+          .then(function (response) {
+            //handle success
+            console.log(response);
+          })
+          .catch(function (response) {
+            //handle error
+            console.log(response);
+          });    
     }
 
     render() {
