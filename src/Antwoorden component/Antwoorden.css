@@ -14,6 +14,7 @@
     mix-blend-mode: normal;
     padding: 2rem;
     max-height: 38rem;
+    border: 0.1rem rgba(255, 255, 255, 0.25) solid;
 }
 
 .vraag:nth-last-child(1){
@@ -22,6 +23,34 @@
 
 .vraag--open{
     overflow:hidden;
+}
+
+.vraag--open:hover{
+    cursor: pointer;
+}
+
+.vragen__navigatie{
+    margin-top: 2rem;
+}
+
+.vragen__navigatie__list{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    width: 100%;
+}
+
+.vragen__navigatie__listItem{
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(1.5rem); 
+    border-radius: 1rem;
+    padding: 2rem;
+    mix-blend-mode: normal;
+    border: 0.1rem rgba(255, 255, 255, 0.25) solid;
+}
+
+.vragen__navigatie__listItem:hover{
+    cursor: pointer;
 }
 
 .vraag__antwoorden{
@@ -51,6 +80,10 @@
     .vraag--open{
         grid-column: 1 / span 2;
     }
+
+    .vragen__navigatie{
+        grid-column: 1 / span 2;
+    }
 }
 
 @media only screen and (min-width: 1300px){
@@ -61,6 +94,10 @@
     .vraag--open{
         grid-column: 1;
     }
+
+    .vragen__navigatie{
+        grid-column: 1 / span 3;
+    }
 }
 
 @media only screen and (min-width: 1440px){
@@ -69,6 +106,43 @@
     }
 
     .vraag--open{
-        grid-column: 1 / span 2;
+        grid-column: span 2;
     }
+
+    .vragen__navigatie{
+        grid-column: 1 / span 4;
+    }
+}
+
+@media print{
+    *{
+        background-color: white;
+    }
+
+    .vragen__navigatie{
+        display: none;
+    }
+
+    .vraag--open{
+        max-height: fit-content;
+        margin-bottom: 50rem;
+    }
+
+    .vraag__canvas{
+        width: 100%;
+    }
+
+    .vraag__header{
+        font-size: 3.6rem;
+    }
+
+    .vraag__antwoord{
+        font-size: 2.6rem;
+    }
+
+    .vraag, h3, ul,li,.vraag__canvas{
+        background-color: RGBA(63,189,229,1);
+        color: #fff;
+    }
+
 }

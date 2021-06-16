@@ -55,7 +55,6 @@ class Vraag extends React.Component {
         }
     }
 
-
     render() {
         let extraClass = "vraag";
         let antwoorden;
@@ -104,7 +103,7 @@ class Vraag extends React.Component {
                     height={320}
                     width={300}
                 />;
-            antwoorden = <div>{antwoorden}</div>
+            antwoorden = <div className="vraag__canvas">{antwoorden}</div>
         }
 
         if (this.props.soort === 2) {
@@ -162,10 +161,10 @@ class Vraag extends React.Component {
                             },
                         }
                     }}
-                    height={325}
+                    height={320}
                     width={300}
                 />;
-            antwoorden = <div>{antwoorden}</div>
+            antwoorden = <div className="vraag__canvas">{antwoorden}</div>
         }
 
         return (

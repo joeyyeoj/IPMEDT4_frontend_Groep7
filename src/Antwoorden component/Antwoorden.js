@@ -13,6 +13,11 @@ class Antwoorden extends React.Component {
         this.haalVragenOp(1);
     }
 
+
+    printPage() {
+        window.print();
+    }
+
     haalVragenOp(vragenlijstId) {
         let array = [];
 
@@ -28,6 +33,12 @@ class Antwoorden extends React.Component {
     render() {
         return (
             <main className="vragen">
+                <nav className="vragen__navigatie">
+                    <ul className="vragen__navigatie__list">
+                        <li className="vragen__navigatie__listItem"><i className="fas fa-arrow-left"></i></li>
+                        <li className="vragen__navigatie__listItem" onClick={this.printPage}><i className="fas fa-print"></i></li>
+                    </ul>
+                </nav>
                 {this.state.vragen.map(function (vraag, id) {
                     return (<Vraag key={id} vraag={vraag.vraag} id={vraag.id} soort={vraag.soort} />)
                 })}
