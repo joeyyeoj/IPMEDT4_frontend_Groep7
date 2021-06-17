@@ -138,6 +138,16 @@
     transition: .5s;
 }
 
+.questions__button:disabled {
+    background: rgba(162, 162, 162, 1);
+    backdrop-filter: blur(25px);
+    border-radius: 15px;
+    border-radius: .5rem;
+    opacity: .5;
+    cursor: auto;
+    font-style: italic;
+}
+
 .questions__button:nth-child(1) {
     float: left;
     margin-left: 2rem;

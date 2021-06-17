@@ -5,6 +5,7 @@ import QuestionOpen from './QuestionOpen';
 import QuestionMc from './QuestionMc';
 import QuestionRange from './QuestionRange';
 import axios from 'axios';
+import ProgressBar from './ProgressBar';
 
 class Questions extends React.Component {
     state = {
@@ -28,12 +29,6 @@ class Questions extends React.Component {
 
     componentDidMount() {
         this.makeApiCall(1);
-        if(this.state.currentAnswer === '') {
-            this.setState({disabledNext: true});
-        }
-        else {
-            this.setState({disabledNext: false});            
-        }
     }
 
     makeApiCall = (listId) => {
@@ -56,7 +51,6 @@ class Questions extends React.Component {
     changeCurrentAnswer = (data) => {
         if(this.state.kind[this.state.currentQuestion] === 3) {
             this.nextQuestion(data);
-
         }
         else {
             this.setState({currentAnswer: data});
@@ -79,10 +73,7 @@ class Questions extends React.Component {
                             <button onClick={this.nextQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabledNext}>Volgende</button>
                         </div>
                     </section>
-                    <section className="progressArea">
-                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion + 1} van {this.state.questions.length}</label>
-                        <progress className="progressArea__progress" value={this.state.currentQuestion + 1} max={this.state.questions.length}></progress>
-                    </section>
+                    <ProgressBar currentQuestion={this.state.currentQuestion} length={this.state.questions.length} />
                 </article>
             );
         }
@@ -99,10 +90,7 @@ class Questions extends React.Component {
                             <button onClick={this.nextQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabledNext}>Volgende</button>
                         </div>
                     </section>
-                    <section className="progressArea">
-                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion + 1} van {this.state.questions.length}</label>
-                        <progress className="progressArea__progress" value={this.state.currentQuestion + 1} max={this.state.questions.length}></progress>
-                    </section>
+                    <ProgressBar currentQuestion={this.state.currentQuestion} length={this.state.questions.length} />
                 </article>
             );
         }
@@ -119,10 +107,7 @@ class Questions extends React.Component {
                             <button onClick={this.nextQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabledNext}>Volgende</button>
                         </div>
                     </section>
-                    <section className="progressArea">
-                        <label className="progressArea__label u-glasMorphism">Vraag {this.state.currentQuestion + 1} van {this.state.questions.length}</label>
-                        <progress className="progressArea__progress" value={this.state.currentQuestion + 1} max={this.state.questions.length}></progress>
-                    </section>
+                    <ProgressBar currentQuestion={this.state.currentQuestion} length={this.state.questions.length} />
                 </article>
             );
         }
