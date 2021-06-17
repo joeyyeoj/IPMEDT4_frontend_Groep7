@@ -1,6 +1,5 @@
 import React from 'react';
 import './Questions.css';
-// import NextPrevButtons from './NextPrevButtons';
 import QuestionOpen from './QuestionOpen';
 import QuestionMc from './QuestionMc';
 import QuestionRange from './QuestionRange';
@@ -43,8 +42,7 @@ class Questions extends React.Component {
                 kindArray.push(res.data[i]['vraagsoort']);
                 optionsArray.push(res.data[i]['opties']);
             }
-            this.setState({questions: questionArray, options: optionsArray, kind: kindArray});        
-            console.log(this.state);
+            this.setState({questions: questionArray, options: optionsArray, kind: kindArray});
         });
     }
 
@@ -137,7 +135,6 @@ class Questions extends React.Component {
         else {
             answersArray.push(this.state.currentAnswer);
         }
-        console.log(answersArray);
         
         const currentQuestion = this.state.currentQuestion;
         const nextQuestion = currentQuestion+1;
@@ -155,7 +152,6 @@ class Questions extends React.Component {
     prevQuestion() {
         let answersArray = this.state.answers;
         answersArray.splice(-1, 1);
-        console.log(answersArray);
 
         const currentQuestion = this.state.currentQuestion;
         const prevQuestion = currentQuestion-1;
