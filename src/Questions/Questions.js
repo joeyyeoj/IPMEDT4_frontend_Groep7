@@ -10,6 +10,7 @@ class Questions extends React.Component {
     state = {
         currentQuestion: 0,
         questions: [],
+        questionIds: [],
         options: [],
         kind: [],
         answers: [],
@@ -34,6 +35,7 @@ class Questions extends React.Component {
         let questionArray = [];
         let kindArray = [];
         let optionsArray = [];
+        let questionIdsArray = [];
 
         const BASE_URL = 'http://localhost:8000/api/vragenlijst/' + listId + '/vragen';
         axios.get(BASE_URL).then(res => {
@@ -41,8 +43,9 @@ class Questions extends React.Component {
                 questionArray.push(res.data[i]['vraag']);
                 kindArray.push(res.data[i]['vraagsoort']);
                 optionsArray.push(res.data[i]['opties']);
+                questionIdsArray.push(res.data[i]['id']);
             }
-            this.setState({questions: questionArray, options: optionsArray, kind: kindArray});
+            this.setState({questions: questionArray, options: optionsArray, kind: kindArray, questionIds: questionIdsArray});
         });
     }
 
@@ -52,11 +55,12 @@ class Questions extends React.Component {
         }
         else {
             this.setState({currentAnswer: data});
+            this.setState({disabledNext: false});
         }
-        this.setState({disabledNext: false});
     }
 
     checkQuestionKind() {
+        console.log(this.state);
         const kind = this.state.kind[this.state.currentQuestion];
         if(kind === 1) {
             return (
@@ -146,7 +150,14 @@ class Questions extends React.Component {
         if(nextQuestion === this.state.questions.length) {
             this.setState({end: true});
         }
-        this.setState({currentQuestion: nextQuestion, answers: answersArray, currentAnswer: '', disabledNext: true});
+
+        if(this.state.kind[nextQuestion] === 2) {
+            this.setState({disabledNext: false})
+        }
+        else {
+            this.setState({disabledNext: true});
+        }
+        this.setState({currentQuestion: nextQuestion, answers: answersArray, currentAnswer: ''});
     }
 
     prevQuestion() {
@@ -158,7 +169,7 @@ class Questions extends React.Component {
         if(this.state.disabledPrev === false && this.state.currentQuestion === 1) {
             this.setState({disabledPrev: true});
         }
-        this.setState({currentQuestion: prevQuestion, asnwers: answersArray, disabledNext: true});
+        this.setState({currentQuestion: prevQuestion, asnwers: answersArray, currentAnswer: '', disabledNext: true});
     }
 
     render() {
