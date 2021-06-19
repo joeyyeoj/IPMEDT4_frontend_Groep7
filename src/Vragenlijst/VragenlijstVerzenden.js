@@ -17,7 +17,8 @@ export class VragenlijstVerzenden extends React.Component{
             vragenlijsten: [],
             redirectToLogin: false,
             mailGroupValid: false,
-            vragenlijstValid: false
+            vragenlijstValid: false,
+            verzonden: false,
         }
     }
 
@@ -68,14 +69,16 @@ export class VragenlijstVerzenden extends React.Component{
         }
         return(
             <form onSubmit={this.onSubmit} className="sendEmailsForm">
+
                 <fieldset className="sendEmailsForm__fieldset">
                     <label className="sendEmailsForm__label" htmlFor="onderzoek">Selecteer een onderzoek:</label>
-                    <Select className="sendEmailsForm__input" name="onderzoek" onChange={this.handleOnderzoekChange} options={this.state.vragenlijsten}></Select>
+                    <Select id="js--selectOnderzoek" className="sendEmailsForm__input" name="onderzoek" onChange={this.handleOnderzoekChange} options={this.state.vragenlijsten}></Select>
                 </fieldset>
                 <fieldset className="sendEmailsForm__fieldset">
                     <label className="sendEmailsForm__label" htmlFor="mailgroep">Versturen naar: </label>
-                    <Select className="sendEmailsForm__input" name="mailgroep" onChange={this.handleMailGroupChange} options={this.state.mailGroepen}></Select>
+                    <Select id="js--selectEmail" className="sendEmailsForm__input" name="mailgroep" onChange={this.handleMailGroupChange} options={this.state.mailGroepen}></Select>
                 </fieldset>
+                { this.state.verzonden ? <p className="sendEmailsForm__success">Enquete verzonden!</p> : '' }
                 <input className="sendEmailsForm__submit" type="submit" disabled={this.state.mailGroupValid && this.state.vragenlijstValid ? '' : true}/>
             </form>
         )
@@ -84,14 +87,16 @@ export class VragenlijstVerzenden extends React.Component{
     handleMailGroupChange = e =>{
         this.setState({
             mailgroep: e.value,
-            mailGroupValid: true
+            mailGroupValid: true,
+            verzonden: false
         })
     }
 
     handleOnderzoekChange = e => {
         this.setState({
             vragenlijst: e.value,
-            vragenlijstValid: true
+            vragenlijstValid: true,
+            verzonden: false
         })
     }
 
@@ -114,6 +119,10 @@ export class VragenlijstVerzenden extends React.Component{
                 'X-XSRF-Token': this.props.csrf_token,
             }
         })
+        this.setState({
+            verzonden: true
+        })
+
     }
 
 }

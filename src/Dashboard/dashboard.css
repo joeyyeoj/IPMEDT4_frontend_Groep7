@@ -1,0 +1,82 @@
+.dashboard{
+    width: 90vw;
+    margin: 0 auto;
+    margin-top: 5rem;
+    border-radius: 2.5rem;
+    background: rgba(255, 255, 255, 0.25);
+    mix-blend-mode: normal;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 2rem;
+    color: white;
+    position: relative;
+}
+
+.dashboard__vragenlijsten{
+    list-style-type: none;
+    margin-top: 2rem;
+}
+
+
+.dashboard__vragenlijst{
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border: none;
+    color: white;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.dashboard__responsecounter{
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+    font-size: 1.3rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1.2rem
+}
+
+.dashboard__toevoegen{
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    border-radius: 50%;
+    background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
+    color: white;
+    height: 4rem;
+    width: 4rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    text-decoration: none;
+    display: flex;
+}
+
+@media only screen and  (min-width: 768px) {
+    .dashboard{
+        width: 70vw;
+    }
+}
+
+@media only screen and  (min-width: 1024px) {
+    .dashboard{
+        width: 60vw;
+    }
+}
+
+@media only screen and  (min-width: 1440px) {
+
+
+
+    .dashboard__vragenlijsten{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 1rem;
+    }
+}
+

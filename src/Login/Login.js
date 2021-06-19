@@ -32,14 +32,14 @@ class Login extends React.Component{
 
     render(){
         if(this.state.redirectToDashboard){
-            return <Redirect to="/verzenden"/>
+            return <Redirect to="/dashboard"/>
         }
         return(
             <form className="loginForm" onSubmit={this.onSubmit }>
                 <fieldset className="loginForm__fieldset">
                     <label htmlFor="email">Email {!this.state.emailError.valid ? this.state.emailError.message : ''}</label>
                     <input className={!this.state.emailError.valid && this.state.emailError.touched ? 'loginForm__input loginForm__input--incorrect' : 'loginForm__input'} type="text" name="email" onChange={this.handleInputChange}/>
-                    <label htmlFor="email">Password</label>
+                    <label htmlFor="email">Wachtwoord</label>
                     <input className={!this.state.passwordError.valid && this.state.passwordError.touched ? 'loginForm__input loginForm__input--incorrect' : 'loginForm__input'} type="password" name="password" onChange={this.handleInputChange}/>
                     <p>{ this.state.incorrectLogin ? 'Onjuiste combinatie van email-adres en wachtwoord!' : '' }</p>
                 </fieldset>
