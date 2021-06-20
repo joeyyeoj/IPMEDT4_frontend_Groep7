@@ -128,6 +128,7 @@
     padding: .75rem 0;
     border-radius: .5rem;
     margin: 1rem;
+    margin-bottom: 0;
     color: #fff;
     font-family: 'Lato', sans-serif;
 }
@@ -136,6 +137,11 @@
     cursor: pointer;
     background-color: rgba(255,255,255, 0.5);    
     transition: .5s;
+}
+
+.questions__button--submit {
+    background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
+    border: none;
 }
 
 .questions__button:disabled {
@@ -178,4 +184,8 @@
 
 .u-height-100 {
     height: 100%;
+}
+
+.u-text-center {
+    text-align: center;
 }

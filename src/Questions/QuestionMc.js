@@ -2,10 +2,6 @@ import React from 'react';
 
 class QuestionOpen extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     onSubmit = (event) => {
         if(this.props.onSubmit) {
             this.props.onSubmit(event.target.value);

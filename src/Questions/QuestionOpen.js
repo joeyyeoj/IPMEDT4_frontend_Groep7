@@ -3,10 +3,6 @@ import React from 'react';
 class QuestionOpen extends React.Component {
     state = {value: '', limit: 250};
 
-    constructor(props) {
-        super(props);
-    }
-
     onChange = (event) => {
         this.setState({value: event.target.value}, () => {
             if(this.props.onChange) {

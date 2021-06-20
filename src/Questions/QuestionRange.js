@@ -4,10 +4,6 @@ class QuestionRange extends React.Component {
 
     state = { value: 3, valueText: 'Neutraal'}
 
-    constructor(props) {
-        super(props);
-    }
-
     onChange(e) {
         const newVal = e.target.value;
         if(newVal == 1) {
