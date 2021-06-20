@@ -1,13 +1,19 @@
 import React from 'react';
-
 import './App.css';
-
-import EmailCard from './EmailCard.js'
+import EmailCard from './email component/EmailCard';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
 class App extends React.Component {
     render() {
         return (
-            <EmailCard />
+            <Router>
+                <Switch>
+                    <Route path="/emaillijst">
+                        <EmailCard />
+                    </Route>
+                </Switch>
+            </Router>
+            
         );
     }
    

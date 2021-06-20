@@ -62,7 +62,7 @@ class EmailCard extends React.Component {
                     <FileUploadComponent />
                     {console.log(this.state.emails)}
                     <ul>
-                        { this.state.emails.map((item, id) => <li key={id}>tt</li>) }
+                        { this.state.emails.map((item, id) => <li key={id}>{this.state.email}</li>) }
                     </ul>
                                             
                 </section>               
