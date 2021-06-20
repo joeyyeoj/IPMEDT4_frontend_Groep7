@@ -12,8 +12,8 @@ const SoortVraagFilter = (props) => {
 			<div className={classes.vraagSoortFilter__control}>
 				<label>Kies een vraagsoort</label>
 				<select value={props.selected} onChange={dropdownChangeHandler}>
-					<option value="open">Open Vraag</option>
-					<option value="meerkeuze">Meerkeuze vraag</option>
+					<option value="open">Open vraag</option>
+					<option value="meerkeuze">Meerkeuze vraag (4 opties)</option>
 					<option value="schaal">Schaal vraag</option>
 				</select>
 			</div>

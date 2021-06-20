@@ -1,4 +1,6 @@
 .card {
+	display: block;
+	position: relative;
 	width: 90vw;
 	margin: 0 auto;
 	margin-top: 5rem;
