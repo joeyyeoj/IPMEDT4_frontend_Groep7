@@ -17,6 +17,7 @@ class Questions extends React.Component {
         disabledPrev: true,
         disabledNext: true,
         end: false,
+        submitted: false,
         currentAnswer: ''
     };
 
@@ -47,6 +48,18 @@ class Questions extends React.Component {
             }
             this.setState({questions: questionArray, options: optionsArray, kind: kindArray, questionIds: questionIdsArray});
         });
+    }
+
+    submitToApi = () => {
+        const URL = 'http://localhost:8000/api/antwoord/submit';
+        for(let i=0; i<this.state.questionIds.length; i++) {
+            const answer = {
+                questionId: this.state.questionIds[i],
+                answer: this.state.answers[i]
+            }
+            axios.post(URL, answer);
+        }
+        this.setState({submitted: true});
     }
 
     changeCurrentAnswer = (data) => {
@@ -113,10 +126,31 @@ class Questions extends React.Component {
                 </article>
             );
         }
-        if(this.state.currentQuestion === this.state.questions.length && this.state.end === true) {
-            for( let i=0; i<this.state.questions.length; i++) {
-                console.log('test');
-            }
+        if(this.state.currentQuestion === this.state.questions.length && this.state.end && !this.state.submitted) {
+            // for( let i=0; i<this.state.questions.length; i++) {
+            //     console.log('test');
+            // }
+            // return <button onClick={this.submitToApi}>Submit</button>;
+            return (
+                <article className="questions">
+                    <section className="questions__questionArea u-glasMorphism u-text-center">
+                        <h3>Bedankt!</h3>
+                        <p>Dit was de laatste vraag van deze enquète, bedankt voor het invullen.</p>
+                        <p>U kunt de enquète nu versturen.</p>
+                        <button className="questions__button questions__button--submit" onClick={this.submitToApi}>Verstuur</button>
+                    </section>
+                </article>
+            );
+        }
+        if(this.state.currentQuestion === this.state.questions.length && this.state.end && this.state.submitted) {
+            return (
+                <article className="questions">
+                    <section className="questions__questionArea u-glasMorphism u-text-center">
+                        <h3>De enquète is verstuurd!</h3>
+                        <p>U kunt het venster sluiten</p>
+                    </section>
+                </article>
+            );
         }
         else {
             return (
