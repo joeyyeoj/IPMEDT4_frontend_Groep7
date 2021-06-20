@@ -85,7 +85,7 @@
     }
 
     .vraag--open{
-        grid-column: 1 / span 2;
+        grid-column: span 2;
     }
 
     .vragen__navigatie{
@@ -138,19 +138,24 @@
     }
 
     .vraag{
-        width: fit-content;
+        width: 100%;
         max-height: none;
         float: left;
     }
 
     .vraag__canvas{
-        height: 10%;
+        height: 40vh;
+        width: 100%;
+    }
+
+    canvas{
+        width: 100%;
     }
 
     .vraag--open{
         width: 100%;
+        height: 88vh;
         max-height: fit-content;
-        margin-bottom: 30rem;
     }
 
     .vraag__header{

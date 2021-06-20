@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Bar, Pie, Chart } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 
 class Vraag extends React.Component {
 
@@ -45,7 +45,7 @@ class Vraag extends React.Component {
 
     hideItems(id) {
         let vraag_antwoorden = document.getElementById(id).parentElement;
-        if (vraag_antwoorden.style.overflow == 'hidden') {
+        if (vraag_antwoorden.style.overflow === 'hidden') {
             vraag_antwoorden.style.overflow = 'inherit';
             vraag_antwoorden.style.maxHeight = "fit-content";
         }

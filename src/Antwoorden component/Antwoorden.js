@@ -15,7 +15,19 @@ class Antwoorden extends React.Component {
 
 
     printPage() {
-        window.print();
+        let vragen = document.getElementsByClassName("vraag");
+        let vraagCanvases = document.getElementsByClassName("vraag__canvas");
+        for (let i = 0; i < vragen.length; i++) {
+            vragen[i].style.gridColumn = "span 2";
+        }
+        for (let i = 0; i < vraagCanvases.length; i++) {
+            vraagCanvases[i].style.width = "75%";
+        }
+        setTimeout(function () {
+            window.print();
+            window.location.reload();
+        }, 500);
+
     }
 
     haalVragenOp(vragenlijstId) {
@@ -32,7 +44,7 @@ class Antwoorden extends React.Component {
 
     render() {
         return (
-            <main className="vragen">
+            <main className="vragen" id="js--vragen">
                 <nav className="vragen__navigatie">
                     <ul className="vragen__navigatie__list">
                         <li className="vragen__navigatie__listItem"><i className="fas fa-arrow-left"></i>Terug</li>
