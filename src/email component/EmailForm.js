@@ -1,18 +1,19 @@
 import React from 'react';
 
-import './SearchBar.css';
+import './EmailForm.css';
 
-class SearchBar extends React.Component {
+class EmailForm extends React.Component {
 
-    state = {searchTerm: ""}
+    state = {emailInput: ""}
 
     onChange = (event) => {
-        this.setState({emailInput: event.target.value});     
+        this.setState({emailInput: event.target.value});    
     }
 
     onSubmit = (event) => {
         event.preventDefault();
         this.props.onSubmit(this.state.emailInput);
+        // console.log(this.state.emailInput);
     }
 
     render() {
@@ -28,7 +29,5 @@ class SearchBar extends React.Component {
     }
 }
 
-export default SearchBar;
+export default EmailForm;
 
-{/* <label className="registerForm__label" htmlFor="email">Email { !this.state.emailError.valid ? this.state.emailError.message : ''}</label>
-<input className={!this.state.emailError.valid && this.state.emailError.touched ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="text" id="email" name="email" onChange={this.handleInputChange}/> */}

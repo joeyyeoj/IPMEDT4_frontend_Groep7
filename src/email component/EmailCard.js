@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './EmailCard.css';
-import SearchBar from './SearchBar.js';
+import EmailForm from './EmailForm.js';
 import FileUploadComponent from './test.js';
 
 import axios from "axios";
@@ -11,34 +11,35 @@ class EmailCard extends React.Component {
     state = { emails: [], id: "" };
 
     componentDidMount() {
-        this.getEmails(1);
-        
+        this.getEmails(1);    
     }
 
     getEmails(emailgroepId) {
         let emailArray = [];
-        const BASE_URL = "http://localhost:8000/api/mailgroep/"+ emailgroepId +"/emailadressen/";
-        axios.get(BASE_URL).then(res => {
+        const EMAILGROEP_URL = "http://localhost:8000/api/mailgroep/"+ emailgroepId +"/emailadressen/";
+        axios.get(EMAILGROEP_URL).then(res => {
             for(let i=0; i<res.data.length; i++) {
                 emailArray.push(res.data[i]['email']);
-                console.log(res.data[i].email);
             }         
-            this.setState({
-                email: emailArray 
-            });        
-            
+            this.setState({ emails: emailArray });      
         });  
+    }
+
+    renderEmails() {
+        return this.state.emails.map(emails => {
+            return ( <p key={emails.id} className="email-card__content__emails">{ emails }</p> )
+        })
     }
 
     // onSubmit = (emailInput) => {
     //     let bodyFormData = new FormData();
     //     bodyFormData.append('email', emailInput);
     //     bodyFormData.append('mailgroep-id', 1);
-    //     const BASE_URL = "http://localhost:8000/api/mailgroep/1/";
+    //     const NIEUWEMAIL_URL = "http://localhost:8000/api/mailgroep/create";
 
     //     axios({
     //         method: "post",
-    //         url: BASE_URL,
+    //         url: NIEUWEMAIL_URL,
     //         data: bodyFormData,
     //         headers: { "Content-Type": "multipart/form-data" },
     //     })
@@ -52,19 +53,15 @@ class EmailCard extends React.Component {
     // }
 
     render() {
-        {console.log(this.state.emails)}
 
         return (
             <section className="email-card">
                 <section className="email-card__content">
                     <h1 className="email-card__content__header">Hey, Gebruiker</h1>
-                    <SearchBar onSubmit={this.onSubmit} />
-                    <FileUploadComponent />
-                    {console.log(this.state.emails)}
-                    <ul>
-                        { this.state.emails.map((item, id) => <li key={id}>{this.state.email}</li>) }
-                    </ul>
-                                            
+                    <EmailForm onSubmit={this.onSubmit} />
+                    <FileUploadComponent />                  
+                    { this.renderEmails() }
+
                 </section>               
             </section>
         );
