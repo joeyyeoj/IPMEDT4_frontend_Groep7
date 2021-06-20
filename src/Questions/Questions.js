@@ -149,6 +149,7 @@ class Questions extends React.Component {
                         <h3>De enquète is verstuurd!</h3>
                         <p>U kunt het venster sluiten</p>
                     </section>
+                    <ProgressBar currentQuestion={this.state.currentQuestion} length={this.state.questions.length} />
                 </article>
             );
         }
