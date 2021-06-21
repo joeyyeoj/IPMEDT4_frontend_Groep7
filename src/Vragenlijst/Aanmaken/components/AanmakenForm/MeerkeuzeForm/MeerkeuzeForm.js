@@ -67,12 +67,11 @@ const MeerkeuzeForm = (props) => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
-		const oudeVragenlijst = props.vragen_lijst;
-		let TEMP_vragenlijst = oudeVragenlijst;
+		const TEMP_vragenlijst = props.vragen_lijst;
 		const nieuweVraag = {
 			type: 3,
 			vraag: vraag,
-			opties: optie1 + ',' + optie2 + ',' + optie3 + ',' + optie4,
+			opties: optie1 + ', ' + optie2 + ', ' + optie3 + ', ' + optie4,
 		};
 		TEMP_vragenlijst.push(nieuweVraag);
 		props.editVragenlijst(TEMP_vragenlijst);

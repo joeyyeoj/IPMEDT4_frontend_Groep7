@@ -6,7 +6,7 @@ import classes from '../MeerkeuzeForm/MeerkeuzeForm.module.css';
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
 
-const OpenForm = () => {
+const OpenForm = (props) => {
 	const [vraag, setVraag] = useState('');
 	const [vraagIsValid, setVraagIsValid] = useState(true);
 
@@ -23,8 +23,16 @@ const OpenForm = () => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
+		const TEMP_vragenlijst = props.vragen_lijst;
+		const nieuweVraag = {
+			type: 1,
+			vraag: vraag,
+			opties: 'Dit is een open vraag',
+		};
+		TEMP_vragenlijst.push(nieuweVraag);
+		props.editVragenlijst(TEMP_vragenlijst);
 		setVraag('');
-		console.log(event);
+		console.log(props.vragen_lijst);
 	};
 
 	return (
@@ -48,4 +56,10 @@ const OpenForm = () => {
 	);
 };
 
-export default OpenForm;
+const mapStateToProps = (state) => {
+	return { vragen_lijst: state.Vragenlijst };
+};
+
+export default connect(mapStateToProps, { editVragenlijst: editVragenlijst })(
+	OpenForm
+);

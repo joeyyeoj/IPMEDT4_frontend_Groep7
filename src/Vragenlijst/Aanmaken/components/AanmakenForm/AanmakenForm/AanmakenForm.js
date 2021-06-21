@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import { editVragenlijst } from '../../../store/actions';
+import { editVragenlijst } from '../../../../../actions';
 import axios from 'axios';
 
 import classes from './AanmakenForm.module.css';

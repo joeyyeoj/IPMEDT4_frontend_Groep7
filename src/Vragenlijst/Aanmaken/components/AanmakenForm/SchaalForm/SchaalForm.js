@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
+import { connect } from 'react-redux';
+import { editVragenlijst } from '../../../../../actions';
 
 import classes from '../MeerkeuzeForm/MeerkeuzeForm.module.css';
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
 
-const MeerkeuzeForm = () => {
+const SchaalForm = (props) => {
 	const [vraag, setVraag] = useState('');
 	const [vraagIsValid, setVraagIsValid] = useState(true);
 
@@ -21,8 +23,16 @@ const MeerkeuzeForm = () => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
+		const TEMP_vragenlijst = props.vragen_lijst;
+		const nieuweVraag = {
+			type: 2,
+			vraag: vraag,
+			opties: 'Dit is een schaal vraag',
+		};
+		TEMP_vragenlijst.push(nieuweVraag);
+		props.editVragenlijst(TEMP_vragenlijst);
 		setVraag('');
-		console.log(event);
+		console.log(props.vragen_lijst);
 	};
 
 	return (
@@ -46,4 +56,10 @@ const MeerkeuzeForm = () => {
 	);
 };
 
-export default MeerkeuzeForm;
+const mapStateToProps = (state) => {
+	return { vragen_lijst: state.Vragenlijst };
+};
+
+export default connect(mapStateToProps, { editVragenlijst: editVragenlijst })(
+	SchaalForm
+);
