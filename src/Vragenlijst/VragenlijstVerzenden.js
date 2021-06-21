@@ -1,12 +1,12 @@
 import React from "react";
 import Select from "react-select";
 import axios from "axios";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import "./VragenlijstVerzenden.css";
-import {changeUser, getCSRFToken, loginUser} from "../actions";
-import {Redirect} from "react-router-dom";
+import { changeUser, getCSRFToken, loginUser } from "../actions";
+import { Redirect } from "react-router-dom";
 
-export class VragenlijstVerzenden extends React.Component{
+export class VragenlijstVerzenden extends React.Component {
 
     constructor(props) {
         super(props);
@@ -15,7 +15,7 @@ export class VragenlijstVerzenden extends React.Component{
             mailgroep: null,
             mailGroepen: [],
             vragenlijsten: [],
-            redirectToLogin: false,
+            redirect: false,
             mailGroupValid: false,
             vragenlijstValid: false,
             verzonden: false,
@@ -23,7 +23,7 @@ export class VragenlijstVerzenden extends React.Component{
     }
 
     componentDidMount() {
-        if(!this.props.logged_in){
+        if (!this.props.logged_in) {
             this.setState({
                 redirectToLogin: true
             })
@@ -34,13 +34,13 @@ export class VragenlijstVerzenden extends React.Component{
         axios.get(BASE_URL + "/user/" + this.props.User.userData.id + "/mailgroepen", {
             withCredentials: true,
             headers: {
-                'Authorization' : 'Bearer ' + this.props.User.token,
+                'Authorization': 'Bearer ' + this.props.User.token,
                 'X-Requested-With': 'XMLHttpRequest',
                 'X-XSRF-Token': this.props.csrf_token,
             }
         }).then(response => {
             const temp_mailgroepen = [];
-            response.data.forEach(mailgroep => temp_mailgroepen.push({value: mailgroep.id, label: mailgroep.name}))
+            response.data.forEach(mailgroep => temp_mailgroepen.push({ value: mailgroep.id, label: mailgroep.name }))
             this.setState({
                 mailGroepen: temp_mailgroepen
             })
@@ -49,13 +49,13 @@ export class VragenlijstVerzenden extends React.Component{
         axios.get(BASE_URL + "/user/" + this.props.User.userData.id + "/vragenlijsten", {
             withCredentials: true,
             headers: {
-                'Authorization' : 'Bearer ' + this.props.User.token,
+                'Authorization': 'Bearer ' + this.props.User.token,
                 'X-Requested-With': 'XMLHttpRequest',
                 'X-XSRF-Token': this.props.csrf_token,
             }
         }).then(response => {
             const temp_vragenlijsten = [];
-            response.data.forEach(vragenlijst => temp_vragenlijsten.push({value: vragenlijst.id, label: vragenlijst.name}))
+            response.data.forEach(vragenlijst => temp_vragenlijsten.push({ value: vragenlijst.id, label: vragenlijst.name }))
             this.setState({
                 vragenlijsten: temp_vragenlijsten
             })
@@ -63,11 +63,11 @@ export class VragenlijstVerzenden extends React.Component{
     }
 
 
-    render(){
-        if(this.state.redirectToLogin){
-            return <Redirect to="/login" />
+    render() {
+        if (this.state.redirect) {
+            return <Redirect to="/dashboard" />
         }
-        return(
+        return (
             <form onSubmit={this.onSubmit} className="sendEmailsForm">
 
                 <fieldset className="sendEmailsForm__fieldset">
@@ -78,13 +78,13 @@ export class VragenlijstVerzenden extends React.Component{
                     <label className="sendEmailsForm__label" htmlFor="mailgroep">Versturen naar: </label>
                     <Select id="js--selectEmail" className="sendEmailsForm__input" name="mailgroep" onChange={this.handleMailGroupChange} options={this.state.mailGroepen}></Select>
                 </fieldset>
-                { this.state.verzonden ? <p className="sendEmailsForm__success">Enquete verzonden!</p> : '' }
-                <input className="sendEmailsForm__submit" type="submit" disabled={this.state.mailGroupValid && this.state.vragenlijstValid ? '' : true}/>
+                {this.state.verzonden ? <p className="sendEmailsForm__success">Enquete verzonden!</p> : ''}
+                <input className="sendEmailsForm__submit" type="submit" disabled={this.state.mailGroupValid && this.state.vragenlijstValid ? '' : true} />
             </form>
         )
     }
 
-    handleMailGroupChange = e =>{
+    handleMailGroupChange = e => {
         this.setState({
             mailgroep: e.value,
             mailGroupValid: true,
@@ -102,7 +102,10 @@ export class VragenlijstVerzenden extends React.Component{
 
     onSubmit = e => {
         e.preventDefault();
-        this.makeApiCall()
+        this.makeApiCall();
+        setTimeout(() => {
+            this.setState({ redirect: true });
+        }, 1000)
     }
 
     makeApiCall = () => {
@@ -114,7 +117,7 @@ export class VragenlijstVerzenden extends React.Component{
         axios.post(sendEmailUrl, pakketje, {
             withCredentials: true,
             headers: {
-                'Authorization' : 'Bearer ' + this.props.User.token,
+                'Authorization': 'Bearer ' + this.props.User.token,
                 'X-Requested-With': 'XMLHttpRequest',
                 'X-XSRF-Token': this.props.csrf_token,
             }
@@ -128,9 +131,9 @@ export class VragenlijstVerzenden extends React.Component{
 }
 
 const mapStateToProps = state => {
-    return {csrf_token: state.CSRFToken, User: state.User, logged_in: state.logged_in}
+    return { csrf_token: state.CSRFToken, User: state.User, logged_in: state.logged_in }
 }
 
 export default connect(
     mapStateToProps,
-    {getCSRFToken: getCSRFToken, changeUser: changeUser})(VragenlijstVerzenden);
+    { getCSRFToken: getCSRFToken, changeUser: changeUser })(VragenlijstVerzenden);
