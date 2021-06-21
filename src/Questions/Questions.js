@@ -139,6 +139,7 @@ class Questions extends React.Component {
                         <p>U kunt de enquète nu versturen.</p>
                         <button className="questions__button questions__button--submit" onClick={this.submitToApi}>Verstuur</button>
                     </section>
+                    <ProgressBar currentQuestion={this.state.currentQuestion} length={this.state.questions.length} />
                 </article>
             );
         }
@@ -149,7 +150,6 @@ class Questions extends React.Component {
                         <h3>De enquète is verstuurd!</h3>
                         <p>U kunt het venster sluiten</p>
                     </section>
-                    <ProgressBar currentQuestion={this.state.currentQuestion} length={this.state.questions.length} />
                 </article>
             );
         }
