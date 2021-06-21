@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios";
 import { connect } from "react-redux";
 import { getCSRFToken } from "../actions";
-import './Opgeslagen.css'
+import '../Dashboard/dashboard.css'
 import { Link } from "react-router-dom";
 import { Navigatie } from "../Navigatie/Navigatie";
 import { Redirect } from "react-router-dom";
@@ -67,7 +67,9 @@ export class Opgeslagen extends React.Component {
                     <ul className="opgeslagen__vragenlijsten">
                         {this.state.vragenlijsten.length > 0 ?
                             this.state.vragenlijsten.map((vragenlijst, index) => {
-                                return <li key={vragenlijst.id} className="opgeslagen__vragenlijst" onClick={this.hergebruik.bind(this, vragenlijst.id)}>{vragenlijst.name}</li>
+                                return <li key={vragenlijst.id} className="opgeslagen__vragenlijst" onClick={this.hergebruik.bind(this, vragenlijst.id)}>
+                                    {vragenlijst.name} <span className="opgeslagen__span"><i class="far fa-copy"></i> <p className="opgeslagen__p">Hergebruiken</p></span>
+                                </li>
                             }) : <p className="opgeslagen__geenlijstenmessage">Je hebt nog geen vragenlijsten</p>
                         }
                     </ul>
