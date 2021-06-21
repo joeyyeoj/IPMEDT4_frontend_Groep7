@@ -1,4 +1,4 @@
-import classes from './Aanmaken.module.css';
+// import classes from './Aanmaken.module.css';
 
 import AanmakenLijst from './components/AanmakenLijst/AanmakenLijst';
 import AanmakenForm from './components/AanmakenForm/AanmakenForm/AanmakenForm';

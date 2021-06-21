@@ -21,6 +21,7 @@ const MeerkeuzeForm = () => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
+		setVraag('');
 		console.log(event);
 	};
 
@@ -34,9 +35,10 @@ const MeerkeuzeForm = () => {
 				isValid={vraagIsValid}
 				onChange={vraagChangeHandler}
 				useRef={vraagInputRef}
+				value={vraag}
 			/>
-			{vraag != '' && (
-				<Button type="submit" className={classes.btn} disabled>
+			{vraag !== '' && (
+				<Button type="submit" className={classes.btn}>
 					Vraag toevoegen
 				</Button>
 			)}

@@ -72,13 +72,15 @@ const MeerkeuzeForm = (props) => {
 		const nieuweVraag = {
 			type: 3,
 			vraag: vraag,
-			optie1: optie1,
-			optie2: optie2,
-			optie3: optie3,
-			optie4: optie4,
+			opties: optie1 + ',' + optie2 + ',' + optie3 + ',' + optie4,
 		};
 		TEMP_vragenlijst.push(nieuweVraag);
 		props.editVragenlijst(TEMP_vragenlijst);
+		setVraag('');
+		setOptie1('');
+		setOptie2('');
+		setOptie3('');
+		setOptie4('');
 		console.log(props.vragen_lijst);
 	};
 
@@ -92,6 +94,7 @@ const MeerkeuzeForm = (props) => {
 				isValid={vraagIsValid}
 				onChange={vraagChangeHandler}
 				useRef={vraagInputRef}
+				value={vraag}
 			/>
 			{vraag !== '' && (
 				<Input
@@ -102,9 +105,10 @@ const MeerkeuzeForm = (props) => {
 					isValid={optie1IsValid}
 					onChange={optie1ChangeHandler}
 					useRef={optie1InputRef}
+					value={optie1}
 				/>
 			)}
-			{optie1 !== '' && (
+			{vraag !== '' && optie1 !== '' && (
 				<Input
 					id="openvraag-optie2"
 					label="Optie 2"
@@ -113,9 +117,10 @@ const MeerkeuzeForm = (props) => {
 					isValid={optie2IsValid}
 					onChange={optie2ChangeHandler}
 					useRef={optie2InputRef}
+					value={optie2}
 				/>
 			)}
-			{optie2 !== '' && (
+			{vraag !== '' && optie1 !== '' && optie2 !== '' && (
 				<Input
 					id="openvraag-optie3"
 					label="Optie 3"
@@ -124,9 +129,10 @@ const MeerkeuzeForm = (props) => {
 					isValid={optie3IsValid}
 					onChange={optie3ChangeHandler}
 					useRef={optie3InputRef}
+					value={optie3}
 				/>
 			)}
-			{optie3 !== '' && (
+			{vraag !== '' && optie1 !== '' && optie2 !== '' && optie3 !== '' && (
 				<Input
 					id="openvraag-optie4"
 					label="Optie 4"
@@ -135,13 +141,18 @@ const MeerkeuzeForm = (props) => {
 					isValid={optie4IsValid}
 					onChange={optie4ChangeHandler}
 					useRef={optie4InputRef}
+					value={optie4}
 				/>
 			)}
-			{optie4 !== '' && (
-				<Button type="submit" className={classes.btn}>
-					Vraag toevoegen
-				</Button>
-			)}
+			{vraag !== '' &&
+				optie1 !== '' &&
+				optie2 !== '' &&
+				optie3 !== '' &&
+				optie4 !== '' && (
+					<Button type="submit" className={classes.btn}>
+						Vraag toevoegen
+					</Button>
+				)}
 		</form>
 	);
 };

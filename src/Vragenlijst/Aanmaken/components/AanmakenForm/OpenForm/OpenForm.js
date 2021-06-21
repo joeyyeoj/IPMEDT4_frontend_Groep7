@@ -23,6 +23,7 @@ const OpenForm = () => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
+		setVraag('');
 		console.log(event);
 	};
 
@@ -36,9 +37,10 @@ const OpenForm = () => {
 				isValid={vraagIsValid}
 				onChange={vraagChangeHandler}
 				useRef={vraagInputRef}
+				value={vraag}
 			/>
 			{vraag !== '' && (
-				<Button type="submit" className={classes.btn} disabled>
+				<Button type="submit" className={classes.btn}>
 					Vraag toevoegen
 				</Button>
 			)}

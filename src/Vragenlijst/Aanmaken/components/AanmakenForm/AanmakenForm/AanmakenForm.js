@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { editVragenlijst } from '../../../store/actions';
 import axios from 'axios';
@@ -11,12 +11,26 @@ import MeerkeuzeForm from '../MeerkeuzeForm/MeerkeuzeForm';
 import OpenForm from '../OpenForm/OpenForm';
 import SchaalForm from '../SchaalForm/SchaalForm';
 import Button from '../../UI/Button/Button';
+import Input from '../../UI/Input/Input';
 
 const AanmakenForm = (props) => {
 	const [vraagsoort, setVraagSoort] = useState('meerkeuze');
+	const [vragenlijstNaam, setVragenlijstNaam] = useState('');
+	const [vragenlijstNaamIsValid, setVragenlijstNaamIsValid] = useState(true);
+
+	const vragenlijstNaamRef = useRef();
 
 	const filterchangeHandler = (selectedVraagSoort) => {
 		setVraagSoort(selectedVraagSoort);
+	};
+
+	const vragenlijstNaamChangeHandler = (event) => {
+		setVragenlijstNaam(event.target.value);
+		if (event.target.value === '') {
+			setVragenlijstNaamIsValid(false);
+		} else {
+			setVragenlijstNaamIsValid(true);
+		}
 	};
 
 	const vragenlijstOpslaan = () => {
@@ -25,7 +39,7 @@ const AanmakenForm = (props) => {
 		const DATA = {
 			vragenlijst: vragenlijst,
 			eigenaarId: props.User.userData.id,
-			vragenlijstNaam: 'test',
+			vragenlijstNaam: vragenlijstNaam,
 		};
 		axios
 			.post(VRAGENLIJST_URL, DATA, {
@@ -42,16 +56,35 @@ const AanmakenForm = (props) => {
 	};
 
 	return (
-		<Card className={classes.card}>
-			<h2 className={classes.titel}>Vragen Toevoegen</h2>
-			<SoortVraagFilter selected={vraagsoort} onChangeFilter={filterchangeHandler} />
-			{vraagsoort === 'open' && <OpenForm />}
-			{vraagsoort === 'meerkeuze' && <MeerkeuzeForm />}
-			{vraagsoort === 'schaal' && <SchaalForm />}
-			<Button onClick={vragenlijstOpslaan} className={classes.btn}>
-				Vragenlijst opslaan
-			</Button>
-		</Card>
+		<>
+			<Card className={classes.card}>
+				<h2 className={classes.titel}>Vragen Toevoegen</h2>
+				<SoortVraagFilter
+					selected={vraagsoort}
+					onChangeFilter={filterchangeHandler}
+				/>
+				{vraagsoort === 'open' && <OpenForm />}
+				{vraagsoort === 'meerkeuze' && <MeerkeuzeForm />}
+				{vraagsoort === 'schaal' && <SchaalForm />}
+			</Card>
+			<Card className={classes.card}>
+				<h2 className={classes.titel}>Lijst opslaan</h2>
+				<Input
+					id="vragenlijstNaam"
+					label="Naam van de vragenlijst"
+					type="text"
+					placeholder="Type hier de naam van de enquête...."
+					isValid={vragenlijstNaamIsValid}
+					onChange={vragenlijstNaamChangeHandler}
+					userRef={vragenlijstNaamRef}
+				/>
+				{vragenlijstNaam !== '' && (
+					<Button onClick={vragenlijstOpslaan} className={classes.btn}>
+						Vragenlijst opslaan
+					</Button>
+				)}
+			</Card>
+		</>
 	);
 };
 
