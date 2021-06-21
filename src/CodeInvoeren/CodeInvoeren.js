@@ -3,6 +3,7 @@ import  {Redirect, withRouter} from 'react-router-dom'
 import axios from "axios";
 import {connect} from "react-redux";
 import './CodeInvoeren.css'
+import '../FormsStyling/Forms.css'
 
 
 class CodeInvoeren extends React.Component {
@@ -47,12 +48,12 @@ class CodeInvoeren extends React.Component {
         }
 
         return(
-            <form onSubmit={this.onSubmit} className="codeForm">
-                <fieldset className="codeForm__fieldset">
-                    <label className="codeForm__label" htmlFor="code">Code</label>
-                    <input onChange={this.handleCodeChange} type="text" name="code" className={this.state.validCode == false && this.state.codeTouched ? "codeForm__input codeForm__input--invalid" : "codeForm__input"}/>
+            <form onSubmit={this.onSubmit} className="form form--code">
+                <fieldset className="form__fieldset">
+                    <label className="form__label" htmlFor="code">Code</label>
+                    <input onChange={this.handleCodeChange} type="text" name="code" className={this.state.validCode == false && this.state.codeTouched ? "form__input form__input--invalid" : "form__input"}/>
                 </fieldset>
-                <input type="submit" className="codeForm__submit" disabled={this.state.codeTouched ? '' : true} />
+                <input type="submit" value="Start" className="form__submit" disabled={this.state.codeTouched ? '' : true} />
             </form>
         )
     }

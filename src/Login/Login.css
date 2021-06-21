@@ -1,74 +1,19 @@
-.loginForm{
-    width: 90vw;
-    margin: 0 auto;
-    margin-top: 5rem;
-    border-radius: 2.5rem;
-    background: rgba(255, 255, 255, 0.25);
-    mix-blend-mode: normal;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 2rem;
-    color: white;
-}
 
-.loginForm__fieldset{
-    width: 100%;
-    border: none;
-}
-
-.loginForm__input {
-    width: 100%;
-    border-radius: 1.5rem;
-    padding-top: 1rem;
-    padding-left: 1rem;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-    margin-top: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0px 0px 70px 4px rgba(0, 0, 0, 0.2);
-}
-
-.loginForm__input--incorrect{
-    border: 2px solid red;
-}
-
-.loginForm__submit{
-    background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
-    border-radius: 1.5rem;
-    padding: 1rem;
-    padding-top: 1.2rem;
-    padding-bottom: 1.2rem;
-    border: none;
-    color: white;
-    width: 15rem;
-    margin-top: 1rem;
-    font-size: 1.8rem;
-    transition: 0.5s ease background;
-}
-
-.loginForm__submit:hover{
-    cursor: pointer;
-    background: white;
-    color: #F98404;
-    border: 2px solid #F98404;
-    padding: 0.6rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-}
 
 @media only screen and  (min-width: 768px) {
-    .loginForm{
+    .form--login{
         max-width: 45vw;
     }
 }
 
 @media only screen and  (min-width: 1024px) {
-    .loginForm{
+    .form--login{
         max-width: 35vw;
     }
 }
 
 @media only screen and  (min-width: 1440px) {
-    .loginForm{
+    .form--login{
         max-width: 30vw;
     }
 }

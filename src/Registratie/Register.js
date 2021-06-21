@@ -3,7 +3,7 @@ import './Register.css';
 import axios from "axios";
 import {changeUser, getCSRFToken, loginUser} from "../actions";
 import {connect} from "react-redux";
-
+import '../FormsStyling/Forms.css'
 
 
 class Register extends React.Component{
@@ -41,23 +41,23 @@ class Register extends React.Component{
 
     render(){
         return(
-            <form className="registerForm" onSubmit={this.onSubmit} id="registerForm" method="POST">
-                <fieldset className="registerForm__fieldset">
-                    <label className="registerForm__label" htmlFor="name">Naam { !this.state.nameError.valid ? this.state.nameError.message : '' }</label>
-                    <input className={!this.state.nameError.valid && this.state.nameError.touched ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="text" id="name" name="name" onChange={this.handleInputChange}/>
-                    <label className="registerForm__label" htmlFor="email">Email { !this.state.emailError.valid ? this.state.emailError.message : ''}</label>
-                    <input className={!this.state.emailError.valid && this.state.emailError.touched ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="text" id="email" name="email" onChange={this.handleInputChange}/>
-                    <label className="registerForm__label" htmlFor="organisatie">Organisatie</label>
-                    <input className="registerForm__input" type="text" name="organisatie" onChange={this.handleInputChange}/>
+            <form className="form form--register" onSubmit={this.onSubmit} id="form" method="POST">
+                <fieldset className="form__fieldset">
+                    <label className="form__label" htmlFor="name">Naam { !this.state.nameError.valid ? this.state.nameError.message : '' }</label>
+                    <input className={!this.state.nameError.valid && this.state.nameError.touched ? 'form__input form__input--invalid' : 'form__input'} type="text" id="name" name="name" onChange={this.handleInputChange}/>
+                    <label className="form__label" htmlFor="email">Email { !this.state.emailError.valid ? this.state.emailError.message : ''}</label>
+                    <input className={!this.state.emailError.valid && this.state.emailError.touched ? 'form__input form__input--invalid' : 'form__input'} type="text" id="email" name="email" onChange={this.handleInputChange}/>
+                    <label className="form__label" htmlFor="organisatie">Organisatie</label>
+                    <input className="form__input" type="text" name="organisatie" onChange={this.handleInputChange}/>
                 </fieldset>
-                <fieldset className="registerForm__fieldset">
-                    <label className="registerForm__label" htmlFor="password">Wachtwoord { !this.state.passwordError.valid ? this.state.passwordError.message : ''}</label>
-                    <input className={!this.state.passwordError.valid && this.state.passwordError.touched ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="password" name="password" onChange={this.handleInputChange}/>
-                    <label className="registerForm__label" htmlFor="password__confirm">Wachtwoord bevestigen</label>
-                    <input className={!this.state.passwordConfirmationError.valid && this.state.passwordConfirmationError.touched ? 'registerForm__input registerForm__input--incorrect' : 'registerForm__input'} type="password" id="password_confirm" name="password_confirm" onChange={this.handleInputChange}/>
+                <fieldset className="form__fieldset">
+                    <label className="form__label" htmlFor="password">Wachtwoord { !this.state.passwordError.valid ? this.state.passwordError.message : ''}</label>
+                    <input className={!this.state.passwordError.valid && this.state.passwordError.touched ? 'form__input form__input--invalid' : 'form__input'} type="password" name="password" onChange={this.handleInputChange}/>
+                    <label className="form__label" htmlFor="password__confirm">Wachtwoord bevestigen</label>
+                    <input className={!this.state.passwordConfirmationError.valid && this.state.passwordConfirmationError.touched ? 'form__input form__input--incorrect' : 'form__input'} type="password" id="password_confirm" name="password_confirm" onChange={this.handleInputChange}/>
                 </fieldset>
-                <fieldset className="registerForm__fieldset">
-                    <input type="submit" className="registerForm__submit" value="Registreren"/>
+                <fieldset className="form__fieldset">
+                    <input type="submit" className="form__submit" value="Registreren"/>
                 </fieldset>
             </form>
             )

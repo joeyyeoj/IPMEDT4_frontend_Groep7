@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import "./VragenlijstVerzenden.css";
 import { changeUser, getCSRFToken, loginUser } from "../actions";
 import { Redirect } from "react-router-dom";
+import '../FormsStyling/Forms.css'
 
 export class VragenlijstVerzenden extends React.Component {
 
@@ -68,18 +69,18 @@ export class VragenlijstVerzenden extends React.Component {
             return <Redirect to="/dashboard" />
         }
         return (
-            <form onSubmit={this.onSubmit} className="sendEmailsForm">
+            <form onSubmit={this.onSubmit} className="form form--verzenden">
 
-                <fieldset className="sendEmailsForm__fieldset">
-                    <label className="sendEmailsForm__label" htmlFor="onderzoek">Selecteer een onderzoek:</label>
-                    <Select id="js--selectOnderzoek" className="sendEmailsForm__input" name="onderzoek" onChange={this.handleOnderzoekChange} options={this.state.vragenlijsten}></Select>
+                <fieldset className="form__fieldset">
+                    <label className="form__label" htmlFor="onderzoek">Selecteer een onderzoek:</label>
+                    <Select id="js--selectOnderzoek" className="form__input--select" name="onderzoek" onChange={this.handleOnderzoekChange} options={this.state.vragenlijsten}></Select>
                 </fieldset>
-                <fieldset className="sendEmailsForm__fieldset">
-                    <label className="sendEmailsForm__label" htmlFor="mailgroep">Versturen naar: </label>
-                    <Select id="js--selectEmail" className="sendEmailsForm__input" name="mailgroep" onChange={this.handleMailGroupChange} options={this.state.mailGroepen}></Select>
+                <fieldset className="form__fieldset">
+                    <label className="form__label" htmlFor="mailgroep">Versturen naar: </label>
+                    <Select id="js--selectEmail" className="form__input--select" name="mailgroep" onChange={this.handleMailGroupChange} options={this.state.mailGroepen}></Select>
                 </fieldset>
-                {this.state.verzonden ? <p className="sendEmailsForm__success">Enquete verzonden!</p> : ''}
-                <input className="sendEmailsForm__submit" type="submit" disabled={this.state.mailGroupValid && this.state.vragenlijstValid ? '' : true} />
+                {this.state.verzonden ? <p className="form__success">Enquete verzonden!</p> : ''}
+                <input className="form__submit" type="submit" disabled={this.state.mailGroupValid && this.state.vragenlijstValid ? '' : true} />
             </form>
         )
     }

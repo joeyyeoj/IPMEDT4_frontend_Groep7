@@ -35,15 +35,15 @@ class Login extends React.Component{
             return <Redirect to="/dashboard"/>
         }
         return(
-            <form className="loginForm" onSubmit={this.onSubmit }>
-                <fieldset className="loginForm__fieldset">
+            <form className="form form--login" onSubmit={this.onSubmit }>
+                <fieldset className="form__fieldset">
                     <label htmlFor="email">Email {!this.state.emailError.valid ? this.state.emailError.message : ''}</label>
-                    <input className={!this.state.emailError.valid && this.state.emailError.touched ? 'loginForm__input loginForm__input--incorrect' : 'loginForm__input'} type="text" name="email" onChange={this.handleInputChange}/>
+                    <input className={!this.state.emailError.valid && this.state.emailError.touched ? 'form__input form__input--invalid' : 'form__input'} type="text" name="email" onChange={this.handleInputChange}/>
                     <label htmlFor="email">Wachtwoord</label>
-                    <input className={!this.state.passwordError.valid && this.state.passwordError.touched ? 'loginForm__input loginForm__input--incorrect' : 'loginForm__input'} type="password" name="password" onChange={this.handleInputChange}/>
+                    <input className={!this.state.passwordError.valid && this.state.passwordError.touched ? 'form__input form__input--invalid' : 'form__input'} type="password" name="password" onChange={this.handleInputChange}/>
                     <p>{ this.state.incorrectLogin ? 'Onjuiste combinatie van email-adres en wachtwoord!' : '' }</p>
                 </fieldset>
-                <input className="loginForm__submit" type="submit" value="Login"/>
+                <input className="form__submit" type="submit" value="Login"/>
             </form>
         )
     }
