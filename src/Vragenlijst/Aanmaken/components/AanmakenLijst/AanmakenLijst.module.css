@@ -1,3 +1,7 @@
 .titel {
 	font-size: 3.6rem;
 }
+
+.lijstItem {
+	list-style: none;
+}

@@ -27,7 +27,7 @@ const SchaalForm = (props) => {
 		const nieuweVraag = {
 			type: 2,
 			vraag: vraag,
-			opties: 'Dit is een schaal vraag',
+			opties: 'Helemaal oneens, Oneens, Neutraal, Eens, Helemaal eens',
 		};
 		TEMP_vragenlijst.push(nieuweVraag);
 		props.editVragenlijst(TEMP_vragenlijst);

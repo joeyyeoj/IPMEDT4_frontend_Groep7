@@ -1,9 +1,9 @@
 .card {
 	display: block;
 	position: relative;
-	width: 90vw;
+	width: 95%;
 	margin: 0 auto;
-	margin-top: 5rem;
+	margin-top: 1.5rem;
 	border-radius: 2.5rem;
 	background: rgba(255, 255, 255, 0.25);
 	mix-blend-mode: normal;
