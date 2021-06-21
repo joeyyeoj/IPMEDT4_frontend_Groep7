@@ -73,7 +73,6 @@ class Questions extends React.Component {
     }
 
     checkQuestionKind() {
-        console.log(this.state);
         const kind = this.state.kind[this.state.currentQuestion];
         if(kind === 1) {
             return (
@@ -127,10 +126,6 @@ class Questions extends React.Component {
             );
         }
         if(this.state.currentQuestion === this.state.questions.length && this.state.end && !this.state.submitted) {
-            // for( let i=0; i<this.state.questions.length; i++) {
-            //     console.log('test');
-            // }
-            // return <button onClick={this.submitToApi}>Submit</button>;
             return (
                 <article className="questions">
                     <section className="questions__questionArea u-glasMorphism u-text-center">
