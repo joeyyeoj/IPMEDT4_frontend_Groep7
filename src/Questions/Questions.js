@@ -209,7 +209,7 @@ class Questions extends React.Component {
             this.setState({disabledPrev: true});
         }
 
-        if(this.state.kind[prevQuestion] === 1 || this.state.kind[prevQuestion] === 2) {
+        if(this.state.kind[prevQuestion] === 1 || (this.state.kind[prevQuestion] === 2 && this.state.kind[currentQuestion] === this.state.kind[prevQuestion])) {
             this.setState({currentAnswer: answersArray[answersArray.length-1]});
         }
         else {
