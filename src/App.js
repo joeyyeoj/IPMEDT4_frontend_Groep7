@@ -7,10 +7,11 @@ import { connect } from "react-redux";
 import { getCSRFToken, loginUser } from "./actions";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import { Switch, ProtectedRoute, Route, BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Cookies from "js-cookie"
 import VragenlijstVerzenden from "./Vragenlijst/VragenlijstVerzenden";
 import Dashboard from "./Dashboard/Dashboard";
+import  CodeInvoeren  from "./CodeInvoeren/CodeInvoeren";
 import { PrivateRoute } from "./PrivateRoute";
 import Opgeslagen from './Opgeslagen/Opgeslagen';
 
@@ -25,6 +26,15 @@ class App extends React.Component {
                         <Route exact path="/">
                             <Login />
                         </Route>
+
+                        <Route exact path="/codeinvoeren">
+                            <CodeInvoeren />
+                        </Route>
+
+                        <Route path="/codeinvoeren/:code">
+                            <CodeInvoeren />
+                        </Route>
+
                         <Route path="/Register">
                             <Register />
                         </Route>
