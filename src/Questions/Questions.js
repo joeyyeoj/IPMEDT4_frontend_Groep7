@@ -81,7 +81,7 @@ class Questions extends React.Component {
                     <section className="questions">
                         <div className="questions__questionArea u-glasMorphism">
                             <h3>{this.state.questions[this.state.currentQuestion]}</h3>
-                            <QuestionOpen onChange={this.changeCurrentAnswer} />
+                            <QuestionOpen value={this.state.currentAnswer} onChange={this.changeCurrentAnswer} />
                         </div>                    
                         <div>
                             <button onClick={this.prevQuestion} className="questions__button u-glasMorphism" disabled={this.state.disabledPrev}>Vorige</button>
@@ -165,7 +165,8 @@ class Questions extends React.Component {
 
     nextQuestion(data) {
         let answersArray = this.state.answers;
-        if(this.state.kind[this.state.currentQuestion] === 2 && this.state.currentAnswer === '') {
+        const rangeValues = ['1', '2', '3', '4', '5']
+        if(this.state.kind[this.state.currentQuestion] === 2 && !rangeValues.includes(this.state.currentAnswer) ) {
             answersArray.push('3');
         }
         else if(this.state.kind[this.state.currentQuestion] === 3) {
@@ -177,6 +178,10 @@ class Questions extends React.Component {
         
         const currentQuestion = this.state.currentQuestion;
         const nextQuestion = currentQuestion+1;
+
+        if(this.state.kind[nextQuestion] != 2) {
+            this.setState({currentAnswer: ''});
+        }
         
         if(this.state.disabledPrev === true) {
             this.setState({disabledPrev: false});
@@ -192,19 +197,34 @@ class Questions extends React.Component {
         else {
             this.setState({disabledNext: true});
         }
-        this.setState({currentQuestion: nextQuestion, answers: answersArray, currentAnswer: ''});
+        this.setState({currentQuestion: nextQuestion, answers: answersArray});
     }
 
     prevQuestion() {
         let answersArray = this.state.answers;
-        answersArray.splice(-1, 1);
 
         const currentQuestion = this.state.currentQuestion;
         const prevQuestion = currentQuestion-1;
         if(this.state.disabledPrev === false && this.state.currentQuestion === 1) {
             this.setState({disabledPrev: true});
         }
-        this.setState({currentQuestion: prevQuestion, asnwers: answersArray, currentAnswer: '', disabledNext: true});
+
+        if(this.state.kind[prevQuestion] === 1 || this.state.kind[prevQuestion] === 2) {
+            this.setState({currentAnswer: answersArray[answersArray.length-1]});
+        }
+        else {
+            this.setState({currentAnswer: ''});
+        }
+
+        if(this.state.kind[prevQuestion] === 3) {
+            this.setState({disabledNext: true});
+        }
+        else {
+            this.setState({disabledNext: false});
+        }
+
+        answersArray.splice(-1, 1);     
+        this.setState({currentQuestion: prevQuestion, asnwers: answersArray});
     }
 
     render() {
