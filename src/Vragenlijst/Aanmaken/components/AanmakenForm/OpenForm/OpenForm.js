@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
+import { connect } from 'react-redux';
+import { editVragenlijst } from '../../../../../actions';
 
 import classes from '../MeerkeuzeForm/MeerkeuzeForm.module.css';
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
 
-const MeerkeuzeForm = () => {
+const OpenForm = () => {
 	const [vraag, setVraag] = useState('');
 	const [vraagIsValid, setVraagIsValid] = useState(true);
 
@@ -35,7 +37,7 @@ const MeerkeuzeForm = () => {
 				onChange={vraagChangeHandler}
 				useRef={vraagInputRef}
 			/>
-			{vraag != '' && (
+			{vraag !== '' && (
 				<Button type="submit" className={classes.btn} disabled>
 					Vraag toevoegen
 				</Button>
@@ -44,4 +46,4 @@ const MeerkeuzeForm = () => {
 	);
 };
 
-export default MeerkeuzeForm;
+export default OpenForm;

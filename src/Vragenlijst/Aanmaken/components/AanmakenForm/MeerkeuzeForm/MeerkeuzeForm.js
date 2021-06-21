@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
+import { connect } from 'react-redux';
+import { editVragenlijst } from '../../../../../actions';
 
 import classes from '../MeerkeuzeForm/MeerkeuzeForm.module.css';
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
 
-const MeerkeuzeForm = () => {
+const MeerkeuzeForm = (props) => {
 	const [vraag, setVraag] = useState('');
 	const [optie1, setOptie1] = useState('');
 	const [optie2, setOptie2] = useState('');
@@ -65,7 +67,19 @@ const MeerkeuzeForm = () => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
-		console.log(event);
+		const oudeVragenlijst = props.vragen_lijst;
+		let TEMP_vragenlijst = oudeVragenlijst;
+		const nieuweVraag = {
+			type: 'meerkeuze',
+			vraag: vraag,
+			optie1: optie1,
+			optie2: optie2,
+			optie3: optie3,
+			optie4: optie4,
+		};
+		TEMP_vragenlijst.push(nieuweVraag);
+		props.editVragenlijst(TEMP_vragenlijst);
+		console.log(props.vragen_lijst);
 	};
 
 	return (
@@ -79,7 +93,7 @@ const MeerkeuzeForm = () => {
 				onChange={vraagChangeHandler}
 				useRef={vraagInputRef}
 			/>
-			{vraag != '' && (
+			{vraag !== '' && (
 				<Input
 					id="openvraag-optie1"
 					label="Optie 1"
@@ -90,7 +104,7 @@ const MeerkeuzeForm = () => {
 					useRef={optie1InputRef}
 				/>
 			)}
-			{optie1 != '' && (
+			{optie1 !== '' && (
 				<Input
 					id="openvraag-optie2"
 					label="Optie 2"
@@ -101,7 +115,7 @@ const MeerkeuzeForm = () => {
 					useRef={optie2InputRef}
 				/>
 			)}
-			{optie2 != '' && (
+			{optie2 !== '' && (
 				<Input
 					id="openvraag-optie3"
 					label="Optie 3"
@@ -112,7 +126,7 @@ const MeerkeuzeForm = () => {
 					useRef={optie3InputRef}
 				/>
 			)}
-			{optie3 != '' && (
+			{optie3 !== '' && (
 				<Input
 					id="openvraag-optie4"
 					label="Optie 4"
@@ -123,7 +137,7 @@ const MeerkeuzeForm = () => {
 					useRef={optie4InputRef}
 				/>
 			)}
-			{optie4 != '' && (
+			{optie4 !== '' && (
 				<Button type="submit" className={classes.btn}>
 					Vraag toevoegen
 				</Button>
@@ -132,4 +146,10 @@ const MeerkeuzeForm = () => {
 	);
 };
 
-export default MeerkeuzeForm;
+const mapStateToProps = (state) => {
+	return { vragen_lijst: state.Vragenlijst };
+};
+
+export default connect(mapStateToProps, { editVragenlijst: editVragenlijst })(
+	MeerkeuzeForm
+);
