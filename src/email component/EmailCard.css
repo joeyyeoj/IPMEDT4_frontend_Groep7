@@ -24,7 +24,7 @@
     font-weight: bold;
 }
 
-.email-card__content__text {
+.email-card__content__emails {
+    line-height: 2.5rem;
     font-size: 1.8rem;
-    margin-top: .25rem;
 }

@@ -2,13 +2,14 @@ import React from 'react';
 
 import './EmailCard.css';
 import EmailForm from './EmailForm.js';
-import FileUploadComponent from './test.js';
+import FileUploadForm from './FileUploadForm.js';
 
 import axios from "axios";
 
 class EmailCard extends React.Component {
 
     state = { emails: [], id: "" };
+    
 
     componentDidMount() {
         this.getEmails(1);    
@@ -31,26 +32,25 @@ class EmailCard extends React.Component {
         })
     }
 
-    // onSubmit = (emailInput) => {
-    //     let bodyFormData = new FormData();
-    //     bodyFormData.append('email', emailInput);
-    //     bodyFormData.append('mailgroep-id', 1);
-    //     const NIEUWEMAIL_URL = "http://localhost:8000/api/mailgroep/create";
+    onSubmit = (emailInput) => {
 
-    //     axios({
-    //         method: "post",
-    //         url: NIEUWEMAIL_URL,
-    //         data: bodyFormData,
-    //         headers: { "Content-Type": "multipart/form-data" },
-    //     })
-    //     // kan later weg
-    //       .then(function (response) {
-    //         console.log(response);
-    //       })
-    //       .catch(function (response) {
-    //         console.log(response);
-    //       });    
-    // }
+        const nieuweMail = {
+            'email': emailInput,
+            'mailgroep-id': 1
+        }
+
+        const NIEUWEMAIL_URL = "http://localhost:8000/api/mailgroep/1/emailadressen";
+        let posttest = axios.post(NIEUWEMAIL_URL, nieuweMail)
+            
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (response) {
+            console.log(response);
+          });  
+          console.log(posttest);
+          console.log(nieuweMail);
+    }
 
     render() {
 
@@ -59,7 +59,7 @@ class EmailCard extends React.Component {
                 <section className="email-card__content">
                     <h1 className="email-card__content__header">Hey, Gebruiker</h1>
                     <EmailForm onSubmit={this.onSubmit} />
-                    <FileUploadComponent />                  
+                    <FileUploadForm />                  
                     { this.renderEmails() }
 
                 </section>               
