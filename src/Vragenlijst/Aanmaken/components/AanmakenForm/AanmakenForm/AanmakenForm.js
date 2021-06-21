@@ -20,7 +20,25 @@ const AanmakenForm = (props) => {
 	};
 
 	const vragenlijstOpslaan = () => {
+		const VRAGENLIJST_URL = 'http://localhost:8000/api/vragenlijst/create';
 		const vragenlijst = props.vragen_lijst;
+		const DATA = {
+			vragenlijst: vragenlijst,
+			eigenaarId: props.User.userData.id,
+			vragenlijstNaam: 'test',
+		};
+		axios
+			.post(VRAGENLIJST_URL, DATA, {
+				withCredentials: true,
+				headers: {
+					'Authorization': 'Bearer ' + props.User.token,
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-XSRF-Token': props.csrf_token,
+				},
+			})
+			.then((res) => {
+				console.log(res);
+			});
 	};
 
 	return (
@@ -38,7 +56,11 @@ const AanmakenForm = (props) => {
 };
 
 const mapStateToProps = (state) => {
-	return { vragen_lijst: state.Vragenlijst };
+	return {
+		vragen_lijst: state.Vragenlijst,
+		logged_in: state.logged_in,
+		User: state.User,
+	};
 };
 
 export default connect(mapStateToProps, { editVragenlijst: editVragenlijst })(

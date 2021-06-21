@@ -70,7 +70,7 @@ const MeerkeuzeForm = (props) => {
 		const oudeVragenlijst = props.vragen_lijst;
 		let TEMP_vragenlijst = oudeVragenlijst;
 		const nieuweVraag = {
-			type: 'meerkeuze',
+			type: 3,
 			vraag: vraag,
 			optie1: optie1,
 			optie2: optie2,
