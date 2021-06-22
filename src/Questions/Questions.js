@@ -195,24 +195,26 @@ class Questions extends React.Component {
 			!this.state.submitted
 		) {
 			return (
-				<article className="questions">
-					<section className="questions__questionArea u-glasMorphism u-text-center">
-						<h3>Bedankt!</h3>
-						<p>
-							Dit was de laatste vraag van deze enquète, bedankt voor het invullen.
-						</p>
-						<p>U kunt de enquète nu versturen.</p>
-						<button
-							className="questions__button questions__button--submit"
-							onClick={this.submitToApi}
-						>
-							Verstuur
-						</button>
+				<article className="u-height-100">
+					<section className="questions">
+						<div className="questions__questionArea u-glasMorphism u-text-center">
+							<h3>Bedankt!</h3>
+							<p>
+								Dit was de laatste vraag van deze enquète, bedankt voor het invullen.
+							</p>
+							<p>U kunt de enquète nu versturen.</p>
+							<button
+								className="questions__button questions__button--submit"
+								onClick={this.submitToApi}
+							>
+								Verstuur
+							</button>
+						</div>
+						<ProgressBar
+							currentQuestion={this.state.currentQuestion}
+							length={this.state.questions.length}
+						/>
 					</section>
-					<ProgressBar
-						currentQuestion={this.state.currentQuestion}
-						length={this.state.questions.length}
-					/>
 				</article>
 			);
 		}
@@ -222,18 +224,22 @@ class Questions extends React.Component {
 			this.state.submitted
 		) {
 			return (
-				<article className="questions">
-					<section className="questions__questionArea u-glasMorphism u-text-center">
-						<h3>De enquète is verstuurd!</h3>
-						<p>U kunt het venster sluiten</p>
+				<article className="u-height-100">
+					<section className="questions">
+						<div className="questions__questionArea u-glasMorphism u-text-center">
+							<h3>De enquète is verstuurd!</h3>
+							<p>U kunt het venster sluiten</p>
+						</div>
 					</section>
 				</article>
 			);
 		} else {
 			return (
-				<article className="loaderArea">
-					<section className="loaderArea__loader"></section>
-					<h2>Even geduld...</h2>
+				<article className="u-height-100">
+					<section className="loaderArea">
+						<div className="loaderArea__loader"></div>
+						<h2>Even geduld...</h2>
+					</section>
 				</article>
 			);
 		}
