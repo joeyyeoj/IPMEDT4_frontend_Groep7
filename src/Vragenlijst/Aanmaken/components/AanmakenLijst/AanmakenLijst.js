@@ -10,7 +10,7 @@ const AanmakenLijst = (props) => {
 		<Card className={styles.card}>
 			<h2 className={styles.titel}>Vragen</h2>
 			<ul>
-				{props.vragen_lijst.map((vraag) => (
+				{props.vragen_lijst.vragenlijst.map((vraag) => (
 					<li
 						key={vraag.vraag + vraag.opties + vraag.type}
 						className={styles.lijstItem}
@@ -18,7 +18,7 @@ const AanmakenLijst = (props) => {
 						<InnerCard className={styles.inner}>
 							<h3>{vraag.vraag}</h3>
 							{/* <p>{vraag.opties}</p> */}
-							{/* {vraag.type === 3 && <p>{vraag.opties}</p>} */}
+							{vraag.type === 3 && <p>{vraag.opties}</p>}
 						</InnerCard>
 					</li>
 				))}

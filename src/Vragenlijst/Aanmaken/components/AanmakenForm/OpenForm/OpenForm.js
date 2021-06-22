@@ -23,14 +23,12 @@ const OpenForm = (props) => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
-		const TEMP_vragenlijst = props.vragen_lijst;
 		const nieuweVraag = {
 			type: 1,
 			vraag: vraag,
 			opties: 'Dit is een open vraag',
 		};
-		TEMP_vragenlijst.push(nieuweVraag);
-		props.editVragenlijst(TEMP_vragenlijst);
+		props.editVragenlijst(nieuweVraag);
 		setVraag('');
 		console.log(props.vragen_lijst);
 	};

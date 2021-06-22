@@ -1,4 +1,10 @@
-import { CHANGE_USER, LOGIN_USER, GET_CSRFTOKEN, EDIT_VRAGENLIJST } from './actions';
+import {
+	CHANGE_USER,
+	LOGIN_USER,
+	GET_CSRFTOKEN,
+	EDIT_VRAGENLIJST,
+	CLEAR_VRAGENLIJST,
+} from './actions';
 
 export const CSRFToken = (state = '', action) => {
 	switch (action.type) {
@@ -27,10 +33,17 @@ export const logged_in = (state = Boolean, action) => {
 	}
 };
 
-export const Vragenlijst = (state = [], action) => {
+export const Vragenlijst = (state = { vragenlijst: [] }, action) => {
 	switch (action.type) {
 		case EDIT_VRAGENLIJST:
-			return action.payload;
+			return {
+				...state,
+				vragenlijst: [...state.vragenlijst, action.payload],
+			};
+		case CLEAR_VRAGENLIJST:
+			return {
+				vragenlijst: [],
+			};
 		default:
 			return state;
 	}

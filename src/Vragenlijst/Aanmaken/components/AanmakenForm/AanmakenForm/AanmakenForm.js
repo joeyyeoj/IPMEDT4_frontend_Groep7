@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import { editVragenlijst } from '../../../../../actions';
+import { editVragenlijst, clearVragenlijst } from '../../../../../actions';
 import axios from 'axios';
 
 import classes from './AanmakenForm.module.css';
@@ -12,11 +12,13 @@ import OpenForm from '../OpenForm/OpenForm';
 import SchaalForm from '../SchaalForm/SchaalForm';
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
+import { Redirect } from 'react-router-dom';
 
 const AanmakenForm = (props) => {
 	const [vraagsoort, setVraagSoort] = useState('meerkeuze');
 	const [vragenlijstNaam, setVragenlijstNaam] = useState('');
 	const [vragenlijstNaamIsValid, setVragenlijstNaamIsValid] = useState(true);
+	const [redirect, setRedirect] = useState(false);
 
 	const vragenlijstNaamRef = useRef();
 
@@ -35,7 +37,7 @@ const AanmakenForm = (props) => {
 
 	const vragenlijstOpslaan = () => {
 		const VRAGENLIJST_URL = 'http://localhost:8000/api/vragenlijst/create';
-		const vragenlijst = props.vragen_lijst;
+		const vragenlijst = props.vragen_lijst.vragenlijst;
 		const DATA = {
 			vragenlijst: vragenlijst,
 			eigenaarId: props.User.userData.id,
@@ -53,39 +55,45 @@ const AanmakenForm = (props) => {
 			.then((res) => {
 				console.log(res);
 			});
+		props.clearVragenlijst();
+		setRedirect(true);
 	};
 
-	return (
-		<>
-			<Card className={classes.card}>
-				<h2 className={classes.titel}>Lijst opslaan</h2>
-				<Input
-					id="vragenlijstNaam"
-					label="Naam van de vragenlijst"
-					type="text"
-					placeholder="Type hier de naam van de enquête...."
-					isValid={vragenlijstNaamIsValid}
-					onChange={vragenlijstNaamChangeHandler}
-					userRef={vragenlijstNaamRef}
-				/>
-				{vragenlijstNaam !== '' && (
-					<Button onClick={vragenlijstOpslaan} className={classes.btn}>
-						Vragenlijst opslaan
-					</Button>
-				)}
-			</Card>
-			<Card className={classes.card}>
-				<h2 className={classes.titel}>Vragen Toevoegen</h2>
-				<SoortVraagFilter
-					selected={vraagsoort}
-					onChangeFilter={filterchangeHandler}
-				/>
-				{vraagsoort === 'open' && <OpenForm />}
-				{vraagsoort === 'meerkeuze' && <MeerkeuzeForm />}
-				{vraagsoort === 'schaal' && <SchaalForm />}
-			</Card>
-		</>
-	);
+	if (redirect === true) {
+		return <Redirect to="/verzenden" />;
+	} else {
+		return (
+			<>
+				<Card className={classes.card}>
+					<h2 className={classes.titel}>Lijst opslaan</h2>
+					<Input
+						id="vragenlijstNaam"
+						label="Naam van de vragenlijst"
+						type="text"
+						placeholder="Type hier de naam van de enquête...."
+						isValid={vragenlijstNaamIsValid}
+						onChange={vragenlijstNaamChangeHandler}
+						userRef={vragenlijstNaamRef}
+					/>
+					{vragenlijstNaam !== '' && (
+						<Button onClick={vragenlijstOpslaan} className={classes.btn}>
+							Vragenlijst opslaan
+						</Button>
+					)}
+				</Card>
+				<Card className={classes.card}>
+					<h2 className={classes.titel}>Vragen Toevoegen</h2>
+					<SoortVraagFilter
+						selected={vraagsoort}
+						onChangeFilter={filterchangeHandler}
+					/>
+					{vraagsoort === 'open' && <OpenForm />}
+					{vraagsoort === 'meerkeuze' && <MeerkeuzeForm />}
+					{vraagsoort === 'schaal' && <SchaalForm />}
+				</Card>
+			</>
+		);
+	}
 };
 
 const mapStateToProps = (state) => {
@@ -96,6 +104,7 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { editVragenlijst: editVragenlijst })(
-	AanmakenForm
-);
+export default connect(mapStateToProps, {
+	editVragenlijst: editVragenlijst,
+	clearVragenlijst: clearVragenlijst,
+})(AanmakenForm);
