@@ -31,16 +31,16 @@ class Login extends React.Component {
 			return <Redirect to="/dashboard" />;
 		}
 		return (
-			<form className="loginForm" onSubmit={this.onSubmit}>
-				<fieldset className="loginForm__fieldset">
+			<form className="form form--login" onSubmit={this.onSubmit}>
+				<fieldset className="form__fieldset">
 					<label htmlFor="email">
 						Email {!this.state.emailError.valid ? this.state.emailError.message : ''}
 					</label>
 					<input
 						className={
 							!this.state.emailError.valid && this.state.emailError.touched
-								? 'loginForm__input loginForm__input--incorrect'
-								: 'loginForm__input'
+								? 'form__input form__input--invalid'
+								: 'form__input'
 						}
 						type="text"
 						name="email"
@@ -50,8 +50,8 @@ class Login extends React.Component {
 					<input
 						className={
 							!this.state.passwordError.valid && this.state.passwordError.touched
-								? 'loginForm__input loginForm__input--incorrect'
-								: 'loginForm__input'
+								? 'form__input form__input--invalid'
+								: 'form__input'
 						}
 						type="password"
 						name="password"
@@ -63,7 +63,7 @@ class Login extends React.Component {
 							: ''}
 					</p>
 				</fieldset>
-				<input className="loginForm__submit" type="submit" value="Login" />
+				<input className="form__submit" type="submit" value="Login" />
 			</form>
 		);
 	}
@@ -183,6 +183,14 @@ class Login extends React.Component {
 			});
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		csrf_token: state.CSRFToken,
+		logged_in: state.logged_in,
+		User: state.user,
+	};
+};
 
 const mapStateToProps = (state) => {
 	return {

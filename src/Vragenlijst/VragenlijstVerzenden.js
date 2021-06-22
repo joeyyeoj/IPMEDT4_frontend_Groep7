@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import './VragenlijstVerzenden.css';
 import { changeUser, getCSRFToken, loginUser } from '../actions';
 import { Redirect } from 'react-router-dom';
+import '../FormsStyling/Forms.css';
 
 export class VragenlijstVerzenden extends React.Component {
 	constructor(props) {
@@ -69,50 +70,43 @@ export class VragenlijstVerzenden extends React.Component {
 			});
 	}
 
-	handleMailGroupChange = (e) => {
-		this.setState({
-			mailgroep: e.value,
-			mailGroupValid: true,
-		});
-	};
-
 	render() {
 		if (this.state.redirect) {
 			return <Redirect to="/dashboard" />;
 		}
 		return (
-			<form onSubmit={this.onSubmit} className="sendEmailsForm">
-				<fieldset className="sendEmailsForm__fieldset">
-					<label className="sendEmailsForm__label" htmlFor="onderzoek">
+			<form onSubmit={this.onSubmit} className="form form--verzenden">
+				<fieldset className="form__fieldset">
+					<label className="form__label" htmlFor="onderzoek">
 						Selecteer een onderzoek:
 					</label>
 					<Select
 						id="js--selectOnderzoek"
-						className="sendEmailsForm__input"
+						className="form__input--select"
 						name="onderzoek"
 						onChange={this.handleOnderzoekChange}
 						options={this.state.vragenlijsten}
 					></Select>
 				</fieldset>
-				<fieldset className="sendEmailsForm__fieldset">
-					<label className="sendEmailsForm__label" htmlFor="mailgroep">
+				<fieldset className="form__fieldset">
+					<label className="form__label" htmlFor="mailgroep">
 						Versturen naar:{' '}
 					</label>
 					<Select
 						id="js--selectEmail"
-						className="sendEmailsForm__input"
+						className="form__input--select"
 						name="mailgroep"
 						onChange={this.handleMailGroupChange}
 						options={this.state.mailGroepen}
 					></Select>
 				</fieldset>
 				{this.state.verzonden ? (
-					<p className="sendEmailsForm__success">Enquete verzonden!</p>
+					<p className="form__success">Enquete verzonden!</p>
 				) : (
 					''
 				)}
 				<input
-					className="sendEmailsForm__submit"
+					className="form__submit"
 					type="submit"
 					disabled={
 						this.state.mailGroupValid && this.state.vragenlijstValid ? '' : true
@@ -164,23 +158,15 @@ export class VragenlijstVerzenden extends React.Component {
 			verzonden: true,
 		});
 	};
-
-	makeApiCall = () => {
-		const sendEmailUrl = 'http://localhost:8000/api/send-email';
-		const pakketje = {
-			mailgroep: this.state.mailgroep,
-			vragenlijst: this.state.vragenlijst,
-		};
-		axios.post(sendEmailUrl, pakketje, {
-			withCredentials: true,
-			headers: {
-				'Authorization': 'Bearer ' + this.props.User.token,
-				'X-Requested-With': 'XMLHttpRequest',
-				'X-XSRF-Token': this.props.csrf_token,
-			},
-		});
-	};
 }
+
+const mapStateToProps = (state) => {
+	return {
+		csrf_token: state.CSRFToken,
+		User: state.User,
+		logged_in: state.logged_in,
+	};
+};
 
 const mapStateToProps = (state) => {
 	return {
