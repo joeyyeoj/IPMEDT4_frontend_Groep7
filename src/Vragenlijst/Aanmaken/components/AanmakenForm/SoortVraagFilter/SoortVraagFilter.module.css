@@ -1,0 +1,26 @@
+.vraagSoortFilter {
+	color: white;
+}
+
+.vraagSoortFilter__control {
+	display: block;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	margin: 1rem 0;
+}
+
+.vraagSoortFilter label {
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	font-size: 2.4rem;
+}
+
+.vraagSoortFilter select {
+	font: inherit;
+	padding: 0.5rem 0 0.5rem 0.5rem;
+	margin-top: 0.5rem;
+	font-weight: bold;
+	border-radius: 6px;
+	width: 100%;
+}
