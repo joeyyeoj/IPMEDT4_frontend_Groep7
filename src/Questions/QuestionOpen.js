@@ -22,7 +22,7 @@ class QuestionOpen extends React.Component {
 					<textarea
 						onChange={this.onChange}
 						className="questions__textArea"
-						value={this.state.value}
+						value={this.props.value}
 						maxlength="250"
 					/>
 					<p className="questions__textArea__label">

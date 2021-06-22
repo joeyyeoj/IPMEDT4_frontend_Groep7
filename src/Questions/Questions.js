@@ -128,7 +128,10 @@ class Questions extends React.Component {
 					<section className="questions">
 						<div className="questions__questionArea u-glasMorphism">
 							<h3>{this.state.questions[this.state.currentQuestion]}</h3>
-							<QuestionRange onChange={this.changeCurrentAnswer} />
+							<QuestionRange
+								onChange={this.changeCurrentAnswer}
+								value={this.state.currentAnswer}
+							/>
 						</div>
 						<div>
 							<button
@@ -275,7 +278,10 @@ class Questions extends React.Component {
 		}
 
 		if (this.state.kind[nextQuestion] === 2) {
-			this.setState({ disabledNext: false });
+			this.setState({
+				disabledNext: false,
+				currentAnswer: 3,
+			});
 		} else {
 			this.setState({ disabledNext: true });
 		}

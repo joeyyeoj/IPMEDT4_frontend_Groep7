@@ -85,10 +85,6 @@
 		height: 38rem;
 	}
 
-	/* .vraag--open {
-		grid-column: span 2;
-	} */
-
 	.vragen__navigatie {
 		grid-column: 1 / span 2;
 	}
@@ -112,14 +108,6 @@
 @media only screen and (min-width: 1440px) {
 	.vragen {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
-	}
-
-	.vraag--open {
-		grid-column: span 2;
-	}
-
-	.vraag:nth-of-type(4n) {
-		grid-column: span 1;
 	}
 
 	.vragen__navigatie {
