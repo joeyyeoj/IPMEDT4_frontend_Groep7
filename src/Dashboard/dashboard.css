@@ -36,6 +36,19 @@ main {
 	position: relative;
 }
 
+.dashboard__vragenlijst:hover,
+.opgeslagen__vragenlijst:hover {
+	cursor: pointer;
+	background: white;
+	color: #f98404;
+	border: 2px solid #f98404;
+	padding: 1rem;
+	padding-top: 1.8rem;
+	padding-bottom: 1.8rem;
+	/* padding-bottom: 1rem; */
+	/* box-shadow: inset 0px 0px 0px 0.3rem #fc4a1a; */
+}
+
 .opgeslagen__vragenlijst {
 	display: flex;
 	justify-content: space-between;
@@ -72,6 +85,13 @@ main {
 	font-size: 4rem;
 	text-decoration: none;
 	display: flex;
+}
+
+.dashboard__toevoegen:hover {
+	cursor: pointer;
+	background: white;
+	color: #f98404;
+	border: 2px solid #f98404;
 }
 
 @media only screen and (min-width: 768px) {

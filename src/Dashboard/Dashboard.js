@@ -97,7 +97,11 @@ export class Dashboard extends React.Component {
 						)}
 					</ul>
 				</main>
-				<Navigatie overzichtActive={true} toevoegenActive={false} />
+				<Navigatie
+					overzichtActive={true}
+					toevoegenActive={false}
+					emailsActive={false}
+				/>
 			</div>
 		);
 	}

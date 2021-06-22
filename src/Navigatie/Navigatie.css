@@ -6,14 +6,17 @@
 
 .navigatie__items {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
 	list-style-type: none;
 }
 
 .navigatie__item {
 	text-align: center;
 	font-size: 1.6rem;
-	background: #a5a5a5;
+	/* background: #a5a5a5; */
+	background: rgba(255, 255, 255, 0.25);
+	backdrop-filter: blur(1.5rem);
+	mix-blend-mode: normal;
 	color: white;
 	position: relative;
 	display: grid;
@@ -28,7 +31,7 @@
 	background: linear-gradient(85.07deg, #fc4a1a 0%, #f7b733 100%);
 }
 
-.navigatie__item--active--left {
+/* .navigatie__item--active--left {
 	margin-right: -15px;
 	border-radius: 1.5rem 1.5rem 1.5rem 0;
 	z-index: 1;
@@ -37,7 +40,7 @@
 .navigatie__item--active--right {
 	margin-left: -15px;
 	border-radius: 1.5rem 1.5rem 0 1.5rem;
-}
+} */
 
 .navigatie__item a {
 	color: white;

@@ -24,13 +24,25 @@ export const Navigatie = (props) => {
 				<li
 					className={
 						props.toevoegenActive
-							? 'navigatie__item navigatie__item--active navigatie__item--active--right'
+							? 'navigatie__item navigatie__item--active navigatie__item--active--midden'
 							: 'navigatie__item'
 					}
 				>
 					<Link to="/opgeslagen">
 						<i class="fas fa-clipboard-list navigatie__icon"></i>
-						<p className="navigatie__itemText">Mijn enquetes</p>
+						<p className="navigatie__itemText">Enquetes</p>
+					</Link>
+				</li>
+				<li
+					className={
+						props.emailsActive
+							? 'navigatie__item navigatie__item--active navigatie__item--active--right'
+							: 'navigatie__item'
+					}
+				>
+					<Link to="/emails">
+						<i class="fas fa-address-book navigatie__icon"></i>
+						<p className="navigatie__itemText">Mailgroepen</p>
 					</Link>
 				</li>
 			</ul>
