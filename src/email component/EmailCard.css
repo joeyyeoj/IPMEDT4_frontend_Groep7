@@ -1,0 +1,44 @@
+.email-card {
+    width: 90vw;
+    margin-left: 5vw;
+    margin-top: 10vh;
+    background: rgba(255,255,255,0.25);
+    position: relative;
+    height: 80vh;
+    border-radius: 10px;
+}
+
+.email-card__content {
+    height: 80vh;
+    width: 100%;
+    background: rgba(255,255,255,15px);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.2);
+    position: absolute;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.email-card__content__header {
+    font-size: 4.8rem;
+    font-weight: bold;
+}
+
+.email-card__content__emails {
+    line-height: 2.5rem;
+    font-size: 1.8rem;
+}
+
+@media(min-width: 700px) {
+    .email-card {
+        width: 70vw;
+        margin-left: 15vw;
+    }
+}
+
+@media(min-width: 1000px) {
+    .email-card {
+        width: 60vw;
+        margin-left: 20vw;
+    }
+}
