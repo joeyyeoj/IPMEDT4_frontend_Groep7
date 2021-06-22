@@ -121,6 +121,10 @@
 
 .questions__mcButton:hover {
     cursor: pointer;
+    color: #F98404;
+    border: 2px solid #F98404;
+    background: #fff;
+    padding: 1.3rem .8rem;
 }
 
 .questions__button {
@@ -131,17 +135,28 @@
     margin-bottom: 0;
     color: #fff;
     font-family: 'Lato', sans-serif;
+    transition: 1s;
 }
 
 .questions__button:hover {
     cursor: pointer;
     background-color: rgba(255,255,255, 0.5);    
-    transition: .5s;
+    border-radius: 5rem;
 }
 
 .questions__button--submit {
     background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
     border: none;
+    transition: 0s;
+}
+
+.questions__button--submit:hover {
+    border-radius: .5rem;
+    cursor: pointer;
+    color: #F98404;
+    border: 2px solid #F98404;
+    background: #fff;
+    padding: .55rem 0;
 }
 
 .questions__button:disabled {
