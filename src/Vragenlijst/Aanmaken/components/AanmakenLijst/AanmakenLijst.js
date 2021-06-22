@@ -11,7 +11,10 @@ const AanmakenLijst = (props) => {
 			<h2 className={styles.titel}>Vragen</h2>
 			<ul>
 				{props.vragen_lijst.map((vraag) => (
-					<li key={vraag.vraag} className={styles.lijstItem}>
+					<li
+						key={vraag.vraag + vraag.opties + vraag.type}
+						className={styles.lijstItem}
+					>
 						<InnerCard className={styles.inner}>
 							<h3>{vraag.vraag}</h3>
 							<p>{vraag.opties}</p>

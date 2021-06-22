@@ -12,6 +12,10 @@
 	color: white;
 }
 
+.card:nth-last-child(1) {
+	margin-bottom: 5rem;
+}
+
 .inner {
 	width: 60%;
 }

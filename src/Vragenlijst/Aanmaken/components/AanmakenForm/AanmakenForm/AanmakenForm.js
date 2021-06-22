@@ -58,16 +58,6 @@ const AanmakenForm = (props) => {
 	return (
 		<>
 			<Card className={classes.card}>
-				<h2 className={classes.titel}>Vragen Toevoegen</h2>
-				<SoortVraagFilter
-					selected={vraagsoort}
-					onChangeFilter={filterchangeHandler}
-				/>
-				{vraagsoort === 'open' && <OpenForm />}
-				{vraagsoort === 'meerkeuze' && <MeerkeuzeForm />}
-				{vraagsoort === 'schaal' && <SchaalForm />}
-			</Card>
-			<Card className={classes.card}>
 				<h2 className={classes.titel}>Lijst opslaan</h2>
 				<Input
 					id="vragenlijstNaam"
@@ -83,6 +73,16 @@ const AanmakenForm = (props) => {
 						Vragenlijst opslaan
 					</Button>
 				)}
+			</Card>
+			<Card className={classes.card}>
+				<h2 className={classes.titel}>Vragen Toevoegen</h2>
+				<SoortVraagFilter
+					selected={vraagsoort}
+					onChangeFilter={filterchangeHandler}
+				/>
+				{vraagsoort === 'open' && <OpenForm />}
+				{vraagsoort === 'meerkeuze' && <MeerkeuzeForm />}
+				{vraagsoort === 'schaal' && <SchaalForm />}
 			</Card>
 		</>
 	);
