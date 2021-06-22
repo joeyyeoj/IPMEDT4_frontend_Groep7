@@ -1,9 +1,8 @@
 .card {
-	display: block;
 	position: relative;
 	width: 90vw;
 	margin: 0 auto;
-	margin-top: 5rem;
+	margin-top: 2rem;
 	border-radius: 2.5rem;
 	background: rgba(255, 255, 255, 0.25);
 	mix-blend-mode: normal;
@@ -13,7 +12,8 @@
 }
 
 .card:nth-last-child(1) {
-	margin-bottom: 5rem;
+	margin-bottom: 10rem;
+	/* background: red; */
 }
 
 .inner {

@@ -82,12 +82,17 @@
 		border: 0.1rem rgba(255, 255, 255, 0.25) solid;
 		display: flex;
 		justify-content: center;
+		margin-left: 0;
+	}
+
+	.navigatie__items {
+		gap: 5rem;
 	}
 
 	.navigatie__item {
 		border-radius: 1.5rem;
-		width: 21rem;
-		margin: 0 1rem 0 1rem;
+		width: 100%;
+		padding: 1rem 2.5rem;
 	}
 }
 
@@ -100,5 +105,11 @@
 @media only screen and (min-width: 1440px) {
 	.navigatie {
 		width: 50vw;
+	}
+
+	.navigatie__item {
+		border-radius: 1.5rem;
+		width: 21rem;
+		padding: 1rem;
 	}
 }

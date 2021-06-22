@@ -3,6 +3,7 @@ import axios from 'axios';
 import Vraag from './Vraag';
 import './Antwoorden.css';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 class Antwoorden extends React.Component {
 	constructor(props) {
@@ -10,6 +11,8 @@ class Antwoorden extends React.Component {
 
 		this.state = {
 			vragen: [],
+			redirect: false,
+			redirectSend: false,
 		};
 	}
 
@@ -26,9 +29,9 @@ class Antwoorden extends React.Component {
 		for (let i = 0; i < vraagCanvases.length; i++) {
 			vraagCanvases[i].style.width = '75%';
 		}
-		setTimeout(function () {
+		setTimeout(() => {
 			window.print();
-			window.location.reload();
+			this.setState({ redirect: true });
 		}, 500);
 	}
 
@@ -58,15 +61,43 @@ class Antwoorden extends React.Component {
 			});
 	}
 
+	terugRedirect() {
+		this.setState({ redirect: true });
+	}
+
+	redirectSend() {
+		this.setState({ redirectSend: true });
+	}
+
 	render() {
+		if (this.state.redirect) {
+			return <Redirect to="/dashboard" />;
+		}
+
+		if (this.state.redirectSend) {
+			return <Redirect to="/verzenden" />;
+		}
+
 		return (
-			<main className="vragen" id="js--vragen">
+			<section className="vragen" id="js--vragen">
 				<nav className="vragen__navigatie">
 					<ul className="vragen__navigatie__list">
-						<li className="vragen__navigatie__listItem">
+						<li
+							className="vragen__navigatie__listItem"
+							onClick={this.terugRedirect.bind(this)}
+						>
 							<i className="fas fa-arrow-left"></i>Terug
 						</li>
-						<li className="vragen__navigatie__listItem" onClick={this.printPage}>
+						<li
+							className="vragen__navigatie__listItem"
+							onClick={this.redirectSend.bind(this)}
+						>
+							<i className="far fa-paper-plane"></i>Verstuur
+						</li>
+						<li
+							className="vragen__navigatie__listItem"
+							onClick={this.printPage.bind(this)}
+						>
 							<i className="fas fa-print"></i>Print
 						</li>
 					</ul>
@@ -77,7 +108,7 @@ class Antwoorden extends React.Component {
 						<Vraag key={id} vraag={vraag.vraag} id={vraag.id} soort={vraag.soort} />
 					);
 				})}
-			</main>
+			</section>
 		);
 	}
 }

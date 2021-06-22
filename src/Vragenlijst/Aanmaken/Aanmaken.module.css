@@ -1,3 +1,45 @@
 .titel {
 	font-size: 3.6rem;
 }
+
+.terug__navigatie {
+	width: 90vw;
+	margin: 0 auto;
+}
+
+.terug__navigatie__listItem {
+	background: rgba(255, 255, 255, 0.25);
+	backdrop-filter: blur(1.5rem);
+	border-radius: 1rem;
+	padding: 2rem;
+	mix-blend-mode: normal;
+	border: 0.1rem rgba(255, 255, 255, 0.25) solid;
+	font-size: 1.8rem;
+	list-style: none;
+	width: max-content;
+	margin-top: 2rem;
+	display: flex;
+	gap: 1rem;
+}
+
+.terug__navigatie__listItem:hover {
+	cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+	.terug__navigatie {
+		max-width: 70vw;
+	}
+}
+
+@media only screen and (min-width: 1024px) {
+	.terug__navigatie {
+		max-width: 60vw;
+	}
+}
+
+@media only screen and (min-width: 1440px) {
+	.terug__navigatie {
+		max-width: 50vw;
+	}
+}

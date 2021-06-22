@@ -14,6 +14,7 @@ main {
 	padding: 2rem;
 	color: white;
 	position: relative;
+	margin-bottom: 15rem;
 }
 
 .dashboard__vragenlijsten,
@@ -34,6 +35,10 @@ main {
 	color: white;
 	margin-bottom: 2rem;
 	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .dashboard__vragenlijst:hover,
@@ -60,9 +65,9 @@ main {
 	grid-template-columns: 1fr;
 	text-align: center;
 	font-size: 1.6rem;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
+	/* position: absolute; */
+	/* top: 50%; */
+	/* transform: translateY(-50%); */
 	right: 1.2rem;
 }
 
@@ -73,8 +78,8 @@ main {
 .dashboard__toevoegen,
 .opgeslagen__toevoegen {
 	position: absolute;
-	right: 2rem;
-	top: 2rem;
+	right: -1rem;
+	top: -1rem;
 	border-radius: 50%;
 	background: linear-gradient(85.07deg, #fc4a1a 0%, #f7b733 100%);
 	color: white;

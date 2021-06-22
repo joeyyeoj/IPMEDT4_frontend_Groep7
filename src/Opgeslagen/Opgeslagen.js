@@ -82,7 +82,7 @@ export class Opgeslagen extends React.Component {
 										{vragenlijst.name}{' '}
 										<span className="opgeslagen__span">
 											<i class="far fa-copy"></i>{' '}
-											<p className="opgeslagen__p">Hergebruiken</p>
+											<p className="opgeslagen__p">Kopieer</p>
 										</span>
 									</li>
 								);

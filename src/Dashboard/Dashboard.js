@@ -69,7 +69,7 @@ export class Dashboard extends React.Component {
 		return (
 			<div className="dashboardholder">
 				<main className="dashboard">
-					<h2 className="dashboard__header">Hey, {this.props.User.userData.name}</h2>
+					<h3 className="dashboard__header">Hey, {this.props.User.userData.name}</h3>
 					<Link to="/aanmaken" className="dashboard__toevoegen">
 						+
 					</Link>
@@ -83,10 +83,10 @@ export class Dashboard extends React.Component {
 										key={vragenlijst.id}
 										className="dashboard__vragenlijst"
 									>
-										{vragenlijst.name}{' '}
-										<span className="dashboard__responsecounter">
+										<p>{vragenlijst.name} </p>
+										<div className="dashboard__responsecounter">
 											{vragenlijst.responses} <p>Reacties</p>{' '}
-										</span>
+										</div>
 									</li>
 								);
 							})

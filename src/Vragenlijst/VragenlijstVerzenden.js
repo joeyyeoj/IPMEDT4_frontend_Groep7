@@ -6,7 +6,7 @@ import './VragenlijstVerzenden.css';
 import { changeUser, getCSRFToken, loginUser } from '../actions';
 import { Redirect } from 'react-router-dom';
 import '../FormsStyling/Forms.css';
-
+import classes from '../Vragenlijst/Aanmaken/Aanmaken.module.css';
 export class VragenlijstVerzenden extends React.Component {
 	constructor(props) {
 		super(props);
@@ -75,44 +75,58 @@ export class VragenlijstVerzenden extends React.Component {
 			return <Redirect to="/dashboard" />;
 		}
 		return (
-			<form onSubmit={this.onSubmit} className="form form--verzenden">
-				<fieldset className="form__fieldset">
-					<label className="form__label" htmlFor="onderzoek">
-						Selecteer een onderzoek:
-					</label>
-					<Select
-						id="js--selectOnderzoek"
-						className="form__input--select"
-						name="onderzoek"
-						onChange={this.handleOnderzoekChange}
-						options={this.state.vragenlijsten}
-					></Select>
-				</fieldset>
-				<fieldset className="form__fieldset">
-					<label className="form__label" htmlFor="mailgroep">
-						Versturen naar:{' '}
-					</label>
-					<Select
-						id="js--selectEmail"
-						className="form__input--select"
-						name="mailgroep"
-						onChange={this.handleMailGroupChange}
-						options={this.state.mailGroepen}
-					></Select>
-				</fieldset>
-				{this.state.verzonden ? (
-					<p className="form__success">Enquete verzonden!</p>
-				) : (
-					''
-				)}
-				<input
-					className="form__submit"
-					type="submit"
-					disabled={
-						this.state.mailGroupValid && this.state.vragenlijstValid ? '' : true
-					}
-				/>
-			</form>
+			<>
+				<nav
+					className={` ${classes.terug__navigatie} ${'terug__navigatie--verzenden'}`}
+				>
+					<ul className={classes.terug}>
+						<li
+							onClick={this.terugRedirect.bind(this)}
+							className={classes.terug__navigatie__listItem}
+						>
+							<i className="fas fa-arrow-left"></i>Terug
+						</li>
+					</ul>
+				</nav>
+				<form onSubmit={this.onSubmit} className="form form--verzenden">
+					<fieldset className="form__fieldset">
+						<label className="form__label" htmlFor="onderzoek">
+							Selecteer een onderzoek:
+						</label>
+						<Select
+							id="js--selectOnderzoek"
+							className="form__input--select"
+							name="onderzoek"
+							onChange={this.handleOnderzoekChange}
+							options={this.state.vragenlijsten}
+						></Select>
+					</fieldset>
+					<fieldset className="form__fieldset">
+						<label className="form__label" htmlFor="mailgroep">
+							Versturen naar:{' '}
+						</label>
+						<Select
+							id="js--selectEmail"
+							className="form__input--select"
+							name="mailgroep"
+							onChange={this.handleMailGroupChange}
+							options={this.state.mailGroepen}
+						></Select>
+					</fieldset>
+					{this.state.verzonden ? (
+						<p className="form__success">Enquete verzonden!</p>
+					) : (
+						''
+					)}
+					<input
+						className="form__submit"
+						type="submit"
+						disabled={
+							this.state.mailGroupValid && this.state.vragenlijstValid ? '' : true
+						}
+					/>
+				</form>
+			</>
 		);
 	}
 
@@ -131,6 +145,10 @@ export class VragenlijstVerzenden extends React.Component {
 			verzonden: false,
 		});
 	};
+
+	terugRedirect() {
+		this.setState({ redirect: true });
+	}
 
 	onSubmit = (e) => {
 		e.preventDefault();

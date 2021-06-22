@@ -17,7 +17,7 @@ const AanmakenLijst = (props) => {
 					>
 						<InnerCard className={styles.inner}>
 							<h3>{vraag.vraag}</h3>
-							<p>{vraag.opties}</p>
+							{/* <p>{vraag.opties}</p> */}
 							{/* {vraag.type === 3 && <p>{vraag.opties}</p>} */}
 						</InnerCard>
 					</li>
