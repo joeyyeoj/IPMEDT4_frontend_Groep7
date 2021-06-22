@@ -82,6 +82,7 @@
 	.vraag {
 		width: 100%;
 		margin: 0;
+		height: 38rem;
 	}
 
 	/* .vraag--open {
@@ -100,11 +101,7 @@
 
 @media only screen and (min-width: 1300px) {
 	.vragen {
-		grid-template-columns: repeat(3, 1fr);
-	}
-
-	.vraag--open {
-		grid-column: 1;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 
 	.vragen__navigatie {
@@ -114,11 +111,15 @@
 
 @media only screen and (min-width: 1440px) {
 	.vragen {
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 
 	.vraag--open {
 		grid-column: span 2;
+	}
+
+	.vraag:nth-of-type(4n) {
+		grid-column: span 1;
 	}
 
 	.vragen__navigatie {
