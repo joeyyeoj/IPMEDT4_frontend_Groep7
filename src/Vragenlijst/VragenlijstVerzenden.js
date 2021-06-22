@@ -168,14 +168,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-const mapStateToProps = (state) => {
-	return {
-		csrf_token: state.CSRFToken,
-		User: state.User,
-		logged_in: state.logged_in,
-	};
-};
-
 export default connect(mapStateToProps, {
 	getCSRFToken: getCSRFToken,
 	changeUser: changeUser,

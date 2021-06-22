@@ -14,6 +14,10 @@ import Dashboard from './Dashboard/Dashboard';
 import CodeInvoeren from './CodeInvoeren/CodeInvoeren';
 import { PrivateRoute } from './PrivateRoute';
 import Opgeslagen from './Opgeslagen/Opgeslagen';
+import Antwoorden from './Antwoorden component/Antwoorden';
+import EmailCard from './email component/EmailCard';
+import Aanmaken from './Vragenlijst/Aanmaken/Aanmaken';
+import Questions from './Questions/Questions';
 
 class App extends React.Component {
 	render() {
@@ -32,7 +36,9 @@ class App extends React.Component {
 						<Route path="/codeinvoeren/:code">
 							<CodeInvoeren />
 						</Route>
-
+						<Route path="/vragen">
+							<Questions />
+						</Route>
 						<Route path="/Register">
 							<Register />
 						</Route>
@@ -53,6 +59,21 @@ class App extends React.Component {
 							authed={this.props.logged_in}
 							path="/opgeslagen"
 							component={Opgeslagen}
+						/>
+						<PrivateRoute
+							authed={this.props.logged_in}
+							path="/antwoorden"
+							component={Antwoorden}
+						/>
+						<PrivateRoute
+							authed={this.props.logged_in}
+							path="/emails"
+							component={EmailCard}
+						/>
+						<PrivateRoute
+							authed={this.props.logged_in}
+							path="/aanmaken"
+							component={Aanmaken}
 						/>
 					</Provider>
 				</Switch>
