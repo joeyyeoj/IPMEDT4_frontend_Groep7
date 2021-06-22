@@ -36,9 +36,7 @@ class App extends React.Component {
 						<Route path="/codeinvoeren/:code">
 							<CodeInvoeren />
 						</Route>
-						<Route path="/vragen">
-							<Questions />
-						</Route>
+						<Route path="/vragen" component={Questions} />
 						<Route path="/Register">
 							<Register />
 						</Route>

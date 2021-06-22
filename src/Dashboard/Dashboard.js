@@ -5,6 +5,7 @@ import { getCSRFToken } from '../actions';
 import './dashboard.css';
 import { Link } from 'react-router-dom';
 import { Navigatie } from '../Navigatie/Navigatie';
+import { Redirect } from 'react-router-dom';
 
 export class Dashboard extends React.Component {
 	constructor(props) {
@@ -12,6 +13,8 @@ export class Dashboard extends React.Component {
 
 		this.state = {
 			vragenlijsten: [],
+			redirect: false,
+			temp_id: null,
 		};
 	}
 
@@ -48,7 +51,21 @@ export class Dashboard extends React.Component {
 			});
 	}
 
+	naarAntwoorden = (id) => {
+		this.setState({
+			redirect: true,
+			temp_id: id,
+		});
+	};
+
 	render() {
+		if (this.state.redirect) {
+			return (
+				<Redirect
+					to={{ pathname: '/antwoorden', state: { id: this.state.temp_id } }}
+				/>
+			);
+		}
 		return (
 			<div className="dashboardholder">
 				<main className="dashboard">
@@ -61,7 +78,11 @@ export class Dashboard extends React.Component {
 						{this.state.vragenlijsten.length > 0 ? (
 							this.state.vragenlijsten.map((vragenlijst, index) => {
 								return (
-									<li key={vragenlijst.id} className="dashboard__vragenlijst">
+									<li
+										onClick={this.naarAntwoorden.bind(this, vragenlijst.id)}
+										key={vragenlijst.id}
+										className="dashboard__vragenlijst"
+									>
 										{vragenlijst.name}{' '}
 										<span className="dashboard__responsecounter">
 											{vragenlijst.responses} <p>Reacties</p>{' '}
