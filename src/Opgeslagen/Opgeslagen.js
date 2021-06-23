@@ -59,6 +59,7 @@ export class Opgeslagen extends React.Component {
     showInvoer(id) {
         this.setState({ tempId: id });
         document.getElementById('js--opgeslagen__naam').style.display = 'block';
+        document.getElementById('js--opgeslagen').style.marginBottom = '2rem';
     }
 
     hergebruik() {
@@ -80,7 +81,7 @@ export class Opgeslagen extends React.Component {
         }
         return (
             <div className="opgeslagenHolder">
-                <main className="opgeslagen">
+                <main className="opgeslagen" id="js--opgeslagen">
                     <ul className="opgeslagen__vragenlijsten">
                         {this.state.vragenlijsten.length > 0 ? (
                             this.state.vragenlijsten.map((vragenlijst, index) => {

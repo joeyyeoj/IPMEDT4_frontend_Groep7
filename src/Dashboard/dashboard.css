@@ -64,6 +64,16 @@ main {
     width: 100%;
 }
 
+.opgeslagen__naam__button:hover{
+	cursor: pointer;
+    background: white;
+    color: #F98404;
+    border: 2px solid #F98404;
+    padding: 0.6rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
 .dashboard__vragenlijsten,
 .opgeslagen__vragenlijsten {
 	list-style-type: none;
@@ -185,6 +195,7 @@ main {
 		left: unset;
 		transform: unset;
 		background: rgba(255, 255, 255, 0.25);
+		margin-top: 0;
 	}
 
 	.dashboard__vragenlijsten,
