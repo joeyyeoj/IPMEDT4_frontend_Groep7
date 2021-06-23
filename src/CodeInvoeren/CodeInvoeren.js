@@ -37,7 +37,7 @@ class CodeInvoeren extends React.Component {
 				<Redirect
 					to={{
 						pathname: '/vragen',
-						state: { id: this.state.vragenlijstId },
+						state: { id: this.state.vragenlijstId, code: this.state.code },
 					}}
 				/>
 			);
