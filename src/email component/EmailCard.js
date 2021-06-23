@@ -1,10 +1,12 @@
 import React from 'react';
-
-import './EmailCard.css';
-import EmailForm from './EmailForm.js';
+import Select from 'react-select';
+import EmailForm from './EmailForm';
 import FileUploadForm from './FileUploadForm.js';
 import { Navigatie } from '../Navigatie/Navigatie';
 import Card from '../Vragenlijst/Aanmaken/components/UI/Card/Card';
+
+import './EmailCard.css';
+import '../Vragenlijst/VragenlijstVerzenden.css';
 
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -13,19 +15,43 @@ class EmailCard extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { emails: [], id: '' };
+		this.state = { emails: []};
 	}
 
 	componentDidMount() {
+		this.getMailgroepen();
 		this.getEmails(1);
 	}
 
+	getMailgroepen() {
+		const MAILGROEP_URL = 'http://localhost:8000/api/user/'+ this.props.User.userData.id +'/mailgroep';
+		axios
+			.get(MAILGROEP_URL, {
+				withCredentials: true,
+				headers: {
+					'Authorization': 'Bearer ' + this.props.User.token,
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-XSRF-Token': this.props.csrf_token,
+				},
+			})
+			.then((response) => {
+				const temp_mailgroepen = [];
+				response.data.forEach((mailgroep) =>
+					temp_mailgroepen.push({ value: mailgroep.id, label: mailgroep.name })
+				);
+				this.setState({
+					mailGroepen: temp_mailgroepen,
+				});
+			});
+	}
+
+
 	getEmails(emailgroepId) {
 		let emailArray = [];
-		const EMAILGROEP_URL =
+		const EMAIL_URL =
 			'http://localhost:8000/api/mailgroep/' + emailgroepId + '/emailadressen/';
 		axios
-			.get(EMAILGROEP_URL, {
+			.get(EMAIL_URL, {
 				withCredentials: true,
 				headers: {
 					'Authorization': 'Bearer ' + this.props.User.token,
@@ -82,6 +108,13 @@ class EmailCard extends React.Component {
 		return (
 			<>
 				<section className="email-card__content">
+					<Select
+						id="js--selectEmail"
+						className="form__input--select"
+						name="mailgroep"
+						onChange={this.handleMailGroupChange}
+						options={this.state.mailGroepen}
+					></Select>
 					<EmailForm onSubmit={this.onSubmit} />
 					{/* <FileUploadForm /> */}
 					{this.state.emails.length > 0 && <Card>{this.renderEmails()}</Card>}
