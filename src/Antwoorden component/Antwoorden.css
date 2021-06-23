@@ -4,6 +4,10 @@
 	margin: 0 auto;
 }
 
+.vragen__responses__header{
+	margin-top: 2rem;
+}
+
 .vraag {
 	width: 100%;
 	margin: 0 auto;
@@ -77,6 +81,11 @@
 		grid-column-gap: 2rem;
 		grid-row-gap: 2rem;
 		margin-top: 2rem;
+	}
+	
+	.vragen__responses__header{
+		margin-top: unset;
+		grid-column: span 2;
 	}
 
 	.vraag {

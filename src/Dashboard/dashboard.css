@@ -1,20 +1,67 @@
+.opgeslagenHolder{
+	position: relative;
+}
+
 main {
 	height: max-content;
 }
 
 .dashboard,
-.opgeslagen {
+.opgeslagen,
+.opgeslagen__naam {
 	width: 90vw;
 	margin: 0 auto;
 	margin-top: 5rem;
 	border-radius: 2.5rem;
 	background: rgba(255, 255, 255, 0.25);
+	backdrop-filter: blur(1.5rem);
 	mix-blend-mode: normal;
 	border: 1px solid rgba(255, 255, 255, 0.25);
 	padding: 2rem;
 	color: white;
 	position: relative;
 	margin-bottom: 15rem;
+}
+
+.opgeslagen__naam{
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(255, 255, 255, 0.5);
+	width: 85vw;
+	display: none;
+}
+
+.opgeslagen__naam__header{
+	font-size: 3.6rem;
+	margin-bottom: 1rem;
+}
+
+.opgeslagen__naam__input{
+	width: 100%;
+    border-radius: 1.5rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0px 0px 70px 4px rgba(0, 0, 0, 0.2);
+	font-size: 100%;
+}
+
+.opgeslagen__naam__button{
+	display: block;
+	background: linear-gradient(85.07deg, #FC4A1A 0%, #F7B733 100%);
+    border-radius: 1.5rem;
+    padding: 1rem;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    border: none;
+    color: white;
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    transition: 0.5s ease background-color;
+    width: 100%;
 }
 
 .dashboard__vragenlijsten,
@@ -104,6 +151,14 @@ main {
 	.opgeslagen {
 		width: 70vw;
 	}
+
+	.opgeslagen__naam{
+		width:65vw;
+	}
+
+	.opgeslagen__naam__button{
+		max-width: 12rem;
+	}
 }
 
 @media only screen and (min-width: 1024px) {
@@ -111,12 +166,25 @@ main {
 	.opgeslagen {
 		width: 60vw;
 	}
+
+	.opgeslagen__naam{
+		width:58vw;
+	}
 }
 
 @media only screen and (min-width: 1440px) {
 	.dashboard,
 	.opgeslagen {
 		width: 50vw;
+	}
+
+	.opgeslagen__naam{
+		width:50vw;
+		position: relative;
+		top: unset;
+		left: unset;
+		transform: unset;
+		background: rgba(255, 255, 255, 0.25);
 	}
 
 	.dashboard__vragenlijsten,
