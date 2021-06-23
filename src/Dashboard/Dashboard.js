@@ -8,111 +8,113 @@ import { Navigatie } from '../Navigatie/Navigatie';
 import { Redirect } from 'react-router-dom';
 
 export class Dashboard extends React.Component {
-	constructor(props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.state = {
-			vragenlijsten: [],
-			redirect: false,
-			temp_id: null,
-		};
-	}
+        this.state = {
+            vragenlijsten: [],
+            redirect: false,
+            temp_id: null,
+            temp_responses: null,
+        };
+    }
 
-	componentDidMount() {
-		const BASE_URL = 'http://localhost:8000/api';
-		const temp_vragenlijsten = [];
+    componentDidMount() {
+        const BASE_URL = 'http://localhost:8000/api';
+        const temp_vragenlijsten = [];
 
-		axios
-			.get(
-				BASE_URL +
-					'/vragenlijsten/' +
-					this.props.User.userData.id +
-					'/responsecount',
-				{
-					withCredentials: true,
-					headers: {
-						'Authorization': 'Bearer ' + this.props.User.token,
-						'X-Requested-With': 'XMLHttpRequest',
-						'X-XSRF-Token': this.props.csrf_token,
-					},
-				}
-			)
-			.then((response) => {
-				response.data.vragenlijsten.forEach((vragenlijst) =>
-					temp_vragenlijsten.push({
-						id: vragenlijst.id,
-						name: vragenlijst.name,
-						responses: vragenlijst.responsecount,
-					})
-				);
-				this.setState({
-					vragenlijsten: temp_vragenlijsten,
-				});
-			});
-	}
+        axios
+            .get(
+                BASE_URL +
+                '/vragenlijsten/' +
+                this.props.User.userData.id +
+                '/responsecount',
+                {
+                    withCredentials: true,
+                    headers: {
+                        'Authorization': 'Bearer ' + this.props.User.token,
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-XSRF-Token': this.props.csrf_token,
+                    },
+                }
+            )
+            .then((response) => {
+                response.data.vragenlijsten.forEach((vragenlijst) =>
+                    temp_vragenlijsten.push({
+                        id: vragenlijst.id,
+                        name: vragenlijst.name,
+                        responses: vragenlijst.responsecount,
+                    })
+                );
+                this.setState({
+                    vragenlijsten: temp_vragenlijsten,
+                });
+            });
+    }
 
-	naarAntwoorden = (id) => {
-		this.setState({
-			redirect: true,
-			temp_id: id,
-		});
-	};
+    naarAntwoorden = (id, responses) => {
+        this.setState({
+            redirect: true,
+            temp_id: id,
+            temp_responses: responses,
+        });
+    };
 
-	render() {
-		if (this.state.redirect) {
-			return (
-				<Redirect
-					to={{ pathname: '/antwoorden', state: { id: this.state.temp_id } }}
-				/>
-			);
-		}
-		return (
-			<div className="dashboardholder">
-				<main className="dashboard">
-					<h3 className="dashboard__header">Hey, {this.props.User.userData.name}</h3>
-					<Link to="/aanmaken" className="dashboard__toevoegen">
-						+
-					</Link>
-					<p>Jouw vragenlijsten:</p>
-					<ul className="dashboard__vragenlijsten">
-						{this.state.vragenlijsten.length > 0 ? (
-							this.state.vragenlijsten.map((vragenlijst, index) => {
-								return (
-									<li
-										onClick={this.naarAntwoorden.bind(this, vragenlijst.id)}
-										key={vragenlijst.id}
-										className="dashboard__vragenlijst"
-									>
-										<p>{vragenlijst.name} </p>
-										<div className="dashboard__responsecounter">
-											{vragenlijst.responses} <p>Reacties</p>{' '}
-										</div>
-									</li>
-								);
-							})
-						) : (
-							<p className="dashboard__geenlijstenmessage">
-								Je hebt nog geen vragenlijsten
-							</p>
-						)}
-					</ul>
-				</main>
-				<Navigatie
-					overzichtActive={true}
-					toevoegenActive={false}
-					emailsActive={false}
-				/>
-			</div>
-		);
-	}
+    render() {
+        if (this.state.redirect) {
+            return (
+                <Redirect
+                    to={{ pathname: '/antwoorden', state: { id: this.state.temp_id, responses: this.state.temp_responses } }}
+                />
+            );
+        }
+        return (
+            <div className="dashboardholder">
+                <main className="dashboard">
+                    <h3 className="dashboard__header">Hey, {this.props.User.userData.name}</h3>
+                    <Link to="/aanmaken" className="dashboard__toevoegen">
+                        +
+                    </Link>
+                    <p>Jouw vragenlijsten:</p>
+                    <ul className="dashboard__vragenlijsten">
+                        {this.state.vragenlijsten.length > 0 ? (
+                            this.state.vragenlijsten.map((vragenlijst, index) => {
+                                return (
+                                    <li
+                                        onClick={this.naarAntwoorden.bind(this, vragenlijst.id, vragenlijst.responses)}
+                                        key={vragenlijst.id}
+                                        className="dashboard__vragenlijst"
+                                    >
+                                        <p>{vragenlijst.name} </p>
+                                        <div className="dashboard__responsecounter">
+                                            {vragenlijst.responses} <p>Reacties</p>{' '}
+                                        </div>
+                                    </li>
+                                );
+                            })
+                        ) : (
+                            <p className="dashboard__geenlijstenmessage">
+                                Je hebt nog geen vragenlijsten
+                            </p>
+                        )}
+                    </ul>
+                </main>
+                <Navigatie
+                    overzichtActive={true}
+                    toevoegenActive={false}
+                    emailsActive={false}
+                />
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {
-	return {
-		csrf_token: state.CSRFToken,
-		User: state.User,
-		logged_in: state.logged_in,
-	};
+    return {
+        csrf_token: state.CSRFToken,
+        User: state.User,
+        logged_in: state.logged_in,
+    };
 };
 
 export default connect(mapStateToProps)(Dashboard);

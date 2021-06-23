@@ -78,6 +78,37 @@ class Antwoorden extends React.Component {
 			return <Redirect to="/verzenden" />;
 		}
 
+		if (this.props.location.state.responses < 5) {
+			return (
+				<section className="vragen" id="js--vragen">
+					<nav className="vragen__navigatie">
+						<ul className="vragen__navigatie__list">
+							<li
+								className="vragen__navigatie__listItem"
+								onClick={this.terugRedirect.bind(this)}
+							>
+								<i className="fas fa-arrow-left"></i>Terug
+							</li>
+							<li
+								className="vragen__navigatie__listItem"
+								onClick={this.redirectSend.bind(this)}
+							>
+								<i className="far fa-paper-plane"></i>Verstuur
+							</li>
+							<li
+								className="vragen__navigatie__listItem"
+								onClick={this.printPage.bind(this)}
+							>
+								<i className="fas fa-print"></i>Print
+							</li>
+						</ul>
+					</nav>
+					<h1 className="vragen__responses__header">Er zijn geen resultaten</h1>
+				</section>
+			);
+		}
+
+		console.log(this.state.responses);
 		return (
 			<section className="vragen" id="js--vragen">
 				<nav className="vragen__navigatie">
@@ -108,8 +139,10 @@ class Antwoorden extends React.Component {
 						<Vraag key={id} vraag={vraag.vraag} id={vraag.id} soort={vraag.soort} />
 					);
 				})}
+				<h1>Er zijn geen resultaten</h1>
 			</section>
 		);
+
 	}
 }
 const mapStateToProps = (state) => {
