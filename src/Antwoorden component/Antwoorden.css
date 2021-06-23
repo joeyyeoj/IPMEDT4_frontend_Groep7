@@ -13,7 +13,7 @@
 	border-radius: 2.5rem;
 	mix-blend-mode: normal;
 	padding: 2rem;
-	max-height: 38rem;
+	min-height: fit-content;
 	border: 0.1rem rgba(255, 255, 255, 0.25) solid;
 }
 
@@ -77,12 +77,12 @@
 		grid-column-gap: 2rem;
 		grid-row-gap: 2rem;
 		margin-top: 2rem;
+		margin-bottom: 2rem;
 	}
 
 	.vraag {
 		width: 100%;
 		margin: 0;
-		height: 38rem;
 	}
 
 	.vragen__navigatie {
@@ -92,6 +92,10 @@
 	.vragen__navigatie__listItem:nth-last-child(2) {
 		margin-left: auto;
 		margin-right: 2rem;
+	}
+
+	.vraag:nth-last-child(1) {
+		margin-bottom: 0;
 	}
 }
 
