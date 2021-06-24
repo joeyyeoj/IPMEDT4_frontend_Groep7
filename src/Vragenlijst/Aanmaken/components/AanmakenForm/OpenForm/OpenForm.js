@@ -24,6 +24,10 @@ const OpenForm = (props) => {
 	const submitHandler = (event) => {
 		event.preventDefault();
 		const nieuweVraag = {
+			id:
+				Math.random() * (999999 - 0.00000000000001) +
+				0.00000000000001 +
+				new Date().getTime(),
 			type: 1,
 			vraag: vraag,
 			opties: 'Dit is een open vraag',

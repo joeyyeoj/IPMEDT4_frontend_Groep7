@@ -24,6 +24,10 @@ const SchaalForm = (props) => {
 	const submitHandler = (event) => {
 		event.preventDefault();
 		const nieuweVraag = {
+			id:
+				Math.random() * (999999 - 0.00000000000001) +
+				0.00000000000001 +
+				new Date().getTime(),
 			type: 2,
 			vraag: vraag,
 			opties: 'Helemaal oneens, Oneens, Neutraal, Eens, Helemaal eens',
