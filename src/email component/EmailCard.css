@@ -17,6 +17,7 @@
 .email-card__content__emails {
 	line-height: 2.5rem;
 	font-size: 1.8rem;
+	list-style: none;
 }
 
 @media (min-width: 700px) {
