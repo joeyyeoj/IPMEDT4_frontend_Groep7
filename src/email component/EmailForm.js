@@ -12,7 +12,6 @@ class formContainer extends React.Component {
 	onSubmit = (event) => {
 		event.preventDefault();
 		this.props.onSubmit(this.state.emailInput);
-		// console.log(this.state.emailInput);
 	};
 
 	render() {

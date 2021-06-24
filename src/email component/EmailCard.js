@@ -108,10 +108,8 @@ class EmailCard extends React.Component {
 			this.getEmails(this.state.mailGroep);
 		}
 		else {
-			console.log("nope");
-		}
-
-		
+			
+		}	
 	};
 
 	onMailgroepSubmit = (mailgroepInput) => {
