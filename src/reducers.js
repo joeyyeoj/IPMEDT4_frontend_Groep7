@@ -4,6 +4,7 @@ import {
 	GET_CSRFTOKEN,
 	EDIT_VRAGENLIJST,
 	CLEAR_VRAGENLIJST,
+	REMOVE_ITEM_FROM_VRAGENLIJST,
 } from './actions';
 
 export const CSRFToken = (state = '', action) => {
@@ -43,6 +44,13 @@ export const Vragenlijst = (state = { vragenlijst: [] }, action) => {
 		case CLEAR_VRAGENLIJST:
 			return {
 				vragenlijst: [],
+			};
+		case REMOVE_ITEM_FROM_VRAGENLIJST:
+			console.log(action.payload);
+			return {
+				vragenlijst: state.vragenlijst.filter((vraag) => {
+					return vraag.id !== action.payload;
+				}),
 			};
 		default:
 			return state;

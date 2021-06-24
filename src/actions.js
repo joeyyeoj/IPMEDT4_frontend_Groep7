@@ -3,6 +3,7 @@ export const GET_CSRFTOKEN = 'GET_CSRFTOKEN';
 export const LOGIN_USER = 'LOGIN_USER';
 export const EDIT_VRAGENLIJST = 'EDIT_VRAGENLIJST';
 export const CLEAR_VRAGENLIJST = 'CLEAR_VRAGENLIJST';
+export const REMOVE_ITEM_FROM_VRAGENLIJST = 'REMOVE_ITEM_FROM_VRAGENLIJST';
 
 export const getCSRFToken = (token) => ({
 	type: GET_CSRFTOKEN,
@@ -27,4 +28,9 @@ export const editVragenlijst = (vragenlijst) => ({
 export const clearVragenlijst = () => ({
 	type: CLEAR_VRAGENLIJST,
 	payload: [],
+});
+
+export const removeItemFromVragenlijst = (id) => ({
+	type: REMOVE_ITEM_FROM_VRAGENLIJST,
+	payload: id,
 });
