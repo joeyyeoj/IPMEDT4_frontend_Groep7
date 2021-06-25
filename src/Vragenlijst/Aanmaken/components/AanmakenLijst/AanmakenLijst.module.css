@@ -4,4 +4,40 @@
 
 .lijstItem {
 	list-style: none;
+	transition: all 5s;
+}
+
+.inner__vraag {
+	margin-right: 5rem;
+}
+
+/* .inner:hover {
+	background: rgba(255, 0, 0, 0.25);
+	border: 1px solid rgba(255, 0, 0, 0.25);
+} */
+
+.removeIcon {
+	position: absolute;
+	right: 2rem;
+	top: 50%;
+	cursor: pointer;
+	color: rgba(255, 0, 0, 1);
+	opacity: 1;
+	font-size: 3.5rem;
+	transition: all 0.25s ease-in;
+	transform: translateY(-50%);
+}
+
+@media only screen and (min-width: 1024px) {
+	.removeIcon {
+		transform: translate(2rem, -50%);
+		font-size: 1.5rem;
+		opacity: 0;
+	}
+
+	.inner:hover .removeIcon {
+		opacity: 1;
+		font-size: 3.5rem;
+		transform: translateY(-50%);
+	}
 }

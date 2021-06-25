@@ -29,7 +29,7 @@ class Questions extends React.Component {
 		this.prevQuestion = this.prevQuestion.bind(this);
 	}
 
-	componentDidMount(props) {
+	componentDidMount() {
 		this.makeApiCall(this.props.location.state.id);
 	}
 
@@ -70,6 +70,7 @@ class Questions extends React.Component {
 			const answer = {
 				questionId: this.state.questionIds[i],
 				answer: this.state.answers[i],
+				code: this.props.location.state.code,
 			};
 			axios.post(URL, answer);
 		}
