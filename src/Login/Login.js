@@ -135,7 +135,7 @@ class Login extends React.Component {
 	}
 
 	makeLoginApiCall() {
-		const login_url = 'https://api-ipmedt4.tychovanveen.nl/public/api/login';
+		const login_url = 'https://api-ipmedt4-9jrub.ondigitalocean.app/api/login';
 		const userAccount = {
 			email: this.state.email,
 			password: this.state.password,
