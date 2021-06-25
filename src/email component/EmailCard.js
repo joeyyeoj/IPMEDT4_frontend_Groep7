@@ -1,10 +1,13 @@
 import React from 'react';
-
-import './EmailCard.css';
-import EmailForm from './EmailForm.js';
-import FileUploadForm from './FileUploadForm.js';
+import Select from 'react-select';
+import EmailForm from './EmailForm';
+import MailgroepForm from './MailgroepForm';
+import FileUploadForm from './FileUploadForm';
 import { Navigatie } from '../Navigatie/Navigatie';
 import Card from '../Vragenlijst/Aanmaken/components/UI/Card/Card';
+
+import './EmailCard.css';
+import '../Vragenlijst/VragenlijstVerzenden.css';
 
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -13,19 +16,42 @@ class EmailCard extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { emails: [], id: '' };
+		this.state = { emails: [], mailGroepen: [], mailGroep: null };
 	}
 
 	componentDidMount() {
-		this.getEmails(1);
+		this.getMailgroepen();
 	}
+
+	getMailgroepen() {
+		const MAILGROEP_URL = 'http://localhost:8000/api/user/'+ this.props.User.userData.id +'/mailgroepen';
+		axios
+			.get(MAILGROEP_URL, {
+				withCredentials: true,
+				headers: {
+					'Authorization': 'Bearer ' + this.props.User.token,
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-XSRF-Token': this.props.csrf_token,
+				},
+			})
+			.then((response) => {
+				const temp_mailgroepen = [];
+				response.data.forEach((mailgroep) =>
+					temp_mailgroepen.push({ value: mailgroep.id, label: mailgroep.name })
+				);
+				this.setState({
+					mailGroepen: temp_mailgroepen,
+				});
+			});
+	}
+
 
 	getEmails(emailgroepId) {
 		let emailArray = [];
-		const EMAILGROEP_URL =
+		const EMAIL_URL =
 			'http://localhost:8000/api/mailgroep/' + emailgroepId + '/emailadressen/';
 		axios
-			.get(EMAILGROEP_URL, {
+			.get(EMAIL_URL, {
 				withCredentials: true,
 				headers: {
 					'Authorization': 'Bearer ' + this.props.User.token,
@@ -41,50 +67,87 @@ class EmailCard extends React.Component {
 			});
 	}
 
+	handleMailGroupChange = (e) => {
+		this.getEmails(e.value);
+		this.setState({ mailGroep: e.value });		
+	}
+
 	renderEmails() {
 		return this.state.emails.map((emails) => {
 			return (
-				<p key={emails.id} className="email-card__content__emails">
-					{emails}
-				</p>
+				<ul key={emails.id} className="email-card__content__emails">
+					<li>{emails}</li>
+				</ul>
 			);
 		});
 	}
 
-	onSubmit = (emailInput) => {
+	onEmailSubmit = (emailInput) => {
 		const nieuweMail = {
 			email: emailInput,
-			mailgroepId: 1,
+			mailgroepId: this.state.mailGroep,
 		};
 
-		const NIEUWEMAIL_URL = 'http://localhost:8000/api/mailgroep/1/emailadressen';
-		let posttest = axios
-			.post(NIEUWEMAIL_URL, nieuweMail, {
+		let postGo = 1;
+		for(let i = 0; i < this.state.emails.length; i++) {
+			if(emailInput == this.state.emails[i]) {
+				postGo = 0;
+			}
+		}
+		if(postGo == 1) {
+			const NIEUWEMAIL_URL = 'http://localhost:8000/api/mailgroep/'+ this.state.mailgroep +'/emailadressen/create';
+			let emailPost = axios
+				.post(NIEUWEMAIL_URL, nieuweMail, {
+					withCredentials: true,
+					headers: {
+						'Authorization': 'Bearer ' + this.props.User.token,
+						'X-Requested-With': 'XMLHttpRequest',
+						'X-XSRF-Token': this.props.csrf_token,
+					},
+				});
+			this.getEmails(this.state.mailGroep);
+		}
+		else {
+			
+		}	
+	};
+
+	onMailgroepSubmit = (mailgroepInput) => {
+		const nieuweMailgroep = {
+			eigenaarId: this.props.User.userData.id,
+			name: mailgroepInput,
+		};
+
+		const NIEUWEMAILGROEP_URL = 'http://localhost:8000/api/mailgroep';
+		let mailgroepPost = axios
+			.post(NIEUWEMAILGROEP_URL, nieuweMailgroep, {
 				withCredentials: true,
 				headers: {
 					'Authorization': 'Bearer ' + this.props.User.token,
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-XSRF-Token': this.props.csrf_token,
 				},
-			})
-
-			.then(function (response) {
-				console.log(response);
-			})
-			.catch(function (response) {
-				console.log(response);
-			});
-		console.log(posttest);
-		console.log(nieuweMail);
+		});
+		this.getMailgroepen();
 	};
 
 	render() {
 		return (
 			<>
 				<section className="email-card__content">
-					<EmailForm onSubmit={this.onSubmit} />
+					<Card>
+						<MailgroepForm onSubmit={this.onMailgroepSubmit} />
+						<Select
+							id="js--selectEmail"
+							className="form__input--select"
+							name="mailgroep"
+							onChange={this.handleMailGroupChange}
+							options={this.state.mailGroepen}
+						></Select>
+						<EmailForm onSubmit={this.onEmailSubmit} />
+					</Card>
 					{/* <FileUploadForm /> */}
-					{this.state.emails.length > 0 && <Card>{this.renderEmails()}</Card>}
+					{this.state.emails.length > 0 && <Card>{this.renderEmails(this.state.mailgoep)}</Card>}
 				</section>
 				<Navigatie
 					overzichtActive={false}

@@ -1,9 +1,8 @@
 import React from 'react';
-import Card from '../Vragenlijst/Aanmaken/components/UI/Card/Card';
 
-import './EmailForm.css';
+import './Form.css';
 
-class EmailForm extends React.Component {
+class formContainer extends React.Component {
 	state = { emailInput: '' };
 
 	onChange = (event) => {
@@ -13,33 +12,30 @@ class EmailForm extends React.Component {
 	onSubmit = (event) => {
 		event.preventDefault();
 		this.props.onSubmit(this.state.emailInput);
-		// console.log(this.state.emailInput);
 	};
 
 	render() {
 		return (
-			<Card>
-				<section className="searchbar">
-					<form onSubmit={this.onSubmit} className="searchbar__form" method="POST">
-						<label className="searchbar__form__label" htmlFor="email">
+				<section className="formContainer">
+					<form onSubmit={this.onSubmit} className="formContainer__form" id="js--email-form" method="POST">
+						<label className="formContainer__form__label" htmlFor="email">
 							Nieuw emailadres
 						</label>
 						<input
 							onChange={this.onChange}
-							className="searchbar__form__input"
+							className="formContainer__form__input"
 							id="email"
 							placeholder="Typ een nieuw emailadres"
 							type="text"
 							value={this.state.emailInput}
 						/>
-						<button className="searchbar__form__button" type="submit">
+						<button className="formContainer__form__button" type="submit">
 							Voeg email toe
 						</button>
 					</form>
 				</section>
-			</Card>
 		);
 	}
 }
 
-export default EmailForm;
+export default formContainer;
