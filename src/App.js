@@ -80,10 +80,13 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		const csrfURL = 'https://ipmedt4corsserver.herokuapp.com/https://api-ipmedt4-9jrub.ondigitalocean.app/sanctum/csrf-cookie/';
+		const csrfURL = 'https://ipmedt4corsserver.herokuapp.com/https://api-ipmedt4-nok8y.ondigitalocean.app/sanctum/csrf-cookie/';
 		axios
 			.get(csrfURL, {
-				withCredentials: false
+				withCredentials: false,
+				headers: {
+					"X-Requested-With": "XMLHttpRequest"
+				}
 			})
 			.then((response) => {
 				let token = Cookies.get('XSRF-TOKEN');
