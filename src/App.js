@@ -81,7 +81,7 @@ class App extends React.Component {
 
 	componentDidMount() {
 		const csrfURL =
-			'http://api-ipmedt4.tychovanveen.nl/public/sanctum/csrf-cookie/';
+			'https://api-ipmedt4.tychovanveen.nl/public/sanctum/csrf-cookie/';
 		axios
 			.get(csrfURL, {
 				withCredentials: true,

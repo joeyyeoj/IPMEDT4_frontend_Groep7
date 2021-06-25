@@ -19,7 +19,7 @@ export class Dashboard extends React.Component {
 	}
 
 	componentDidMount() {
-		const BASE_URL = 'http://api-ipmedt4.tychovanveen.nl/public/api';
+		const BASE_URL = 'https://api-ipmedt4.tychovanveen.nl/public/api';
 		const temp_vragenlijsten = [];
 
 		axios
