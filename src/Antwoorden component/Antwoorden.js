@@ -78,7 +78,7 @@ class Antwoorden extends React.Component {
 			return <Redirect to="/verzenden" />;
 		}
 
-		if (this.props.location.state.responses < 5) {
+		if (this.props.location.state.responses > 5) {
 			return (
 				<section className="vragen" id="js--vragen">
 					<nav className="vragen__navigatie">
