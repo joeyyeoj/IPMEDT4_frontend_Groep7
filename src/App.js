@@ -85,6 +85,7 @@ class App extends React.Component {
 		axios
 			.get(csrfURL, {
 				withCredentials: true,
+				credentials: 'same-origin',
 			})
 			.then((response) => {
 				let token = Cookies.get('XSRF-TOKEN');
