@@ -36,7 +36,8 @@ const AanmakenForm = (props) => {
 	};
 
 	const vragenlijstOpslaan = () => {
-		const VRAGENLIJST_URL = 'http://localhost:8000/api/vragenlijst/create';
+		const VRAGENLIJST_URL =
+			'https://api-ipmedt4.tychovanveen.nl/public/api/vragenlijst/create/';
 		const vragenlijst = props.vragen_lijst.vragenlijst;
 		const DATA = {
 			vragenlijst: vragenlijst,

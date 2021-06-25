@@ -39,7 +39,10 @@ class Questions extends React.Component {
 		let optionsArray = [];
 		let questionIdsArray = [];
 
-		const BASE_URL = 'http://localhost:8000/api/vragenlijst/' + listId + '/vragen';
+		const BASE_URL =
+			'https://api-ipmedt4.tychovanveen.nl/public/api/vragenlijst/' +
+			listId +
+			'/vragen/';
 		axios
 			.get(BASE_URL, {
 				withCredentials: true,
@@ -65,7 +68,7 @@ class Questions extends React.Component {
 	};
 
 	submitToApi = () => {
-		const URL = 'http://localhost:8000/api/antwoord/submit';
+		const URL = 'https://api-ipmedt4.tychovanveen.nl/public/api/antwoord/submit/';
 		for (let i = 0; i < this.state.questionIds.length; i++) {
 			const answer = {
 				questionId: this.state.questionIds[i],

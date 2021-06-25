@@ -23,7 +23,9 @@ class EmailCard extends React.Component {
 	getEmails(emailgroepId) {
 		let emailArray = [];
 		const EMAILGROEP_URL =
-			'http://localhost:8000/api/mailgroep/' + emailgroepId + '/emailadressen/';
+			'https://api-ipmedt4.tychovanveen.nl/public/api/mailgroep/' +
+			emailgroepId +
+			'/emailadressen/';
 		axios
 			.get(EMAILGROEP_URL, {
 				withCredentials: true,
@@ -57,7 +59,8 @@ class EmailCard extends React.Component {
 			mailgroepId: 1,
 		};
 
-		const NIEUWEMAIL_URL = 'http://localhost:8000/api/mailgroep/1/emailadressen';
+		const NIEUWEMAIL_URL =
+			'https://api-ipmedt4.tychovanveen.nl/public/api/mailgroep/1/emailadressen/';
 		let posttest = axios
 			.post(NIEUWEMAIL_URL, nieuweMail, {
 				withCredentials: true,

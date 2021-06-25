@@ -71,9 +71,9 @@ class CodeInvoeren extends React.Component {
 	}
 
 	fetchVragenlijstIdEnRedirect(code) {
-		const BASE_URL = 'http://127.0.0.1:8000/api/';
+		const BASE_URL = 'https://api-ipmedt4.tychovanveen.nl/public/api/';
 		axios
-			.get(BASE_URL + 'code/' + code + '/vragenlijst')
+			.get(BASE_URL + 'code/' + code + '/vragenlijst/')
 			.then((response) => {
 				this.setState({
 					vragenlijstId: response.data.id,

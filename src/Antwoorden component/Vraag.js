@@ -24,7 +24,9 @@ class Vraag extends React.Component {
 		let arrayData = [];
 
 		const BASE_URL =
-			'http://localhost:8000/api/vraag/' + this.props.id + '/antwoorden';
+			'https://api-ipmedt4.tychovanveen.nl/public/api/vraag/' +
+			this.props.id +
+			'/antwoorden/';
 		axios
 			.get(BASE_URL, {
 				withCredentials: true,

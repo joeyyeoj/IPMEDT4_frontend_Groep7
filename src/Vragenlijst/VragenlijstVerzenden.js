@@ -30,9 +30,9 @@ export class VragenlijstVerzenden extends React.Component {
 			return;
 		}
 
-		const BASE_URL = 'http://localhost:8000/api';
+		const BASE_URL = 'https://api-ipmedt4.tychovanveen.nl/public/api';
 		axios
-			.get(BASE_URL + '/user/' + this.props.User.userData.id + '/mailgroepen', {
+			.get(BASE_URL + '/user/' + this.props.User.userData.id + '/mailgroepen/', {
 				withCredentials: true,
 				headers: {
 					'Authorization': 'Bearer ' + this.props.User.token,
@@ -159,7 +159,8 @@ export class VragenlijstVerzenden extends React.Component {
 	};
 
 	makeApiCall = () => {
-		const sendEmailUrl = 'http://localhost:8000/api/send-email';
+		const sendEmailUrl =
+			'https://api-ipmedt4.tychovanveen.nl/public/api/send-email/';
 		const pakketje = {
 			mailgroep: this.state.mailgroep,
 			vragenlijst: this.state.vragenlijst,

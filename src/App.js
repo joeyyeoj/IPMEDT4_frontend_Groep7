@@ -80,7 +80,8 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		const csrfURL = 'http://localhost:8000/sanctum/csrf-cookie';
+		const csrfURL =
+			'https://api-ipmedt4.tychovanveen.nl/public/sanctum/csrf-cookie/';
 		axios
 			.get(csrfURL, {
 				withCredentials: true,

@@ -39,7 +39,9 @@ class Antwoorden extends React.Component {
 		let array = [];
 
 		const BASE_URL =
-			'http://localhost:8000/api/vragenlijst/' + vragenlijstId + '/vragen/';
+			'https://api-ipmedt4.tychovanveen.nl/public/api/vragenlijst/' +
+			vragenlijstId +
+			'/vragen/';
 		axios
 			.get(BASE_URL, {
 				withCredentials: true,

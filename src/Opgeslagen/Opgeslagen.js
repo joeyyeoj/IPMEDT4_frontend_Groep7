@@ -18,7 +18,7 @@ export class Opgeslagen extends React.Component {
 	}
 
 	componentDidMount() {
-		const BASE_URL = 'http://localhost:8000/api';
+		const BASE_URL = 'https://api-ipmedt4.tychovanveen.nl/public/api';
 		const temp_vragenlijsten = [];
 
 		axios
@@ -26,7 +26,7 @@ export class Opgeslagen extends React.Component {
 				BASE_URL +
 					'/vragenlijsten/' +
 					this.props.User.userData.id +
-					'/responsecount',
+					'/responsecount/',
 				{
 					withCredentials: true,
 					headers: {
@@ -51,8 +51,8 @@ export class Opgeslagen extends React.Component {
 	}
 
 	hergebruik(id) {
-		const BASE_URL = 'http://localhost:8000/api';
-		axios.get(BASE_URL + '/vragenlijst/' + id + '/hergebruiken', {
+		const BASE_URL = 'https://api-ipmedt4.tychovanveen.nl/public/api';
+		axios.get(BASE_URL + '/vragenlijst/' + id + '/hergebruiken/', {
 			withCredentials: true,
 			headers: {
 				'Authorization': 'Bearer ' + this.props.User.token,

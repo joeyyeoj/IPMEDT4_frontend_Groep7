@@ -278,7 +278,8 @@ class Register extends React.Component {
 	}
 
 	makeApiCall = () => {
-		const REGISTER_URL = 'http://127.0.0.1:8000/api/users/create';
+		const REGISTER_URL =
+			'https://api-ipmedt4.tychovanveen.nl/public/api/users/create';
 		const userAccount = {
 			name: this.state.name,
 			email: this.state.email,
