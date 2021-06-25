@@ -59,7 +59,9 @@ export class Opgeslagen extends React.Component {
     showInvoer(id) {
         this.setState({ tempId: id });
         document.getElementById('js--opgeslagen__naam').style.display = 'block';
-        document.getElementById('js--opgeslagen').style.marginBottom = '2rem';
+        document.getElementById('js--opgeslagen').style.marginTop = '0';
+        document.getElementById('js--opgeslagen__input').focus();
+        window.scrollTo(0, 0);
     }
 
     hergebruik() {
@@ -81,6 +83,11 @@ export class Opgeslagen extends React.Component {
         }
         return (
             <div className="opgeslagenHolder">
+                <section className="opgeslagen__naam" id="js--opgeslagen__naam">
+                    <h1 className="opgeslagen__naam__header">Naam vragenlijst</h1>
+                    <input type="text" id="js--opgeslagen__input" className="opgeslagen__naam__input" onChange={this.naamUpdaten.bind(this)} />
+                    <button className="opgeslagen__naam__button" onClick={this.hergebruik.bind(this)}>Gebruik</button>
+                </section>
                 <main className="opgeslagen" id="js--opgeslagen">
                     <ul className="opgeslagen__vragenlijsten">
                         {this.state.vragenlijsten.length > 0 ? (
@@ -106,11 +113,6 @@ export class Opgeslagen extends React.Component {
                         )}
                     </ul>
                 </main>
-                <section className="opgeslagen__naam" id="js--opgeslagen__naam">
-                    <h1 className="opgeslagen__naam__header">Naam vragenlijst</h1>
-                    <input type="text" className="opgeslagen__naam__input" onChange={this.naamUpdaten.bind(this)} />
-                    <button className="opgeslagen__naam__button" onClick={this.hergebruik.bind(this)}>Gebruik</button>
-                </section>
                 <Navigatie
                     overzichtActive={false}
                     toevoegenActive={true}

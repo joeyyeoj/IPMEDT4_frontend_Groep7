@@ -139,7 +139,6 @@ class Antwoorden extends React.Component {
 						<Vraag key={id} vraag={vraag.vraag} id={vraag.id} soort={vraag.soort} />
 					);
 				})}
-				<h1>Er zijn geen resultaten</h1>
 			</section>
 		);
 

@@ -1,6 +1,6 @@
-.opgeslagenHolder{
+/* .opgeslagenHolder{
 	position: relative;
-}
+} */
 
 main {
 	height: max-content;
@@ -24,13 +24,8 @@ main {
 }
 
 .opgeslagen__naam{
-	position: absolute;
-	top: 30%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background: rgba(255, 255, 255, 0.5);
-	width: 85vw;
 	display: none;
+	margin-bottom: 2rem;
 }
 
 .opgeslagen__naam__header{
@@ -158,12 +153,9 @@ main {
 
 @media only screen and (min-width: 768px) {
 	.dashboard,
-	.opgeslagen {
+	.opgeslagen,
+	.opgeslagen__naam {
 		width: 70vw;
-	}
-
-	.opgeslagen__naam{
-		width:65vw;
 	}
 
 	.opgeslagen__naam__button{
@@ -173,29 +165,17 @@ main {
 
 @media only screen and (min-width: 1024px) {
 	.dashboard,
-	.opgeslagen {
+	.opgeslagen,
+	.opgeslagen__naam {
 		width: 60vw;
-	}
-
-	.opgeslagen__naam{
-		width:58vw;
 	}
 }
 
 @media only screen and (min-width: 1440px) {
 	.dashboard,
-	.opgeslagen {
-		width: 50vw;
-	}
-
+	.opgeslagen,
 	.opgeslagen__naam{
-		width:50vw;
-		position: relative;
-		top: unset;
-		left: unset;
-		transform: unset;
-		background: rgba(255, 255, 255, 0.25);
-		margin-top: 0;
+		width: 50vw;
 	}
 
 	.dashboard__vragenlijsten,
