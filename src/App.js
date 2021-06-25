@@ -83,7 +83,7 @@ class App extends React.Component {
 		const csrfURL = 'https://cors-anywhere.herokuapp.com/https://api-ipmedt4-9jrub.ondigitalocean.app/sanctum/csrf-cookie';
 		axios
 			.get(csrfURL, {
-
+				withCredentials: false
 			})
 			.then((response) => {
 				let token = Cookies.get('XSRF-TOKEN');
