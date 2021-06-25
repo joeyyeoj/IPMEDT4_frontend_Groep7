@@ -1,6 +1,8 @@
 {
   "name": "ipmedt4_frontend_groep7",
   "version": "0.1.0",
+  "private": true,
+  "proxy": "https://api-ipmedt4.tychovanveen.nl/public",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^5.12.0",
